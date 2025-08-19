@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ایران کوین | بازی کسب درآمد</title>
+    <title>هم‌قدم - دوستیابی جوانان ایران</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -28,346 +28,321 @@
             background: linear-gradient(to bottom, #1a1a2e, #16213e);
             color: var(--light);
             min-height: 100vh;
-            padding: 20px;
+            padding: 0;
             line-height: 1.6;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
+            padding-bottom: 70px; /* فضای برای فوتر */
         }
         
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: var(--gradient);
+            padding: 15px 20px;
+            color: white;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            gap: 10px;
         }
         
         .logo h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(45deg, var(--accent), #ff9a9e);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
         
         .logo-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-        }
-        
-        .stats {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .stat-card {
-            background: var(--gradient);
-            padding: 15px 25px;
-            border-radius: 15px;
-            text-align: center;
-            min-width: 150px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            color: white;
         }
         
         .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+            padding: 20px;
+            min-height: calc(100vh - 140px);
         }
         
-        @media (max-width: 900px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
         
-        .coin-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+        .section.active {
+            display: block;
         }
         
-        .coin-title {
-            font-size: 1.8rem;
+        /* پروفایل استایل */
+        .profile-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
             margin-bottom: 20px;
-            color: var(--accent);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .coin {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-            position: relative;
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin: 0 auto 15px;
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: 2px solid var(--accent);
+        }
+        
+        .btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
             cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* صفحه کشف افراد */
+        .discover-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .user-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s;
         }
         
-        .coin-inner {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #d4af37, #f4e4a6);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 5px solid #aa1b1b;
-        }
-        
-        .coin-inner:before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="14" text-anchor="middle" fill="%23aa1b1b" dominant-baseline="middle">ایران</text></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.8;
-        }
-        
-        .coin-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #3a2615;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .coin:hover {
-            transform: scale(1.05);
-        }
-        
-        .coin:active .coin-inner {
-            transform: scale(0.95);
-        }
-        
-        .click-info {
-            margin-top: 20px;
-            font-size: 1.2rem;
-        }
-        
-        .shop {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        .shop-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--accent);
-            text-align: center;
-        }
-        
-        .shop-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .shop-item {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .shop-item:hover {
+        .user-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
-        .item-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-        
-        .item-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        
-        .item-price {
-            color: #d4af37;
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .buy-btn {
-            background: var(--gradient);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
+        .user-img {
             width: 100%;
+            height: 150px;
+            object-fit: cover;
         }
         
-        .buy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .user-info {
+            padding: 15px;
         }
         
-        .buy-btn:disabled {
-            background: #555;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .upgrade-desc {
-            font-size: 0.9rem;
-            margin-top: 10px;
-            color: #aaa;
-        }
-        
-        .achievements {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        .achievements-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--accent);
-            text-align: center;
-        }
-        
-        .achievement-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .achievement {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .achievement-icon {
-            font-size: 2rem;
-            color: #d4af37;
-        }
-        
-        .achievement-info h3 {
+        .user-name {
+            font-size: 1.1rem;
             margin-bottom: 5px;
         }
         
-        .achievement-info p {
+        .user-age {
             color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .user-bio {
             font-size: 0.9rem;
-        }
-        
-        .achievement.locked {
-            opacity: 0.6;
-        }
-        
-        .achievement-progress {
-            height: 5px;
-            background: #333;
-            border-radius: 5px;
-            margin-top: 10px;
+            margin-bottom: 15px;
+            height: 60px;
             overflow: hidden;
         }
         
-        .progress-bar {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 5px;
+        .action-buttons {
+            display: flex;
+            gap: 10px;
         }
         
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: #aaa;
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
             font-size: 0.9rem;
         }
         
-        /* Animations */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 0.5s ease-in-out;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .float {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+        .like-btn {
             background: var(--success);
             color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transform: translateX(100%);
-            transition: transform 0.3s ease-out;
-            z-index: 1000;
         }
         
-        .notification.show {
-            transform: translateX(0);
+        .dislike-btn {
+            background: #ff5252;
+            color: white;
+        }
+        
+        /* صفحه چت */
+        .chat-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chat-user-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .message.received {
+            background: rgba(255, 255, 255, 0.1);
+            align-self: flex-start;
+            border-bottom-right-radius: 0;
+        }
+        
+        .message.sent {
+            background: var(--gradient);
+            align-self: flex-end;
+            border-bottom-left-radius: 0;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .send-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        /* فوتر ناوبری */
+        .nav-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+            font-size: 0.8rem;
+        }
+        
+        .nav-item.active {
+            color: var(--accent);
+        }
+        
+        .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 768px) {
+            .discover-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -375,234 +350,284 @@
     <div class="container">
         <header>
             <div class="logo">
-                <i class="fas fa-coins logo-icon"></i>
-                <h1>ایران کوین</h1>
-            </div>
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-label">سکه‌ها</div>
-                    <div class="stat-value" id="coins">0</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">درآمد هر کلیک</div>
-                    <div class="stat-value" id="click-value">1</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">درآمد پسیو</div>
-                    <div class="stat-value" id="passive-income">0</div>
-                </div>
+                <i class="fas fa-heart logo-icon"></i>
+                <h1>هم‌قدم</h1>
             </div>
         </header>
         
         <div class="main-content">
-            <div class="coin-section">
-                <h2 class="coin-title">برای کسب سکه کلیک کن!</h2>
-                <div class="coin" id="main-coin">
-                    <div class="coin-inner float">
-                        <div class="coin-value">+1</div>
+            <!-- بخش پروفایل -->
+            <div id="profile-section" class="section">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <img src="https://via.placeholder.com/120" alt="پروفایل" class="profile-pic" id="profile-picture">
+                        <h2>پروفایل شما</h2>
                     </div>
-                </div>
-                <div class="click-info">
-                    <p>هر کلیک: <span id="click-amount">1</span> سکه</p>
-                    <p>درآمد غیرفعال: <span id="passive-amount">0</span> سکه در ثانیه</p>
+                    
+                    <div class="form-group">
+                        <label for="profile-name">نام و نام خانوادگی</label>
+                        <input type="text" id="profile-name" class="form-control" placeholder="نام خود را وارد کنید">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-age">سن</label>
+                        <input type="number" id="profile-age" class="form-control" placeholder="سن خود را وارد کنید" min="18" max="25">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-gender">جنسیت</label>
+                        <select id="profile-gender" class="form-control">
+                            <option value="">انتخاب کنید</option>
+                            <option value="male">مرد</option>
+                            <option value="female">زن</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-bio">درباره من</label>
+                        <textarea id="profile-bio" class="form-control" rows="3" placeholder="چند جمله درباره خود بنویسید..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-interests">علاقه‌مندی‌ها</label>
+                        <input type="text" id="profile-interests" class="form-control" placeholder="مثلاً: سینما، موسیقی، ورزش">
+                    </div>
+                    
+                    <button class="btn" id="save-profile">ذخیره پروفایل</button>
                 </div>
             </div>
             
-            <div class="shop">
-                <h2 class="shop-title">فروشگاه ارتقاء</h2>
-                <div class="shop-items">
-                    <div class="shop-item">
-                        <i class="fas fa-mouse-pointer item-icon"></i>
-                        <h3 class="item-title">ارتقاء کلیک</h3>
-                        <p class="item-price">قیمت: 50 سکه</p>
-                        <p class="upgrade-desc">هر کلیک 1 سکه بیشتر تولید می‌کند</p>
-                        <button class="buy-btn" onclick="buyUpgrade('click', 50, 1)">خرید</button>
+            <!-- بخش کشف افراد -->
+            <div id="discover-section" class="section">
+                <h2 style="margin-bottom: 20px; text-align: center;">افراد جدید</h2>
+                
+                <div class="discover-grid" id="discover-users">
+                    <!-- کاربران به صورت داینامیک اضافه می‌شوند -->
+                </div>
+            </div>
+            
+            <!-- بخش چت -->
+            <div id="chat-section" class="section">
+                <h2 style="margin-bottom: 20px; text-align: center;">چت‌ها</h2>
+                
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <img src="https://via.placeholder.com/40" alt="user" class="chat-user-img">
+                        <div>
+                            <div class="user-name">سارا محمدی</div>
+                            <div class="user-age">۲۲ ساله</div>
+                        </div>
                     </div>
                     
-                    <div class="shop-item">
-                        <i class="fas fa-bolt item-icon"></i>
-                        <h3 class="item-title">اتوماتیک کلیک</h3>
-                        <p class="item-price">قیمت: 200 سکه</p>
-                        <p class="upgrade-desc">هر ثانیه 1 سکه تولید می‌کند</p>
-                        <button class="buy-btn" onclick="buyUpgrade('auto', 200, 1)">خرید</button>
+                    <div class="chat-messages">
+                        <div class="message received">
+                            سلام! چطوری؟
+                        </div>
+                        <div class="message sent">
+                            خوبم ممنون! تو چطوریه؟
+                        </div>
+                        <div class="message received">
+                            خوبم. علاقه‌مند به دیدار هستی؟
+                        </div>
                     </div>
                     
-                    <div class="shop-item">
-                        <i class="fas fa-industry item-icon"></i>
-                        <h3 class="item-title">کارخانه سکه</h3>
-                        <p class="item-price">قیمت: 1000 سکه</p>
-                        <p class="upgrade-desc">هر ثانیه 5 سکه تولید می‌کند</p>
-                        <button class="buy-btn" onclick="buyUpgrade('factory', 1000, 5)">خرید</button>
-                    </div>
-                    
-                    <div class="shop-item">
-                        <i class="fas fa-rocket item-icon"></i>
-                        <h3 class="item-title">سیستم پیشرفته</h3>
-                        <p class="item-price">قیمت: 5000 سکه</p>
-                        <p class="upgrade-desc">هر ثانیه 25 سکه تولید می‌کند</p>
-                        <button class="buy-btn" onclick="buyUpgrade('rocket', 5000, 25)">خرید</button>
+                    <div class="chat-input">
+                        <input type="text" placeholder="پیام خود را بنویسید...">
+                        <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="achievements">
-            <h2 class="achievements-title">دستاوردها</h2>
-            <div class="achievement-list">
-                <div class="achievement">
-                    <i class="fas fa-trophy achievement-icon"></i>
-                    <div class="achievement-info">
-                        <h3>شروع کننده</h3>
-                        <p>۱۰۰ سکه جمع‌آوری کنید</p>
-                        <div class="achievement-progress">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="achievement locked">
-                    <i class="fas fa-medal achievement-icon"></i>
-                    <div class="achievement-info">
-                        <h3>بازیکن حرفه‌ای</h3>
-                        <p>۱۰۰۰ سکه جمع‌آوری کنید</p>
-                        <div class="achievement-progress">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="achievement locked">
-                    <i class="fas fa-crown achievement-icon"></i>
-                    <div class="achievement-info">
-                        <h3>سلطان سکه</h3>
-                        <p>۱۰۰۰۰ سکه جمع‌آوری کنید</p>
-                        <div class="achievement-progress">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
+        <!-- فوتر ناوبری -->
+        <div class="nav-footer">
+            <div class="nav-item active" data-section="profile-section">
+                <i class="fas fa-user nav-icon"></i>
+                <span>پروفایل</span>
+            </div>
+            <div class="nav-item" data-section="chat-section">
+                <i class="fas fa-comment nav-icon"></i>
+                <span>چت</span>
+            </div>
+            <div class="nav-item" data-section="discover-section">
+                <i class="fas fa-search nav-icon"></i>
+                <span>کشف</span>
             </div>
         </div>
-        
-        <footer>
-            <p>Iran Coin - تمامی حقوق محفوظ است © ۲۰۲۳ | پیشرفت شما به صورت خودکار ذخیره می‌شود</p>
-        </footer>
-    </div>
-
-    <div class="notification" id="notification">
-        خرید شما با موفقیت انجام شد!
     </div>
 
     <script>
-        // Game state
-        let gameState = {
-            coins: 0,
-            clickValue: 1,
-            passiveIncome: 0,
-            upgrades: {
-                click: 0,
-                auto: 0,
-                factory: 0,
-                rocket: 0
-            }
+        // مدیریت وضعیت کاربر
+        let userProfile = {
+            name: '',
+            age: '',
+            gender: '',
+            bio: '',
+            interests: '',
+            profileComplete: false
         };
         
-        // DOM elements
-        const coinsElement = document.getElementById('coins');
-        const clickValueElement = document.getElementById('click-value');
-        const passiveIncomeElement = document.getElementById('passive-income');
-        const clickAmountElement = document.getElementById('click-amount');
-        const passiveAmountElement = document.getElementById('passive-amount');
-        const mainCoin = document.getElementById('main-coin');
-        const notification = document.getElementById('notification');
+        // کاربران نمونه برای بخش کشف
+        const sampleUsers = [
+            {
+                name: 'سارا محمدی',
+                age: 22,
+                gender: 'female',
+                bio: 'علاقه‌مند به سینما و کتاب. دانشجوی روانشناسی',
+                interests: 'سینما, کتاب, موسیقی',
+                image: 'https://via.placeholder.com/150?text=سارا'
+            },
+            {
+                name: 'امیررضا حسینی',
+                age: 24,
+                gender: 'male',
+                bio: 'طراح گرافیک و عکاس. عاشق طبیعت گردی',
+                interests: 'هنر, عکاسی, طبیعت',
+                image: 'https://via.placeholder.com/150?text=امیررضا'
+            },
+            {
+                name: 'نازنین کریمی',
+                age: 21,
+                gender: 'female',
+                bio: 'دانشجوی معماری. علاقه‌مند به ورزش و سفر',
+                interests: 'معماری, ورزش, سفر',
+                image: 'https://via.placeholder.com/150?text=نازنین'
+            },
+            {
+                name: 'محمد امینی',
+                age: 23,
+                gender: 'male',
+                bio: 'برنامه‌نویس و علاقه‌مند به تکنولوژی‌های جدید',
+                interests: 'برنامه‌نویسی, تکنولوژی, بازی',
+                image: 'https://via.placeholder.com/150?text=محمد'
+            }
+        ];
         
-        // Load game state from localStorage
-        function loadGame() {
-            const savedGame = localStorage.getItem('iranCoinGame');
-            if (savedGame) {
-                gameState = JSON.parse(savedGame);
-                updateDisplay();
+        // المنت‌های DOM
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.section');
+        
+        // بررسی وضعیت پروفایل کاربر هنگام لود صفحه
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserProfile();
+            setupNavigation();
+            renderDiscoverUsers();
+            
+            // اگر پروفایل کامل است، مستقیماً به بخش کشف برو
+            if (userProfile.profileComplete) {
+                showSection('discover-section');
+                updateNavigation('discover-section');
+            } else {
+                showSection('profile-section');
+                updateNavigation('profile-section');
+            }
+        });
+        
+        // بارگذاری پروفایل کاربر از localStorage
+        function loadUserProfile() {
+            const savedProfile = localStorage.getItem('userProfile');
+            if (savedProfile) {
+                userProfile = JSON.parse(savedProfile);
+                
+                // پر کردن فرم با داده‌های ذخیره شده
+                document.getElementById('profile-name').value = userProfile.name;
+                document.getElementById('profile-age').value = userProfile.age;
+                document.getElementById('profile-gender').value = userProfile.gender;
+                document.getElementById('profile-bio').value = userProfile.bio;
+                document.getElementById('profile-interests').value = userProfile.interests;
             }
         }
         
-        // Save game state to localStorage
-        function saveGame() {
-            localStorage.setItem('iranCoinGame', JSON.stringify(gameState));
+        // ذخیره پروفایل کاربر در localStorage
+        function saveUserProfile() {
+            userProfile.name = document.getElementById('profile-name').value;
+            userProfile.age = document.getElementById('profile-age').value;
+            userProfile.gender = document.getElementById('profile-gender').value;
+            userProfile.bio = document.getElementById('profile-bio').value;
+            userProfile.interests = document.getElementById('profile-interests').value;
+            
+            // بررسی کامل بودن پروفایل
+            userProfile.profileComplete = userProfile.name && userProfile.age && userProfile.gender && userProfile.bio && userProfile.interests;
+            
+            // ذخیره در localStorage
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+            
+            if (userProfile.profileComplete) {
+                alert('پروفایل با موفقیت ذخیره شد!');
+                showSection('discover-section');
+                updateNavigation('discover-section');
+            } else {
+                alert('لطفاً تمام فیلدها را پر کنید.');
+            }
         }
         
-        // Update display with current game state
-        function updateDisplay() {
-            coinsElement.textContent = Math.floor(gameState.coins).toLocaleString();
-            clickValueElement.textContent = gameState.clickValue.toLocaleString();
-            passiveIncomeElement.textContent = gameState.passiveIncome.toLocaleString();
-            clickAmountElement.textContent = gameState.clickValue.toLocaleString();
-            passiveAmountElement.textContent = gameState.passiveIncome.toLocaleString();
+        // راه‌اندازی ناوبری
+        function setupNavigation() {
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    
+                    // اگر کاربر می‌خواهد به بخش کشف برود اما پروفایل کامل نیست
+                    if (sectionId === 'discover-section' && !userProfile.profileComplete) {
+                        alert('لطفاً ابتدا پروفایل خود را تکمیل کنید.');
+                        showSection('profile-section');
+                        updateNavigation('profile-section');
+                        return;
+                    }
+                    
+                    showSection(sectionId);
+                    updateNavigation(sectionId);
+                });
+            });
             
-            // Update achievement progress
-            updateAchievements();
+            // رویداد کلیک برای دکمه ذخیره پروفایل
+            document.getElementById('save-profile').addEventListener('click', saveUserProfile);
         }
         
-        // Show notification
-        function showNotification(message) {
-            notification.textContent = message;
-            notification.classList.add('show');
+        // نمایش بخش مورد نظر
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
             
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            document.getElementById(sectionId).classList.add('active');
         }
         
-        // Click on coin
-        mainCoin.addEventListener('click', () => {
-            gameState.coins += gameState.clickValue;
-            updateDisplay();
-            saveGame();
-            
-            // Create floating text animation
-            const floatingText = document.createElement('div');
-            floatingText.textContent = `+${gameState.clickValue}`;
-            floatingText.style.position = 'absolute';
-            floatingText.style.color = '#d4af37';
-            floatingText.style.fontWeight = 'bold';
-            floatingText.style.fontSize = '1.5rem';
-            floatingText.style.pointerEvents = 'none';
-            floatingText.style.zIndex = '100';
-            floatingText.style.animation = 'floatUp 1s ease-out forwards';
-            
-            // Add animation keyframes
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes floatUp {
-                    0% { transform: translateY(0); opacity: 1; }
-                    100% { transform: translateY(-100px); opacity: 0; }
+        // به‌روزرسانی وضعیت ناوبری
+        function updateNavigation(sectionId) {
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === sectionId) {
+                    item.classList.add('active');
                 }
-            `;
-            document.head.appendChild(style);
-            
-            // Position the floating text
-            const rect = mainCoin.getBoundingClientRect();
-            floatingText.style.left = `${rect.left + rect.width/2 - 20}px`;
-            floatingText.style.top = `${rect.top}px`;
-            
-            document.body.appendChild(floatingText);
-            
-            // Remove after animation completes
-            setTimeout(() => {
-                document.body.removeChild(floatingText);
-            }, 1000);
-            
-            // Add pulse animation to coin
-            mainCoin.classList.add('pulse');
-            setTimeout(() => {
-                mainCoin.classList.remove('pulse');
-            }, 500);
-        });
+            });
+        }
         
-        // Buy upgrade
-        function buyUpgrade(type, cost, value) {
-            if (gameState.coins >= cost) {
-                gameState.coins -= cost;
+        // نمایش کاربران در بخش کشف
+        function renderDiscoverUsers() {
+            const discoverContainer = document.getElementById('discover-users');
+            discoverContainer.innerHTML = '';
+            
+            sampleUsers.forEach(user => {
+                const userCard = document.createElement('div');
+                userCard.className = 'user-card';
                 
-                if (type === 'click') {
-                    gameState.clickValue += value;
-                    gameSt
+                userCard.innerHTML = `
+                    <img src="${user.image}" alt="${user.name}" class="user-img">
+                    <div class="user-info">
+                        <h3 class="user-name">${user.name}</h3>
+                        <div class="user-age">${user.age} ساله</div>
+                        <p class="user-bio">${user.bio}</p>
+                        <div class="action-buttons">
+                            <button class="action-btn dislike-btn"><i class="fas fa-times"></i></button>
+                            <button class="action-btn like-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                `;
+                
+                discoverContainer.appendChild(userCard);
+            });
+        }
+    </script>
+</body>
+</html>
