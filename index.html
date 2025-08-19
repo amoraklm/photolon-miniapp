@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Telegram Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body{margin:0;font-family:sans-serif;background:#fff;color:#111}
+    .wrap{padding:16px}
+    button{padding:10px 16px;border:0;border-radius:12px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>”·«„ «“ Mini App ??</h1>
+    <p id="user"></p>
+    <button id="btn">ò«— «‰Ã«„ »œÂ</button>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();               // «⁄·«„ ¬„«œêÌ »Â  ·ê—«„
+    tg.expand();              // «— ›«⁄ ò«„·
+    tg.BackButton.show();     // œò„Â »—ê‘ 
+    tg.onEvent('backButtonClicked', () => tg.close());
+
+    //  „ œ«—ò/·«Ì   ·ê—«„
+    document.body.style.background = tg.colorScheme === 'dark' ? '#111' : '#fff';
+    document.body.style.color = tg.colorScheme === 'dark' ? '#eee' : '#111';
+
+    // ‰„«Ì‘ ‰«„ ò«—»—
+    const u = tg.initDataUnsafe?.user;
+    if (u) document.getElementById('user').textContent = `ò«—»—: ${u.first_name} ${u.last_name||''}`;
+
+    // œò„Â «’·Ì Å«ÌÌ‰
+    tg.MainButton.setText('«—”«· œ«œÂ');
+    tg.MainButton.show();
+    tg.MainButton.onClick(() => {
+      tg.sendData(JSON.stringify({ action: 'submit', time: Date.now() }));
+    });
+
+    // œò„Â œ«Œ· ’›ÕÂ
+    document.getElementById('btn').onclick = () => {
+      tg.showPopup({ title:'«‰Ã«„ ‘œ', message:'ÌÂ «ò‘‰  ” Ì «Ã—« ‘œ ?', buttons:[{type:'ok'}] });
+    };
+  </script>
+</body>
+</html>
