@@ -1,0 +1,138 @@
+/* ›Ê‰  */
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  margin: 0;
+  background: #fff;
+  color: #222;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* Âœ— */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #3b1e6d, #2563eb);
+  padding: 15px 25px;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+nav a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+nav a:hover {
+  color: #f0f0f0;
+}
+
+/* »Œ‘ ÂÌ—Ê */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f9f9ff;
+  animation: fadeIn 1s ease-in-out;
+}
+.hero h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #3b1e6d;
+}
+.hero p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+.hero button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.hero button:hover {
+  background: #1e40af;
+}
+
+/* ò«— ùÂ« */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
+  padding: 30px;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-6px);
+}
+.card h3 {
+  color: #2563eb;
+  margin-top: 0;
+}
+
+/* ‰ò«  ”—Ì⁄ */
+.tips {
+  background: #eef2ff;
+  padding: 30px;
+}
+.tips h2 {
+  color: #3b1e6d;
+}
+.tips ul {
+  list-style: none;
+  padding: 0;
+}
+.tips li {
+  padding: 8px 0;
+}
+
+/* „‰«»⁄ */
+#resources {
+  text-align: center;
+  padding: 40px;
+}
+#resources button {
+  margin-top: 15px;
+  background: #3b1e6d;
+  color: #fff;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#resources button:hover {
+  background: #2d1753;
+}
+
+/* ›Ê — */
+footer {
+  background: #111;
+  color: #bbb;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+}
+
+/* «‰Ì„Ì‘‰ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
