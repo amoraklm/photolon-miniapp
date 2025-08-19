@@ -1,15 +1,46 @@
-// �Ә��� �� Ә�� �������
-function scrollToSection(id) {
-  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+// شورتکات‌ها
+const shortcuts = {
+  Windows: [
+    "Ctrl + J → کپی سریع لایه",
+    "Alt + Scroll → زوم سریع",
+    "Shift + Drag → تناسب حفظ شود"
+  ],
+  Mac: [
+    "Cmd + J → کپی سریع لایه",
+    "Option + Scroll → زوم سریع",
+    "Shift + Drag → تناسب حفظ شود"
+  ]
+};
+
+const shortcutsList = document.getElementById("shortcutsList");
+const osLabel = document.getElementById("osLabel");
+const osToggle = document.getElementById("osToggle");
+
+function renderShortcuts(os) {
+  shortcutsList.innerHTML = "";
+  shortcuts[os].forEach(s => {
+    let li = document.createElement("li");
+    li.textContent = s;
+    shortcutsList.appendChild(li);
+  });
+}
+renderShortcuts("Windows");
+
+// باز و بسته شدن کرکره‌ای
+function toggleAccordion() {
+  const content = document.querySelector(".accordion-content");
+  const arrow = document.getElementById("arrow");
+  content.classList.toggle("active");
+  arrow.textContent = content.classList.contains("active") ? "▲" : "▼";
 }
 
-// �ݘ� �Ә��� ���� ���ʝ��
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".card").forEach(card => {
-    const rect = card.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 50) {
-      card.style.opacity = 1;
-      card.style.transform = "translateY(0)";
-    }
-  });
-});
+// تغییر سیستم عامل
+function toggleOS() {
+  if (osToggle.checked) {
+    osLabel.textContent = "Mac";
+    renderShortcuts("Mac");
+  } else {
+    osLabel.textContent = "Windows";
+    renderShortcuts("Windows");
+  }
+}
