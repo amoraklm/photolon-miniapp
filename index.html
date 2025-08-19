@@ -3,21 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هم‌قدم - نسخه پیشرفته</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>مینی‌اپ ارز دیجیتال | مشابه نات‌کوین</title>
     <style>
-        :root {
-            --primary: #6a11cb;
-            --secondary: #2575fc;
-            --accent: #ff4e50;
-            --dark: #121212;
-            --light: #f8f9fa;
-            --success: #00c853;
-            --warning: #ffab00;
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-        }
-        
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -25,1011 +13,625 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        :root {
+            --primary: #2a6bf0;
+            --secondary: #7239ea;
+            --success: #0acf97;
+            --danger: #fa5c7c;
+            --warning: #ffbc00;
+            --info: #39afd1;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --background: #f5f8ff;
+            --card-bg: #ffffff;
+            --text: #2c3033;
+            --border: #e2e8f0;
+        }
+        
         body {
-            background: linear-gradient(to bottom, #1a1a2e, #16213e);
-            color: var(--light);
-            min-height: 100vh;
-            padding: 0;
+            background-color: var(--background);
+            color: var(--text);
             line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
         }
         
+        /* Container */
         .container {
-            max-width: 100%;
+            max-width: 480px;
             margin: 0 auto;
-            padding-bottom: 70px;
+            padding: 16px;
+            background: var(--background);
+            min-height: 100vh;
         }
         
-        header {
-            background: var(--gradient);
-            padding: 15px 20px;
-            color: white;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        /* Header */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 16px 0;
+            margin-bottom: 16px;
+            position: sticky;
+            top: 0;
+            background: var(--background);
+            z-index: 100;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 1.5rem;
+            gap: 12px;
             font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
         }
         
         .logo-icon {
-            font-size: 1.8rem;
-            color: white;
-        }
-        
-        .header-actions {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .header-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
-            color: white;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        .main-content {
-            padding: 20px;
-            min-height: calc(100vh - 140px);
-        }
-        
-        .section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .section.active {
-            display: block;
-        }
-        
-        /* استایل‌های پیشرفته برای پروفایل */
-        .profile-container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .profile-header {
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .profile-pic-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px;
-        }
-        
-        .profile-pic {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-        }
-        
-        .change-photo-btn {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background: var(--accent);
             color: white;
+        }
+        
+        /* Balance Card */
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .balance-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        
+        .balance-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .balance-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 20px;
+            border-radius: 12px;
             border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+            font-weight: 600;
             cursor: pointer;
-        }
-        
-        .interest-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .interest-tag {
-            background: var(--gradient);
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-        
-        /* استایل‌های پیشرفته برای کشف افراد */
-        .discover-filters {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding: 5px 0;
-        }
-        
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        
-        .filter-btn.active {
-            background: var(--gradient);
-        }
-        
-        .discover-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .user-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s;
-            position: relative;
-        }
-        
-        .user-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .user-status {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ccc;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-        
-        .user-status.online {
-            background: var(--success);
-        }
-        
-        .user-img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-        
-        .user-info {
-            padding: 15px;
-        }
-        
-        .user-name {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            display: flex;
+            transition: all 0.3s ease;
+            display: inline-flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            gap: 8px;
         }
         
-        .verified-badge {
-            color: var(--success);
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 8px 16px;
             font-size: 0.9rem;
         }
         
-        .user-age {
-            color: #aaa;
-            margin-bottom: 10px;
+        /* Card */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
         
-        .user-bio {
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            height: 60px;
-            overflow: hidden;
-        }
-        
-        .action-buttons {
+        .card-header {
             display: flex;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
         
-        .action-btn {
+        .card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background: #f1f5ff;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 16px;
+        }
+        
+        .tab {
             flex: 1;
+            text-align: center;
             padding: 8px;
             border-radius: 8px;
-            border: none;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        .like-btn {
-            background: var(--success);
-            color: white;
+        .tab.active {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
-        .dislike-btn {
-            background: #ff5252;
-            color: white;
+        /* Transaction List */
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
         
-        /* استایل‌های پیشرفته برای چت */
-        .chats-list {
-            margin-bottom: 20px;
-        }
-        
-        .chat-item {
+        .transaction-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
         }
         
-        .chat-item:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .transaction-item:last-child {
+            border-bottom: none;
         }
         
-        .chat-item.unread {
-            background: rgba(37, 117, 252, 0.15);
+        .transaction-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5ff;
+            color: var(--primary);
         }
         
-        .chat-user-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        .chat-info {
+        .transaction-details {
             flex: 1;
         }
         
-        .chat-name {
-            font-size: 1rem;
-            margin-bottom: 5px;
+        .transaction-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .transaction-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .transaction-amount {
+            font-weight: 700;
+        }
+        
+        .amount-in {
+            color: var(--success);
+        }
+        
+        .amount-out {
+            color: var(--danger);
+        }
+        
+        /* Market List */
+        .market-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .market-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 16px;
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         }
         
-        .last-message {
+        .market-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5ff;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .market-details {
+            flex: 1;
+        }
+        
+        .market-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .market-price {
             font-size: 0.9rem;
-            color: #aaa;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            color: #6c757d;
         }
         
-        .chat-meta {
-            text-align: left;
-            min-width: 70px;
+        .market-change {
+            font-weight: 600;
+            font-size: 0.9rem;
         }
         
-        .chat-time {
-            font-size: 0.8rem;
-            color: #aaa;
-            margin-bottom: 5px;
+        .change-up {
+            color: var(--success);
         }
         
-        .unread-count {
-            background: var(--accent);
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 10px;
-            display: inline-block;
-            text-align: center;
+        .change-down {
+            color: var(--danger);
         }
         
-        /* فوتر ناوبری پیشرفته */
-        .nav-footer {
+        /* Bottom Navigation */
+        .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
+            background: white;
             display: flex;
             justify-content: space-around;
-            padding: 12px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 100;
+            padding: 12px;
+            border-top: 1px solid var(--border);
+            max-width: 480px;
+            margin: 0 auto;
         }
         
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #aaa;
-            cursor: pointer;
-            transition: color 0.3s;
+            gap: 4px;
+            color: #6c757d;
             font-size: 0.8rem;
-            position: relative;
         }
         
         .nav-item.active {
-            color: var(--accent);
+            color: var(--primary);
         }
         
         .nav-icon {
-            font-size: 1.3rem;
-            margin-bottom: 4px;
+            font-size: 1.2rem;
         }
         
-        .nav-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--accent);
-            color: white;
-            font-size: 0.7rem;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
         }
         
-        /* انیمیشن‌های پیشرفته */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .mb-4 {
+            margin-bottom: 24px;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        /* رسپانسیو پیشرفته */
-        @media (max-width: 768px) {
-            .discover-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header-actions {
-                gap: 10px;
-            }
-            
-            .header-btn {
-                width: 35px;
-                height: 35px;
-            }
-        }
-        
-        /* مودال و پاپ‌آپ */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+        .hidden {
             display: none;
         }
         
-        .modal {
-            background: var(--dark);
-            border-radius: 15px;
-            padding: 20px;
-            width: 90%;
-            max-width: 400px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .modal-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding-bottom: 70px;
+            }
+            
+            .balance-actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
+        <!-- Header -->
+        <div class="header">
             <div class="logo">
-                <i class="fas fa-heart logo-icon"></i>
-                <h1>هم‌قدم</h1>
+                <div class="logo-icon">$</div>
+                <span>کریپتوپِی</span>
             </div>
-            <div class="header-actions">
-                <button class="header-btn" id="notifications-btn">
-                    <i class="fas fa-bell"></i>
-                </button>
-                <button class="header-btn" id="settings-btn">
-                    <i class="fas fa-cog"></i>
-                </button>
-            </div>
-        </header>
+            <button class="btn btn-sm btn-outline">پروفایل</button>
+        </div>
         
-        <div class="main-content">
-            <!-- بخش پروفایل پیشرفته -->
-            <div id="profile-section" class="section">
-                <div class="profile-container">
-                    <div class="profile-header">
-                        <div class="profile-pic-container">
-                            <img src="https://via.placeholder.com/120" alt="پروفایل" class="profile-pic" id="profile-picture">
-                            <button class="change-photo-btn">
-                                <i class="fas fa-camera"></i>
-                            </button>
-                        </div>
-                        <h2>پروفایل شما</h2>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="profile-name">نام و نام خانوادگی</label>
-                        <input type="text" id="profile-name" class="form-control" placeholder="نام خود را وارد کنید">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="profile-age">سن</label>
-                        <input type="number" id="profile-age" class="form-control" placeholder="سن خود را وارد کنید" min="18" max="25">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="profile-gender">جنسیت</label>
-                        <select id="profile-gender" class="form-control">
-                            <option value="">انتخاب کنید</option>
-                            <option value="male">مرد</option>
-                            <option value="female">زن</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="profile-bio">درباره من</label>
-                        <textarea id="profile-bio" class="form-control" rows="3" placeholder="چند جمله درباره خود بنویسید..."></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="profile-interests">علاقه‌مندی‌ها (با کاما جدا کنید)</label>
-                        <input type="text" id="profile-interests" class="form-control" placeholder="مثلاً: سینما, موسیقی, ورزش">
-                    </div>
-                    
-                    <div class="interest-tags" id="interest-tags-container">
-                        <!-- تگ‌های علاقه‌مندی‌ها اینجا نمایش داده می‌شوند -->
-                    </div>
-                    
-                    <button class="btn" id="save-profile">ذخیره پروفایل</button>
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <div class="balance-label">موجودی کل</div>
+            <div class="balance-amount">۱۲,۴۵۰,۰۰۰ <span style="font-size: 1.2rem;">تومان</span></div>
+            <div class="balance-actions">
+                <button class="btn btn-primary">
+                    <i class="nav-icon">+</i>
+                    واریز
+                </button>
+                <button class="btn btn-outline">
+                    <i class="nav-icon">⇄</i>
+                    انتقال
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active">ارزهای من</div>
+            <div class="tab">بازار</div>
+            <div class="tab">معامله</div>
+        </div>
+        
+        <!-- My Coins Section -->
+        <div id="my-coins">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">دارایی‌های دیجیتال</div>
+                    <button class="btn btn-sm" style="background: #f1f5ff; color: var(--primary);">مشاهده همه</button>
                 </div>
                 
-                <div class="profile-container">
-                    <h3>تنظیمات حریم خصوصی</h3>
-                    <div class="form-group">
-                        <label class="switch">
-                            <input type="checkbox" id="profile-visible">
-                            <span class="slider"></span>
-                        </label>
-                        <span>پروفایل من قابل مشاهده باشد</span>
+                <div class="market-list">
+                    <div class="market-item">
+                        <div class="market-icon">B</div>
+                        <div class="market-details">
+                            <div class="market-name">بیت‌کوین (BTC)</div>
+                            <div class="market-price">۱,۲۳۴,۰۰۰,۰۰۰ تومان</div>
+                        </div>
+                        <div class="market-change change-up">+۲.۵٪</div>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="switch">
-                            <input type="checkbox" id="notifications-enabled" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span> دریافت notifications</span>
+                    <div class="market-item">
+                        <div class="market-icon">E</div>
+                        <div class="market-details">
+                            <div class="market-name">اتریوم (ETH)</div>
+                            <div class="market-price">۱۲۳,۴۵۶,۰۰۰ تومان</div>
+                        </div>
+                        <div class="market-change change-up">+۱.۸٪</div>
+                    </div>
+                    
+                    <div class="market-item">
+                        <div class="market-icon">T</div>
+                        <div class="market-details">
+                            <div class="market-name">تتر (USDT)</div>
+                            <div class="market-price">۵۶,۷۸۹ تومان</div>
+                        </div>
+                        <div class="market-change change-down">-۰.۱٪</div>
                     </div>
                 </div>
             </div>
             
-            <!-- بخش کشف افراد پیشرفته -->
-            <div id="discover-section" class="section">
-                <h2 style="margin-bottom: 15px;">کشف افراد جدید</h2>
-                
-                <div class="discover-filters">
-                    <button class="filter-btn active">همه</button>
-                    <button class="filter-btn">آنلاین</button>
-                    <button class="filter-btn">نزدیک‌ها</button>
-                    <button class="filter-btn">علاقه‌مندی‌های مشترک</button>
-                    <button class="filter-btn">اخیراً فعال</button>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">آخرین تراکنش‌ها</div>
+                    <button class="btn btn-sm" style="background: #f1f5ff; color: var(--primary);">مشاهده همه</button>
                 </div>
                 
-                <div class="discover-grid" id="discover-users">
-                    <!-- کاربران به صورت داینامیک اضافه می‌شوند -->
-                </div>
-            </div>
-            
-            <!-- بخش چت پیشرفته -->
-            <div id="chat-section" class="section">
-                <h2 style="margin-bottom: 15px;">چت‌ها</h2>
-                
-                <div class="chats-list" id="chats-list">
-                    <!-- لیست چت‌ها اینجا نمایش داده می‌شود -->
-                </div>
-                
-                <div class="chat-container" id="active-chat" style="display: none;">
-                    <div class="chat-header">
-                        <img src="https://via.placeholder.com/40" alt="user" class="chat-user-img">
-                        <div>
-                            <div class="user-name">سارا محمدی <i class="fas fa-check-circle verified-badge"></i></div>
-                            <div class="user-age">آنلاین</div>
+                <div class="transaction-list">
+                    <div class="transaction-item">
+                        <div class="transaction-icon">⇩</div>
+                        <div class="transaction-details">
+                            <div class="transaction-title">واریز وجه</div>
+                            <div class="transaction-date">۱۴۰۲/۰۵/۱۵ - ۱۲:۳۰</div>
                         </div>
+                        <div class="transaction-amount amount-in">+۵۰۰,۰۰۰ تومان</div>
                     </div>
                     
-                    <div class="chat-messages">
-                        <div class="message received">
-                            سلام! چطوری؟
+                    <div class="transaction-item">
+                        <div class="transaction-icon">⇨</div>
+                        <div class="transaction-details">
+                            <div class="transaction-title">ارسال به محمد</div>
+                            <div class="transaction-date">۱۴۰۲/۰۵/۱۴ - ۰۹:۴۵</div>
                         </div>
-                        <div class="message sent">
-                            خوبم ممنون! تو چطوریه؟
-                        </div>
-                        <div class="message received">
-                            خوبم. علاقه‌مند به دیدار هستی؟
-                        </div>
+                        <div class="transaction-amount amount-out">-۲۰۰,۰۰۰ تومان</div>
                     </div>
                     
-                    <div class="chat-input">
-                        <input type="text" placeholder="پیام خود را بنویسید...">
-                        <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- بخش اعلان‌ها -->
-            <div id="notifications-section" class="section">
-                <h2 style="margin-bottom: 20px;">اعلان‌ها</h2>
-                
-                <div class="notifications-list">
-                    <div class="notification-item">
-                        <div class="notification-icon">
-                            <i class="fas fa-heart"></i>
+                    <div class="transaction-item">
+                        <div class="transaction-icon">B</div>
+                        <div class="transaction-details">
+                            <div class="transaction-title">خرید بیت‌کوین</div>
+                            <div class="transaction-date">۱۴۰۲/۰۵/۱۲ - ۱۶:۲۰</div>
                         </div>
-                        <div class="notification-content">
-                            <p><strong>سارا محمدی</strong> پروفایل شما را لایک کرد</p>
-                            <span class="notification-time">۲ ساعت پیش</span>
-                        </div>
-                    </div>
-                    
-                    <div class="notification-item">
-                        <div class="notification-icon">
-                            <i class="fas fa-comment"></i>
-                        </div>
-                        <div class="notification-content">
-                            <p><strong>امیررضا حسینی</strong> برای شما پیام جدید فرستاد</p>
-                            <span class="notification-time">۵ ساعت پیش</span>
-                        </div>
-                    </div>
-                    
-                    <div class="notification-item">
-                        <div class="notification-icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="notification-content">
-                            <p><strong>نازنین کریمی</strong> را کشف کنید - علایق مشترک: سینما, موسیقی</p>
-                            <span class="notification-time">۱ روز پیش</span>
-                        </div>
+                        <div class="transaction-amount amount-out">-۱,۵۰۰,۰۰۰ تومان</div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- فوتر ناوبری پیشرفته -->
-        <div class="nav-footer">
-            <div class="nav-item active" data-section="profile-section">
-                <i class="fas fa-user nav-icon"></i>
-                <span>پروفایل</span>
+        <!-- Market Section (Hidden by default) -->
+        <div id="market" class="hidden">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">ارزهای پرطرفدار</div>
+                    <button class="btn btn-sm" style="background: #f1f5ff; color: var(--primary);">جستجو</button>
+                </div>
+                
+                <div class="market-list">
+                    <div class="market-item">
+                        <div class="market-icon">B</div>
+                        <div class="market-details">
+                            <div class="market-name">بیت‌کوین (BTC)</div>
+                            <div class="market-price">۱,۲۳۴,۰۰۰,۰۰۰ تومان</div>
+                        </div>
+                        <div class="market-change change-up">+۲.۵٪</div>
+                    </div>
+                    
+                    <div class="market-item">
+                        <div class="market-icon">E</div>
+                        <div class="market-details">
+                            <div class="market-name">اتریوم (ETH)</div>
+                            <div class="market-price">۱۲۳,۴۵۶,۰۰۰ تومان</div>
+                        </div>
+                        <div class="market-change change-up">+۱.۸٪</div>
+                    </div>
+                    
+                    <div class="market-item">
+                        <div class="market-icon">S</div>
+                        <div class="market-details">
+                            <div class="market-name">سولانا (SOL)</div>
+                            <div class="market-price">۱,۲۳۴,۰۰۰ تومان</div>
+                        </div>
+                        <div class="market-change change-up">+۵.۲٪</div>
+                    </div>
+                    
+                    <div class="market-item">
+                        <div class="market-icon">D</div>
+                        <div class="market-details">
+                            <div class="market-name">دوج کوین (DOGE)</div>
+                            <div class="market-price">۵۶۷ تومان</div>
+                        </div>
+                        <div class="market-change change-down">-۱.۲٪</div>
+                    </div>
+                </div>
             </div>
-            <div class="nav-item" data-section="chat-section">
-                <i class="fas fa-comment nav-icon"></i>
-                <span>چت</span>
-                <span class="nav-badge">3</span>
+        </div>
+        
+        <!-- Trade Section (Hidden by default) -->
+        <div id="trade" class="hidden">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">خرید و فروش</div>
+                </div>
+                
+                <div style="padding: 16px 0;">
+                    <div style="display: flex; margin-bottom: 20px; background: #f1f5ff; border-radius: 12px; padding: 4px;">
+                        <div style="flex: 1; text-align: center; padding: 12px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); font-weight: 600;">خرید</div>
+                        <div style="flex: 1; text-align: center; padding: 12px; color: #6c757d; font-weight: 500;">فروش</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">ارز مورد نظر</label>
+                        <select style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: white;">
+                            <option>بیت‌کوین (BTC)</option>
+                            <option>اتریوم (ETH)</option>
+                            <option>تتر (USDT)</option>
+                            <option>سولانا (SOL)</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">مبلغ (تومان)</label>
+                        <input type="number" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border);" placeholder="مبلغ را وارد کنید">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px; padding: 16px; background: #f8f9fa; border-radius: 12px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>قیمت هر واحد:</span>
+                            <span>۱,۲۳۴,۰۰۰,۰۰۰ تومان</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>مقدار دریافت:</span>
+                            <span>۰.۰۰۰۴۱۵ BTC</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;">خرید بیت‌کوین</button>
+                </div>
             </div>
-            <div class="nav-item" data-section="discover-section">
-                <i class="fas fa-search nav-icon"></i>
-                <span>کشف</span>
-                <span class="nav-badge pulse">5</span>
-            </div>
-            <div class="nav-item" data-section="notifications-section">
-                <i class="fas fa-bell nav-icon"></i>
-                <span>اعلان‌ها</span>
-            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <div class="nav-icon">🏠</div>
+            <span>خانه</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">📊</div>
+            <span>بازار</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">⇄</div>
+            <span>معامله</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">💼</div>
+            <span>کیف پول</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">☰</div>
+            <span>بیشتر</span>
         </div>
     </div>
 
     <script>
-        // مدیریت وضعیت کاربر
-        let userProfile = {
-            name: '',
-            age: '',
-            gender: '',
-            bio: '',
-            interests: [],
-            profileComplete: false,
-            settings: {
-                profileVisible: true,
-                notifications: true
-            },
-            matches: [],
-            likes: []
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.tab');
+        const sections = {
+            'my-coins': document.getElementById('my-coins'),
+            'market': document.getElementById('market'),
+            'trade': document.getElementById('trade')
         };
         
-        // کاربران نمونه برای بخش کشف
-        const sampleUsers = [
-            {
-                id: 1,
-                name: 'سارا محمدی',
-                age: 22,
-                gender: 'female',
-                bio: 'علاقه‌مند به سینما و کتاب. دانشجوی روانشناسی',
-                interests: ['سینما', 'کتاب', 'موسیقی'],
-                image: 'https://via.placeholder.com/150?text=سارا',
-                verified: true,
-                online: true,
-                distance: '2km'
-            },
-            {
-                id: 2,
-                name: 'امیررضا حسینی',
-                age: 24,
-                gender: 'male',
-                bio: 'طراح گرافیک و عکاس. عاشق طبیعت گردی',
-                interests: ['هنر', 'عکاسی', 'طبیعت'],
-                image: 'https://via.placeholder.com/150?text=امیررضا',
-                verified: false,
-                online: false,
-                distance: '5km'
-            },
-            {
-                id: 3,
-                name: 'نازنین کریمی',
-                age: 21,
-                gender: 'female',
-                bio: 'دانشجوی معماری. علاقه‌مند به ورزش و سفر',
-                interests: ['معماری', 'ورزش', 'سفر'],
-                image: 'https://via.placeholder.com/150?text=نازنین',
-                verified: true,
-                online: true,
-                distance: '3km'
-            },
-            {
-                id: 4,
-                name: 'محمد امینی',
-                age: 23,
-                gender: 'male',
-                bio: 'برنامه‌نویس و علاقه‌مند به تکنولوژی‌های جدید',
-                interests: ['برنامه‌نویسی', 'تکنولوژی', 'بازی'],
-                image: 'https://via.placeholder.com/150?text=محمد',
-                verified: false,
-                online: true,
-                distance: '7km'
-            }
-        ];
-        
-        // چت‌های نمونه
-        const sampleChats = [
-            {
-                id: 1,
-                userId: 1,
-                name: 'سارا محمدی',
-                image: 'https://via.placeholder.com/50?text=سارا',
-                lastMessage: 'علاقه‌مند به دیدار هستی؟',
-                time: '12:30',
-                unread: 3,
-                online: true
-            },
-            {
-                id: 2,
-                userId: 3,
-                name: 'نازنین کریمی',
-                image: 'https://via.placeholder.com/50?text=نازنین',
-                lastMessage: 'چه فیلم‌هایی دوست داری؟',
-                time: 'دیروز',
-                unread: 0,
-                online: false
-            }
-        ];
-        
-        // المنت‌های DOM
-        const navItems = document.querySelectorAll('.nav-item');
-        const sections = document.querySelectorAll('.section');
-        
-        // بررسی وضعیت پروفایل کاربر هنگام لود صفحه
-        document.addEventListener('DOMContentLoaded', function() {
-            loadUserProfile();
-            setupNavigation();
-            renderDiscoverUsers();
-            renderChatsList();
-            setupEventListeners();
-            
-            // اگر پروفایل کامل است، مستقیماً به بخش کشف برو
-            if (userProfile.profileComplete) {
-                showSection('discover-section');
-                updateNavigation('discover-section');
-            } else {
-                showSection('profile-section');
-                updateNavigation('profile-section');
-            }
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all sections
+                Object.values(sections).forEach(section => {
+                    section.classList.add('hidden');
+                });
+                
+                // Show the corresponding section
+                if (tab.textContent === 'ارزهای من') {
+                    sections['my-coins'].classList.remove('hidden');
+                } else if (tab.textContent === 'بازار') {
+                    sections['market'].classList.remove('hidden');
+                } else if (tab.textContent === 'معامله') {
+                    sections['trade'].classList.remove('hidden');
+                }
+            });
         });
         
-        // بارگذاری پروفایل کاربر از localStorage
-        function loadUserProfile() {
-            const savedProfile = localStorage.getItem('userProfile');
-            if (savedProfile) {
-                userProfile = JSON.parse(savedProfile);
+        // Bottom navigation functionality
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all nav items
+                navItems.forEach(i => i.classList.remove('active'));
                 
-                // پر کردن فرم با داده‌های ذخیره شده
-                document.getElementById('profile-name').value = userProfile.name;
-                document.getElementById('profile-age').value = userProfile.age;
-                document.getElementById('profile-gender').value = userProfile.gender;
-                document.getElementById('profile-bio').value = userProfile.bio;
-                document.getElementById('profile-interests').value = userProfile.interests.join(', ');
-                document.getElementById('profile-visible').checked = userProfile.settings.profileVisible;
-                document.getElementById('notifications-enabled').checked = userProfile.settings.notifications;
+                // Add active class to clicked nav item
+                item.classList.add('active');
                 
-                // نمایش تگ‌های علاقه‌مندی‌ها
-                renderInterestTags();
-            }
-        }
-        
-        // ذخیره پروفایل کاربر در localStorage
-        function saveUserProfile() {
-            userProfile.name = document.getElementById('profile-name').value;
-            userProfile.age = document.getElementById('profile-age').value;
-            userProfile.gender = document.getElementById('profile-gender').value;
-            userProfile.bio = document.getElementById('profile-bio').value;
-            
-            // پردازش علاقه‌مندی‌ها
-            const interestsInput = document.getElementById('profile-interests').value;
-            userProfile.interests = interestsInput.split(',').map(item => item.trim()).filter(item => item !== '');
-            
-            // ذخیره تنظیمات
-            userProfile.settings.profileVisible = document.getElementById('profile-visible').checked;
-            userProfile.settings.notifications = document.getElementById('notifications-enabled').checked;
-            
-            // بررسی کامل بودن پروفایل
-            userProfile.profileComplete = userProfile.name && userProfile.age && userProfile.gender && userProfile.bio && userProfile.interests.length > 0;
-            
-            // ذخیره در localStorage
-            localStorage.setItem('userProfile', JSON.stringify(userProfile));
-            
-            if (userProfile.profileComplete) {
-                showNotification('پروفایل با موفقیت ذخیره شد!');
-                showSection('discover-section');
-                updateNavigation('discover-section');
-                renderInterestTags();
-            } else {
-                showNotification('لطفاً تمام فیلدهای ضروری را پر کنید.', 'error');
-            }
-        }
-        
-        // نمایش تگ‌های علاقه‌مندی‌ها
-        function renderInterestTags() {
-            const container = document.getElementById('interest-tags-container');
-            container.innerHTML = '';
-            
-            userProfile.interests.forEach(interest => {
-                const tag = document.createElement('div');
-                tag.className = 'interest-tag';
-                tag.textContent = interest;
-                container.appendChild(tag);
-            });
-        }
-        
-        // راه‌اندازی ناوبری
-        function setupNavigation() {
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const sectionId = this.getAttribute('data-section');
-                    
-                    // اگر کاربر می‌خواهد به بخش کشف برود اما پروفایل کامل نیست
-                    if (sectionId === 'discover-section' && !userProfile.profileComplete) {
-                        showNotification('لطفاً ابتدا پروفایل خود را تکمیل کنید.', 'warning');
-                        showSection('profile-section');
-                        updateNavigation('profile-section');
-                        return;
-                    }
-                    
-                    showSection(sectionId);
-                    updateNavigation(sectionId);
-                });
-            });
-        }
-        
-        // نمایش بخش مورد نظر
-        function showSection(sectionId) {
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            document.getElementById(sectionId).classList.add('active');
-        }
-        
-        // به‌روزرسانی وضعیت ناوبری
-        function updateNavigation(sectionId) {
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('data-section') === sectionId) {
-                    item.classList.add('active');
+                // In a real app, this would navigate to different pages
+                // For this demo, we'll just show an alert
+                if (item.querySelector('span').textContent === 'بیشتر') {
+                    alert('منوی بیشتر باز شد');
                 }
             });
-        }
+        });
         
-        // نمایش کاربران در بخش کشف
-        function renderDiscoverUsers() {
-            const discoverContainer = document.getElementById('discover-users');
-            discoverContainer.innerHTML = '';
-            
-            sampleUsers.forEach(user => {
-                const userCard = document.createElement('div');
-                userCard.className = 'user-card';
-                
-                userCard.innerHTML = `
-                    <div class="user-status ${user.online ? 'online' : ''}"></div>
-                    <img src="${user.image}" alt="${user.name}" class="user-img">
-                    <div class="user-info">
-                        <h3 class="user-name">${user.name} ${user.verified ? '<i class="fas fa-check-circle verified-badge"></i>' : ''}</h3>
-                        <div class="user-age">${user.age} ساله - ${user.distance} دور</div>
-                        <p class="user-bio">${user.bio}</p>
-                        <div class="interest-tags">
-                            ${user.interests.slice(0, 3).map(interest => `<div class="interest-tag">${interest}</div>`).join('')}
-                        </div>
-                        <div class="action-buttons">
-                            <button class="action-btn dislike-btn" data-user-id="${user.id}"><i class="fas fa-times"></i></button>
-                            <button class="action-btn like-btn" data-user-id="${user.id}"><i class="fas fa-heart"></i></button>
-                        </div>
-                    </div>
-                `;
-                
-                discoverContainer.appendChild(userCard);
-            });
-            
-            // اضافه کردن event listener برای دکمه‌های لایک/دیس لایک
-            document.querySelectorAll('.like-btn, .dislike-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const userId = this.getAttribute('data-user-id');
-                    if (this.classList.contains('like-btn')) {
-                        likeUser(userId);
-                    } else {
-                        dislikeUser(userId);
-                    }
-                });
-            });
-        }
-        
-        // نمایش لیست چت‌ها
-        function renderChatsList() {
-            const chatsContainer = document.getElementById('chats-list');
-            chatsContainer.innerHTML = '';
-            
-            sampleChats.forEach(chat => {
-                const chatItem = document.createElement('div');
-                chatItem.className = `chat-item ${chat.unread > 0 ? 'unread' : ''}`;
-                chatItem.setAttribute('data-chat-id', chat.id);
-                
-                chatItem.innerHTML = `
-                    <img src="${chat.image}" alt="${chat.name}" class="chat-user-img">
-                    <div class="chat-info">
-                        <h3 class="chat-name">${chat.name} ${chat.online ? '<span class="user-status online"></span>' : ''}</h3>
-                        <p class="last-message">${chat.lastMessage}</p>
-                    </div>
-                    <div class="chat-meta">
-                        <div class="chat-time">${chat.time}</div>
-                        ${chat.unread > 0 ? `<div class="unread-count">${chat.unread}</div>` : ''}
-                    </div>
-                `;
-                
-                chatsContainer.appendChild(chatItem);
-            });
-            
-            // اضافه کردن event listener برای آیتم‌های چت
-            document.querySelectorAll('.chat-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const chatId = this.getAttribute('data-chat-id');
-                    openChat(chatId);
-                });
-            });
-        }
-        
-        // لایک کردن یک کاربر
-        function likeUser(userId) {
-            if (!userProfile.likes.includes(userId)) {
-                userProfile.likes.push(userId);
-                localStorage.setItem('userProfile', JSON.stringify(userProfile));
-                
-                // بررسی تطابق
-                const likedUser = sampleUsers.find(user => user.id == userId);
-                if (likedUser && likedUser.likes && likedUser.likes.includes('current-user')) {
-                    // ایجاد تطابق
-                    if (!userProfile.matches.includes(userId)) {
-                        userProfile.matches.push(userId);
-                        localStorage.setItem('userProfile', JSON.stringify(userProfile));
-                        showNotification(`تطابق! شما و ${likedUser.name} همدیگر را لایک کردید.`);
-                    }
-                }
-                
-                showNotification('علاقه‌مندی شما ثبت شد!');
-            }
-        }
-        
-        // دیس لایک کردن یک کاربر
-        function dislikeUser(userId) {
-            showNotification('پروفایل رد شد.');
-        }
-        
-        // باز کردن چت
-        function openChat(chatId) {
-            document.getElementById('chats-list').style.display = 'none';
-            document.getElementById('active-chat').style.display = 'block';
-        }
-        
-        // نمایش اعلان
-        function showNotification(message, type = 'success') {
-            // در اینجا می‌توانید یک سیستم اعلان زیبا پیاده‌سازی کنید
-            alert(message);
-        }
-        
-        // راه‌اندازی event listeners اضافی
-        function setupEventListeners() {
-            // رویداد کلیک برای دکمه ذخیره پروفایل
-            document.getElementById('save-profile').addEventListener('click', saveUserProfile);
-            
-            // رویداد برای دکمه‌های هدر
-            document.getElementById('notifications-btn').addEventListener('click', function() {
-                showSection('notifications-section');
-                updateNavigation('notifications-section');
-            });
-            
-            document.getElementById('settings-btn').addEventListener('click', function() {
-                showSection('profile-section');
-                updateNavigation('profile-section');
-            });
-            
-            // رویداد برای فیلترهای بخش کشف
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    // در اینجا می‌توانید فیلتر کردن کاربران را پیاده‌سازی کنید
-                });
-            });
-        }
+        // Simulate loading data
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Mini App loaded successfully!');
+        });
     </script>
 </body>
 </html>
