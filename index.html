@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هم‌قدم - دوستیابی جوانان ایران</title>
+    <title>هم‌قدم - نسخه پیشرفته</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -13,6 +13,7 @@
             --dark: #121212;
             --light: #f8f9fa;
             --success: #00c853;
+            --warning: #ffab00;
             --card-bg: rgba(255, 255, 255, 0.1);
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
@@ -35,7 +36,7 @@
         .container {
             max-width: 100%;
             margin: 0 auto;
-            padding-bottom: 70px; /* فضای برای فوتر */
+            padding-bottom: 70px;
         }
         
         header {
@@ -47,12 +48,14 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
         }
         
@@ -64,6 +67,24 @@
         .logo-icon {
             font-size: 1.8rem;
             color: white;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .header-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .main-content {
@@ -80,7 +101,7 @@
             display: block;
         }
         
-        /* پروفایل استایل */
+        /* استایل‌های پیشرفته برای پروفایل */
         .profile-container {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
@@ -93,60 +114,74 @@
         .profile-header {
             text-align: center;
             margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .profile-pic-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
         }
         
         .profile-pic {
-            width: 120px;
-            height: 120px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--accent);
-            margin: 0 auto 15px;
-            display: block;
         }
         
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-        }
-        
-        .form-control:focus {
-            outline: 2px solid var(--accent);
-        }
-        
-        .btn {
-            background: var(--gradient);
+        .change-photo-btn {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: var(--accent);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
             cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            font-size: 1rem;
-            transition: transform 0.2s;
         }
         
-        .btn:hover {
-            transform: translateY(-2px);
+        .interest-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
         }
         
-        /* صفحه کشف افراد */
+        .interest-tag {
+            background: var(--gradient);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        /* استایل‌های پیشرفته برای کشف افراد */
+        .discover-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding: 5px 0;
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .filter-btn.active {
+            background: var(--gradient);
+        }
+        
         .discover-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -160,10 +195,26 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s;
+            position: relative;
         }
         
         .user-card:hover {
             transform: translateY(-5px);
+        }
+        
+        .user-status {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .user-status.online {
+            background: var(--success);
         }
         
         .user-img {
@@ -179,6 +230,14 @@
         .user-name {
             font-size: 1.1rem;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .verified-badge {
+            color: var(--success);
+            font-size: 0.9rem;
         }
         
         .user-age {
@@ -217,88 +276,80 @@
             color: white;
         }
         
-        /* صفحه چت */
-        .chat-container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            height: 400px;
-            display: flex;
-            flex-direction: column;
+        /* استایل‌های پیشرفته برای چت */
+        .chats-list {
+            margin-bottom: 20px;
         }
         
-        .chat-header {
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
+        .chat-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .chat-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .chat-item.unread {
+            background: rgba(37, 117, 252, 0.15);
         }
         
         .chat-user-img {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
         }
         
-        .chat-messages {
+        .chat-info {
             flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
         }
         
-        .message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 15px;
+        .chat-name {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .last-message {
             font-size: 0.9rem;
+            color: #aaa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        .message.received {
-            background: rgba(255, 255, 255, 0.1);
-            align-self: flex-start;
-            border-bottom-right-radius: 0;
+        .chat-meta {
+            text-align: left;
+            min-width: 70px;
         }
         
-        .message.sent {
-            background: var(--gradient);
-            align-self: flex-end;
-            border-bottom-left-radius: 0;
+        .chat-time {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 5px;
         }
         
-        .chat-input {
-            display: flex;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            gap: 10px;
-        }
-        
-        .chat-input input {
-            flex: 1;
-            padding: 10px 15px;
-            border-radius: 20px;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-        
-        .send-btn {
+        .unread-count {
             background: var(--accent);
             color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: center;
         }
         
-        /* فوتر ناوبری */
+        /* فوتر ناوبری پیشرفته */
         .nav-footer {
             position: fixed;
             bottom: 0;
@@ -321,6 +372,7 @@
             cursor: pointer;
             transition: color 0.3s;
             font-size: 0.8rem;
+            position: relative;
         }
         
         .nav-item.active {
@@ -332,17 +384,91 @@
             margin-bottom: 4px;
         }
         
-        /* انیمیشن‌ها */
+        .nav-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* انیمیشن‌های پیشرفته */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         
-        /* رسپانسیو */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* رسپانسیو پیشرفته */
         @media (max-width: 768px) {
             .discover-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .header-actions {
+                gap: 10px;
+            }
+            
+            .header-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+        
+        /* مودال و پاپ‌آپ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .modal {
+            background: var(--dark);
+            border-radius: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -353,14 +479,27 @@
                 <i class="fas fa-heart logo-icon"></i>
                 <h1>هم‌قدم</h1>
             </div>
+            <div class="header-actions">
+                <button class="header-btn" id="notifications-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <button class="header-btn" id="settings-btn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
         </header>
         
         <div class="main-content">
-            <!-- بخش پروفایل -->
+            <!-- بخش پروفایل پیشرفته -->
             <div id="profile-section" class="section">
                 <div class="profile-container">
                     <div class="profile-header">
-                        <img src="https://via.placeholder.com/120" alt="پروفایل" class="profile-pic" id="profile-picture">
+                        <div class="profile-pic-container">
+                            <img src="https://via.placeholder.com/120" alt="پروفایل" class="profile-pic" id="profile-picture">
+                            <button class="change-photo-btn">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
                         <h2>پروفایل شما</h2>
                     </div>
                     
@@ -389,33 +528,68 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="profile-interests">علاقه‌مندی‌ها</label>
-                        <input type="text" id="profile-interests" class="form-control" placeholder="مثلاً: سینما، موسیقی، ورزش">
+                        <label for="profile-interests">علاقه‌مندی‌ها (با کاما جدا کنید)</label>
+                        <input type="text" id="profile-interests" class="form-control" placeholder="مثلاً: سینما, موسیقی, ورزش">
+                    </div>
+                    
+                    <div class="interest-tags" id="interest-tags-container">
+                        <!-- تگ‌های علاقه‌مندی‌ها اینجا نمایش داده می‌شوند -->
                     </div>
                     
                     <button class="btn" id="save-profile">ذخیره پروفایل</button>
                 </div>
+                
+                <div class="profile-container">
+                    <h3>تنظیمات حریم خصوصی</h3>
+                    <div class="form-group">
+                        <label class="switch">
+                            <input type="checkbox" id="profile-visible">
+                            <span class="slider"></span>
+                        </label>
+                        <span>پروفایل من قابل مشاهده باشد</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="switch">
+                            <input type="checkbox" id="notifications-enabled" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span> دریافت notifications</span>
+                    </div>
+                </div>
             </div>
             
-            <!-- بخش کشف افراد -->
+            <!-- بخش کشف افراد پیشرفته -->
             <div id="discover-section" class="section">
-                <h2 style="margin-bottom: 20px; text-align: center;">افراد جدید</h2>
+                <h2 style="margin-bottom: 15px;">کشف افراد جدید</h2>
+                
+                <div class="discover-filters">
+                    <button class="filter-btn active">همه</button>
+                    <button class="filter-btn">آنلاین</button>
+                    <button class="filter-btn">نزدیک‌ها</button>
+                    <button class="filter-btn">علاقه‌مندی‌های مشترک</button>
+                    <button class="filter-btn">اخیراً فعال</button>
+                </div>
                 
                 <div class="discover-grid" id="discover-users">
                     <!-- کاربران به صورت داینامیک اضافه می‌شوند -->
                 </div>
             </div>
             
-            <!-- بخش چت -->
+            <!-- بخش چت پیشرفته -->
             <div id="chat-section" class="section">
-                <h2 style="margin-bottom: 20px; text-align: center;">چت‌ها</h2>
+                <h2 style="margin-bottom: 15px;">چت‌ها</h2>
                 
-                <div class="chat-container">
+                <div class="chats-list" id="chats-list">
+                    <!-- لیست چت‌ها اینجا نمایش داده می‌شود -->
+                </div>
+                
+                <div class="chat-container" id="active-chat" style="display: none;">
                     <div class="chat-header">
                         <img src="https://via.placeholder.com/40" alt="user" class="chat-user-img">
                         <div>
-                            <div class="user-name">سارا محمدی</div>
-                            <div class="user-age">۲۲ ساله</div>
+                            <div class="user-name">سارا محمدی <i class="fas fa-check-circle verified-badge"></i></div>
+                            <div class="user-age">آنلاین</div>
                         </div>
                     </div>
                     
@@ -437,9 +611,46 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- بخش اعلان‌ها -->
+            <div id="notifications-section" class="section">
+                <h2 style="margin-bottom: 20px;">اعلان‌ها</h2>
+                
+                <div class="notifications-list">
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p><strong>سارا محمدی</strong> پروفایل شما را لایک کرد</p>
+                            <span class="notification-time">۲ ساعت پیش</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p><strong>امیررضا حسینی</strong> برای شما پیام جدید فرستاد</p>
+                            <span class="notification-time">۵ ساعت پیش</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p><strong>نازنین کریمی</strong> را کشف کنید - علایق مشترک: سینما, موسیقی</p>
+                            <span class="notification-time">۱ روز پیش</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <!-- فوتر ناوبری -->
+        <!-- فوتر ناوبری پیشرفته -->
         <div class="nav-footer">
             <div class="nav-item active" data-section="profile-section">
                 <i class="fas fa-user nav-icon"></i>
@@ -448,10 +659,16 @@
             <div class="nav-item" data-section="chat-section">
                 <i class="fas fa-comment nav-icon"></i>
                 <span>چت</span>
+                <span class="nav-badge">3</span>
             </div>
             <div class="nav-item" data-section="discover-section">
                 <i class="fas fa-search nav-icon"></i>
                 <span>کشف</span>
+                <span class="nav-badge pulse">5</span>
+            </div>
+            <div class="nav-item" data-section="notifications-section">
+                <i class="fas fa-bell nav-icon"></i>
+                <span>اعلان‌ها</span>
             </div>
         </div>
     </div>
@@ -463,43 +680,89 @@
             age: '',
             gender: '',
             bio: '',
-            interests: '',
-            profileComplete: false
+            interests: [],
+            profileComplete: false,
+            settings: {
+                profileVisible: true,
+                notifications: true
+            },
+            matches: [],
+            likes: []
         };
         
         // کاربران نمونه برای بخش کشف
         const sampleUsers = [
             {
+                id: 1,
                 name: 'سارا محمدی',
                 age: 22,
                 gender: 'female',
                 bio: 'علاقه‌مند به سینما و کتاب. دانشجوی روانشناسی',
-                interests: 'سینما, کتاب, موسیقی',
-                image: 'https://via.placeholder.com/150?text=سارا'
+                interests: ['سینما', 'کتاب', 'موسیقی'],
+                image: 'https://via.placeholder.com/150?text=سارا',
+                verified: true,
+                online: true,
+                distance: '2km'
             },
             {
+                id: 2,
                 name: 'امیررضا حسینی',
                 age: 24,
                 gender: 'male',
                 bio: 'طراح گرافیک و عکاس. عاشق طبیعت گردی',
-                interests: 'هنر, عکاسی, طبیعت',
-                image: 'https://via.placeholder.com/150?text=امیررضا'
+                interests: ['هنر', 'عکاسی', 'طبیعت'],
+                image: 'https://via.placeholder.com/150?text=امیررضا',
+                verified: false,
+                online: false,
+                distance: '5km'
             },
             {
+                id: 3,
                 name: 'نازنین کریمی',
                 age: 21,
                 gender: 'female',
                 bio: 'دانشجوی معماری. علاقه‌مند به ورزش و سفر',
-                interests: 'معماری, ورزش, سفر',
-                image: 'https://via.placeholder.com/150?text=نازنین'
+                interests: ['معماری', 'ورزش', 'سفر'],
+                image: 'https://via.placeholder.com/150?text=نازنین',
+                verified: true,
+                online: true,
+                distance: '3km'
             },
             {
+                id: 4,
                 name: 'محمد امینی',
                 age: 23,
                 gender: 'male',
                 bio: 'برنامه‌نویس و علاقه‌مند به تکنولوژی‌های جدید',
-                interests: 'برنامه‌نویسی, تکنولوژی, بازی',
-                image: 'https://via.placeholder.com/150?text=محمد'
+                interests: ['برنامه‌نویسی', 'تکنولوژی', 'بازی'],
+                image: 'https://via.placeholder.com/150?text=محمد',
+                verified: false,
+                online: true,
+                distance: '7km'
+            }
+        ];
+        
+        // چت‌های نمونه
+        const sampleChats = [
+            {
+                id: 1,
+                userId: 1,
+                name: 'سارا محمدی',
+                image: 'https://via.placeholder.com/50?text=سارا',
+                lastMessage: 'علاقه‌مند به دیدار هستی؟',
+                time: '12:30',
+                unread: 3,
+                online: true
+            },
+            {
+                id: 2,
+                userId: 3,
+                name: 'نازنین کریمی',
+                image: 'https://via.placeholder.com/50?text=نازنین',
+                lastMessage: 'چه فیلم‌هایی دوست داری؟',
+                time: 'دیروز',
+                unread: 0,
+                online: false
             }
         ];
         
@@ -512,6 +775,8 @@
             loadUserProfile();
             setupNavigation();
             renderDiscoverUsers();
+            renderChatsList();
+            setupEventListeners();
             
             // اگر پروفایل کامل است، مستقیماً به بخش کشف برو
             if (userProfile.profileComplete) {
@@ -534,7 +799,12 @@
                 document.getElementById('profile-age').value = userProfile.age;
                 document.getElementById('profile-gender').value = userProfile.gender;
                 document.getElementById('profile-bio').value = userProfile.bio;
-                document.getElementById('profile-interests').value = userProfile.interests;
+                document.getElementById('profile-interests').value = userProfile.interests.join(', ');
+                document.getElementById('profile-visible').checked = userProfile.settings.profileVisible;
+                document.getElementById('notifications-enabled').checked = userProfile.settings.notifications;
+                
+                // نمایش تگ‌های علاقه‌مندی‌ها
+                renderInterestTags();
             }
         }
         
@@ -544,21 +814,42 @@
             userProfile.age = document.getElementById('profile-age').value;
             userProfile.gender = document.getElementById('profile-gender').value;
             userProfile.bio = document.getElementById('profile-bio').value;
-            userProfile.interests = document.getElementById('profile-interests').value;
+            
+            // پردازش علاقه‌مندی‌ها
+            const interestsInput = document.getElementById('profile-interests').value;
+            userProfile.interests = interestsInput.split(',').map(item => item.trim()).filter(item => item !== '');
+            
+            // ذخیره تنظیمات
+            userProfile.settings.profileVisible = document.getElementById('profile-visible').checked;
+            userProfile.settings.notifications = document.getElementById('notifications-enabled').checked;
             
             // بررسی کامل بودن پروفایل
-            userProfile.profileComplete = userProfile.name && userProfile.age && userProfile.gender && userProfile.bio && userProfile.interests;
+            userProfile.profileComplete = userProfile.name && userProfile.age && userProfile.gender && userProfile.bio && userProfile.interests.length > 0;
             
             // ذخیره در localStorage
             localStorage.setItem('userProfile', JSON.stringify(userProfile));
             
             if (userProfile.profileComplete) {
-                alert('پروفایل با موفقیت ذخیره شد!');
+                showNotification('پروفایل با موفقیت ذخیره شد!');
                 showSection('discover-section');
                 updateNavigation('discover-section');
+                renderInterestTags();
             } else {
-                alert('لطفاً تمام فیلدها را پر کنید.');
+                showNotification('لطفاً تمام فیلدهای ضروری را پر کنید.', 'error');
             }
+        }
+        
+        // نمایش تگ‌های علاقه‌مندی‌ها
+        function renderInterestTags() {
+            const container = document.getElementById('interest-tags-container');
+            container.innerHTML = '';
+            
+            userProfile.interests.forEach(interest => {
+                const tag = document.createElement('div');
+                tag.className = 'interest-tag';
+                tag.textContent = interest;
+                container.appendChild(tag);
+            });
         }
         
         // راه‌اندازی ناوبری
@@ -569,7 +860,7 @@
                     
                     // اگر کاربر می‌خواهد به بخش کشف برود اما پروفایل کامل نیست
                     if (sectionId === 'discover-section' && !userProfile.profileComplete) {
-                        alert('لطفاً ابتدا پروفایل خود را تکمیل کنید.');
+                        showNotification('لطفاً ابتدا پروفایل خود را تکمیل کنید.', 'warning');
                         showSection('profile-section');
                         updateNavigation('profile-section');
                         return;
@@ -579,9 +870,6 @@
                     updateNavigation(sectionId);
                 });
             });
-            
-            // رویداد کلیک برای دکمه ذخیره پروفایل
-            document.getElementById('save-profile').addEventListener('click', saveUserProfile);
         }
         
         // نمایش بخش مورد نظر
@@ -613,19 +901,133 @@
                 userCard.className = 'user-card';
                 
                 userCard.innerHTML = `
+                    <div class="user-status ${user.online ? 'online' : ''}"></div>
                     <img src="${user.image}" alt="${user.name}" class="user-img">
                     <div class="user-info">
-                        <h3 class="user-name">${user.name}</h3>
-                        <div class="user-age">${user.age} ساله</div>
+                        <h3 class="user-name">${user.name} ${user.verified ? '<i class="fas fa-check-circle verified-badge"></i>' : ''}</h3>
+                        <div class="user-age">${user.age} ساله - ${user.distance} دور</div>
                         <p class="user-bio">${user.bio}</p>
+                        <div class="interest-tags">
+                            ${user.interests.slice(0, 3).map(interest => `<div class="interest-tag">${interest}</div>`).join('')}
+                        </div>
                         <div class="action-buttons">
-                            <button class="action-btn dislike-btn"><i class="fas fa-times"></i></button>
-                            <button class="action-btn like-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn dislike-btn" data-user-id="${user.id}"><i class="fas fa-times"></i></button>
+                            <button class="action-btn like-btn" data-user-id="${user.id}"><i class="fas fa-heart"></i></button>
                         </div>
                     </div>
                 `;
                 
                 discoverContainer.appendChild(userCard);
+            });
+            
+            // اضافه کردن event listener برای دکمه‌های لایک/دیس لایک
+            document.querySelectorAll('.like-btn, .dislike-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const userId = this.getAttribute('data-user-id');
+                    if (this.classList.contains('like-btn')) {
+                        likeUser(userId);
+                    } else {
+                        dislikeUser(userId);
+                    }
+                });
+            });
+        }
+        
+        // نمایش لیست چت‌ها
+        function renderChatsList() {
+            const chatsContainer = document.getElementById('chats-list');
+            chatsContainer.innerHTML = '';
+            
+            sampleChats.forEach(chat => {
+                const chatItem = document.createElement('div');
+                chatItem.className = `chat-item ${chat.unread > 0 ? 'unread' : ''}`;
+                chatItem.setAttribute('data-chat-id', chat.id);
+                
+                chatItem.innerHTML = `
+                    <img src="${chat.image}" alt="${chat.name}" class="chat-user-img">
+                    <div class="chat-info">
+                        <h3 class="chat-name">${chat.name} ${chat.online ? '<span class="user-status online"></span>' : ''}</h3>
+                        <p class="last-message">${chat.lastMessage}</p>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">${chat.time}</div>
+                        ${chat.unread > 0 ? `<div class="unread-count">${chat.unread}</div>` : ''}
+                    </div>
+                `;
+                
+                chatsContainer.appendChild(chatItem);
+            });
+            
+            // اضافه کردن event listener برای آیتم‌های چت
+            document.querySelectorAll('.chat-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const chatId = this.getAttribute('data-chat-id');
+                    openChat(chatId);
+                });
+            });
+        }
+        
+        // لایک کردن یک کاربر
+        function likeUser(userId) {
+            if (!userProfile.likes.includes(userId)) {
+                userProfile.likes.push(userId);
+                localStorage.setItem('userProfile', JSON.stringify(userProfile));
+                
+                // بررسی تطابق
+                const likedUser = sampleUsers.find(user => user.id == userId);
+                if (likedUser && likedUser.likes && likedUser.likes.includes('current-user')) {
+                    // ایجاد تطابق
+                    if (!userProfile.matches.includes(userId)) {
+                        userProfile.matches.push(userId);
+                        localStorage.setItem('userProfile', JSON.stringify(userProfile));
+                        showNotification(`تطابق! شما و ${likedUser.name} همدیگر را لایک کردید.`);
+                    }
+                }
+                
+                showNotification('علاقه‌مندی شما ثبت شد!');
+            }
+        }
+        
+        // دیس لایک کردن یک کاربر
+        function dislikeUser(userId) {
+            showNotification('پروفایل رد شد.');
+        }
+        
+        // باز کردن چت
+        function openChat(chatId) {
+            document.getElementById('chats-list').style.display = 'none';
+            document.getElementById('active-chat').style.display = 'block';
+        }
+        
+        // نمایش اعلان
+        function showNotification(message, type = 'success') {
+            // در اینجا می‌توانید یک سیستم اعلان زیبا پیاده‌سازی کنید
+            alert(message);
+        }
+        
+        // راه‌اندازی event listeners اضافی
+        function setupEventListeners() {
+            // رویداد کلیک برای دکمه ذخیره پروفایل
+            document.getElementById('save-profile').addEventListener('click', saveUserProfile);
+            
+            // رویداد برای دکمه‌های هدر
+            document.getElementById('notifications-btn').addEventListener('click', function() {
+                showSection('notifications-section');
+                updateNavigation('notifications-section');
+            });
+            
+            document.getElementById('settings-btn').addEventListener('click', function() {
+                showSection('profile-section');
+                updateNavigation('profile-section');
+            });
+            
+            // رویداد برای فیلترهای بخش کشف
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    // در اینجا می‌توانید فیلتر کردن کاربران را پیاده‌سازی کنید
+                });
             });
         }
     </script>
