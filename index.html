@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سکه‌های ایرانی | Iranian Coins</title>
+    <title>ایران کوین | بازی کسب درآمد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and Base Styles */
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff4e50;
+            --dark: #121212;
+            --light: #f8f9fa;
+            --success: #00c853;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -14,308 +25,548 @@
         }
         
         body {
-            background: linear-gradient(135deg, #d4af37 0%, #c0930c 100%);
-            color: #3a2615;
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            color: var(--light);
             min-height: 100vh;
             padding: 20px;
+            line-height: 1.6;
         }
         
-        /* Container Styles */
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            padding: 20px;
         }
         
-        /* Header Styles */
         header {
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(90deg, #aa1b1b 0%, #d4af37 100%);
-            border-radius: 15px;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Stats Bar */
-        .stats {
             display: flex;
             justify-content: space-between;
-            background-color: #f8f0e0;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #d4af37;
+            align-items: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
         
-        .stat-item {
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, var(--accent), #ff9a9e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+        
+        .stats {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .stat-card {
+            background: var(--gradient);
+            padding: 15px 25px;
+            border-radius: 15px;
             text-align: center;
-            flex: 1;
-            padding: 10px;
+            min-width: 150px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .stat-value {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #aa1b1b;
         }
         
-        /* Coin Styles */
-        .coin-area {
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .coin-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
             text-align: center;
-            padding: 30px 0;
-            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .coin-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
         }
         
         .coin {
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle at 30% 30%, #d4af37, #8b6914);
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .coin-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            margin: 0 auto;
+            background: linear-gradient(145deg, #d4af37, #f4e4a6);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: #3a2615;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
-            border: 5px solid #aa1b1b;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
             overflow: hidden;
+            border: 5px solid #aa1b1b;
         }
         
-        .coin:before {
+        .coin-inner:before {
             content: "";
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="14" text-anchor="middle" fill="%23aa1b1b" dominant-baseline="middle">تخت جمشید</text></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="14" text-anchor="middle" fill="%23aa1b1b" dominant-baseline="middle">ایران</text></svg>');
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.7;
+            opacity: 0.8;
+        }
+        
+        .coin-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3a2615;
+            position: relative;
+            z-index: 2;
         }
         
         .coin:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 1);
         }
         
-        .coin:active {
+        .coin:active .coin-inner {
             transform: scale(0.95);
         }
         
-        /* Shop Styles */
-        .shop {
-            background-color: #f8f0e0;
-            padding: 20px;
-            border-radius: 15px;
+        .click-info {
             margin-top: 20px;
-            border: 2px solid #d4af37;
+            font-size: 1.2rem;
         }
         
-        .shop h2 {
+        .shop {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .shop-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--accent);
             text-align: center;
-            margin-bottom: 20px;
-            color: #aa1b1b;
-            border-bottom: 2px solid #d4af37;
-            padding-bottom: 10px;
         }
         
         .shop-items {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
         
         .shop-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .shop-item:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
-        .shop-item img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+        .item-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .item-title {
+            font-size: 1.3rem;
             margin-bottom: 10px;
-            object-fit: cover;
-            border: 2px solid #d4af37;
         }
         
-        .shop-item h3 {
-            margin: 10px 0;
-            color: #3a2615;
-        }
-        
-        .shop-item p {
-            color: #aa1b1b;
+        .item-price {
+            color: #d4af37;
             font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
         }
         
         .buy-btn {
-            background: linear-gradient(90deg, #aa1b1b 0%, #d4af37 100%);
+            background: var(--gradient);
             border: none;
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 10px;
-            transition: transform 0.2s;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
         }
         
         .buy-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .buy-btn:disabled {
-            background: #cccccc;
+            background: #555;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
-        /* Footer Styles */
-        footer {
-            text-align: center;
+        .upgrade-desc {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #aaa;
+        }
+        
+        .achievements {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
             margin-top: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .achievements-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            text-align: center;
+        }
+        
+        .achievement-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .achievement {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
             padding: 20px;
-            color: #3a2615;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .achievement-icon {
+            font-size: 2rem;
+            color: #d4af37;
+        }
+        
+        .achievement-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        .achievement-info p {
+            color: #aaa;
             font-size: 0.9rem;
         }
         
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .stats {
-                flex-direction: column;
-            }
-            
-            .stat-item {
-                margin-bottom: 10px;
-            }
-            
-            .shop-items {
-                grid-template-columns: 1fr;
-            }
-            
-            .coin {
-                width: 120px;
-                height: 120px;
-            }
+        .achievement.locked {
+            opacity: 0.6;
+        }
+        
+        .achievement-progress {
+            height: 5px;
+            background: #333;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>سکه‌های ایرانی 🪙</h1>
-            <p>با کلیک روی سکه، درآمد کسب کنید و کارت‌های مختلف بخرید!</p>
+            <div class="logo">
+                <i class="fas fa-coins logo-icon"></i>
+                <h1>ایران کوین</h1>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">سکه‌ها</div>
+                    <div class="stat-value" id="coins">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">درآمد هر کلیک</div>
+                    <div class="stat-value" id="click-value">1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">درآمد پسیو</div>
+                    <div class="stat-value" id="passive-income">0</div>
+                </div>
+            </div>
         </header>
         
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-label">سکه‌های شما:</div>
-                <div class="stat-value" id="coins">0 تومان</div>
+        <div class="main-content">
+            <div class="coin-section">
+                <h2 class="coin-title">برای کسب سکه کلیک کن!</h2>
+                <div class="coin" id="main-coin">
+                    <div class="coin-inner float">
+                        <div class="coin-value">+1</div>
+                    </div>
+                </div>
+                <div class="click-info">
+                    <p>هر کلیک: <span id="click-amount">1</span> سکه</p>
+                    <p>درآمد غیرفعال: <span id="passive-amount">0</span> سکه در ثانیه</p>
+                </div>
             </div>
-            <div class="stat-item">
-                <div class="stat-label">درآمد هر کلیک:</div>
-                <div class="stat-value" id="click-value">1 تومان</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">درآمد غیرفعال:</div>
-                <div class="stat-value" id="passive-income">0 تومان/ثانیه</div>
+            
+            <div class="shop">
+                <h2 class="shop-title">فروشگاه ارتقاء</h2>
+                <div class="shop-items">
+                    <div class="shop-item">
+                        <i class="fas fa-mouse-pointer item-icon"></i>
+                        <h3 class="item-title">ارتقاء کلیک</h3>
+                        <p class="item-price">قیمت: 50 سکه</p>
+                        <p class="upgrade-desc">هر کلیک 1 سکه بیشتر تولید می‌کند</p>
+                        <button class="buy-btn" onclick="buyUpgrade('click', 50, 1)">خرید</button>
+                    </div>
+                    
+                    <div class="shop-item">
+                        <i class="fas fa-bolt item-icon"></i>
+                        <h3 class="item-title">اتوماتیک کلیک</h3>
+                        <p class="item-price">قیمت: 200 سکه</p>
+                        <p class="upgrade-desc">هر ثانیه 1 سکه تولید می‌کند</p>
+                        <button class="buy-btn" onclick="buyUpgrade('auto', 200, 1)">خرید</button>
+                    </div>
+                    
+                    <div class="shop-item">
+                        <i class="fas fa-industry item-icon"></i>
+                        <h3 class="item-title">کارخانه سکه</h3>
+                        <p class="item-price">قیمت: 1000 سکه</p>
+                        <p class="upgrade-desc">هر ثانیه 5 سکه تولید می‌کند</p>
+                        <button class="buy-btn" onclick="buyUpgrade('factory', 1000, 5)">خرید</button>
+                    </div>
+                    
+                    <div class="shop-item">
+                        <i class="fas fa-rocket item-icon"></i>
+                        <h3 class="item-title">سیستم پیشرفته</h3>
+                        <p class="item-price">قیمت: 5000 سکه</p>
+                        <p class="upgrade-desc">هر ثانیه 25 سکه تولید می‌کند</p>
+                        <button class="buy-btn" onclick="buyUpgrade('rocket', 5000, 25)">خرید</button>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div class="coin-area">
-            <div class="coin" id="main-coin">
-                💰
-            </div>
-            <p style="margin-top: 15px;">روی سکه کلیک کنید!</p>
-        </div>
-        
-        <div class="shop">
-            <h2>فروشگاه کارت‌ها</h2>
-            <div class="shop-items">
-                <div class="shop-item">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d4af37'/><text x='50' y='50' font-size='12' text-anchor='middle' fill='%23aa1b1b' dominant-baseline='middle'>هادی چوپان</text></svg>" alt="هادی چوپان">
-                    <h3>هادی چوپان</h3>
-                    <p>قیمت: 50 تومان</p>
-                    <p>درآمد هر کلیک: +1 تومان</p>
-                    <button class="buy-btn" onclick="buyItem('hadi', 50, 1, 0)">خرید</button>
+        <div class="achievements">
+            <h2 class="achievements-title">دستاوردها</h2>
+            <div class="achievement-list">
+                <div class="achievement">
+                    <i class="fas fa-trophy achievement-icon"></i>
+                    <div class="achievement-info">
+                        <h3>شروع کننده</h3>
+                        <p>۱۰۰ سکه جمع‌آوری کنید</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="shop-item">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d4af37'/><text x='50' y='50' font-size='12' text-anchor='middle' fill='%23aa1b1b' dominant-baseline='middle'>فرش ایرانی</text></svg>" alt="فرش ایرانی">
-                    <h3>فرش ایرانی</h3>
-                    <p>قیمت: 200 تومان</p>
-                    <p>درآمد غیرفعال: 2 تومان/ثانیه</p>
-                    <button class="buy-btn" onclick="buyItem('carpet', 200, 0, 2)">خرید</button>
+                <div class="achievement locked">
+                    <i class="fas fa-medal achievement-icon"></i>
+                    <div class="achievement-info">
+                        <h3>بازیکن حرفه‌ای</h3>
+                        <p>۱۰۰۰ سکه جمع‌آوری کنید</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="shop-item">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d4af37'/><text x='50' y='50' font-size='10' text-anchor='middle' fill='%23aa1b1b' dominant-baseline='middle'>تخت جمشید</text></svg>" alt="تخت جمشید">
-                    <h3>تخت جمشید</h3>
-                    <p>قیمت: 500 تومان</p>
-                    <p>درآمد غیرفعال: 5 تومان/ثانیه</p>
-                    <button class="buy-btn" onclick="buyItem('persepolis', 500, 0, 5)">خرید</button>
+                <div class="achievement locked">
+                    <i class="fas fa-crown achievement-icon"></i>
+                    <div class="achievement-info">
+                        <h3>سلطان سکه</h3>
+                        <p>۱۰۰۰۰ سکه جمع‌آوری کنید</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>ساخته شده با ❤️ برای ایرانیان | هر ۵ ثانیه یکبار درآمد غیرفعال به شما تعلق می‌گیرد</p>
+            <p>Iran Coin - تمامی حقوق محفوظ است © ۲۰۲۳ | پیشرفت شما به صورت خودکار ذخیره می‌شود</p>
         </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        خرید شما با موفقیت انجام شد!
     </div>
 
     <script>
         // Game state
-        let coins = 0;
-        let clickValue = 1;
-        let passiveIncome = 0;
+        let gameState = {
+            coins: 0,
+            clickValue: 1,
+            passiveIncome: 0,
+            upgrades: {
+                click: 0,
+                auto: 0,
+                factory: 0,
+                rocket: 0
+            }
+        };
         
         // DOM elements
         const coinsElement = document.getElementById('coins');
         const clickValueElement = document.getElementById('click-value');
         const passiveIncomeElement = document.getElementById('passive-income');
+        const clickAmountElement = document.getElementById('click-amount');
+        const passiveAmountElement = document.getElementById('passive-amount');
         const mainCoin = document.getElementById('main-coin');
+        const notification = document.getElementById('notification');
         
-        // Update display
+        // Load game state from localStorage
+        function loadGame() {
+            const savedGame = localStorage.getItem('iranCoinGame');
+            if (savedGame) {
+                gameState = JSON.parse(savedGame);
+                updateDisplay();
+            }
+        }
+        
+        // Save game state to localStorage
+        function saveGame() {
+            localStorage.setItem('iranCoinGame', JSON.stringify(gameState));
+        }
+        
+        // Update display with current game state
         function updateDisplay() {
-            coinsElement.textContent = `${coins} تومان`;
-            clickValueElement.textContent = `${clickValue} تومان`;
-            passiveIncomeElement.textContent = `${passiveIncome} تومان/ثانیه`;
+            coinsElement.textContent = Math.floor(gameState.coins).toLocaleString();
+            clickValueElement.textContent = gameState.clickValue.toLocaleString();
+            passiveIncomeElement.textContent = gameState.passiveIncome.toLocaleString();
+            clickAmountElement.textContent = gameState.clickValue.toLocaleString();
+            passiveAmountElement.textContent = gameState.passiveIncome.toLocaleString();
+            
+            // Update achievement progress
+            updateAchievements();
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
         
         // Click on coin
         mainCoin.addEventListener('click', () => {
-            coins += clickValue;
+            gameState.coins += gameState.clickValue;
             updateDisplay();
+            saveGame();
             
             // Create floating text animation
             const floatingText = document.createElement('div');
-            floatingText.textContent = `+${clickValue}`;
+            floatingText.textContent = `+${gameState.clickValue}`;
             floatingText.style.position = 'absolute';
             floatingText.style.color = '#d4af37';
             floatingText.style.fontWeight = 'bold';
-            floatingText.style.fontSize = '1.2rem';
+            floatingText.style.fontSize = '1.5rem';
             floatingText.style.pointerEvents = 'none';
+            floatingText.style.zIndex = '100';
             floatingText.style.animation = 'floatUp 1s ease-out forwards';
             
             // Add animation keyframes
@@ -323,14 +574,14 @@
             style.textContent = `
                 @keyframes floatUp {
                     0% { transform: translateY(0); opacity: 1; }
-                    100% { transform: translateY(-50px); opacity: 0; }
+                    100% { transform: translateY(-100px); opacity: 0; }
                 }
             `;
             document.head.appendChild(style);
             
             // Position the floating text
             const rect = mainCoin.getBoundingClientRect();
-            floatingText.style.left = `${rect.left + rect.width/2}px`;
+            floatingText.style.left = `${rect.left + rect.width/2 - 20}px`;
             floatingText.style.top = `${rect.top}px`;
             
             document.body.appendChild(floatingText);
@@ -339,29 +590,19 @@
             setTimeout(() => {
                 document.body.removeChild(floatingText);
             }, 1000);
+            
+            // Add pulse animation to coin
+            mainCoin.classList.add('pulse');
+            setTimeout(() => {
+                mainCoin.classList.remove('pulse');
+            }, 500);
         });
         
-        // Buy item function
-        function buyItem(item, cost, clickIncrease, passiveIncrease) {
-            if (coins >= cost) {
-                coins -= cost;
-                clickValue += clickIncrease;
-                passiveIncome += passiveIncrease;
-                updateDisplay();
-                alert(`شما با موفقیت ${item} را خریدید!`);
-            } else {
-                alert('سکه کافی ندارید!');
-            }
-        }
-        
-        // Passive income every 5 seconds
-        setInterval(() => {
-            coins += passiveIncome;
-            updateDisplay();
-        }, 5000);
-        
-        // Initialize display
-        updateDisplay();
-    </script>
-</body>
-</html>
+        // Buy upgrade
+        function buyUpgrade(type, cost, value) {
+            if (gameState.coins >= cost) {
+                gameState.coins -= cost;
+                
+                if (type === 'click') {
+                    gameState.clickValue += value;
+                    gameSt
