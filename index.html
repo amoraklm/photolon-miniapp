@@ -1,60 +1,367 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>فتولون</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سکه‌های ایرانی | Iranian Coins</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #d4af37 0%, #c0930c 100%);
+            color: #3a2615;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Container Styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #aa1b1b 0%, #d4af37 100%);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Stats Bar */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f8f0e0;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #d4af37;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #aa1b1b;
+        }
+        
+        /* Coin Styles */
+        .coin-area {
+            text-align: center;
+            padding: 30px 0;
+            margin: 20px 0;
+        }
+        
+        .coin {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 30% 30%, #d4af37, #8b6914);
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #3a2615;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+            border: 5px solid #aa1b1b;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coin:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="14" text-anchor="middle" fill="%23aa1b1b" dominant-baseline="middle">تخت جمشید</text></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.7;
+        }
+        
+        .coin:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 1);
+        }
+        
+        .coin:active {
+            transform: scale(0.95);
+        }
+        
+        /* Shop Styles */
+        .shop {
+            background-color: #f8f0e0;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 2px solid #d4af37;
+        }
+        
+        .shop h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #aa1b1b;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 10px;
+        }
+        
+        .shop-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .shop-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .shop-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .shop-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+            border: 2px solid #d4af37;
+        }
+        
+        .shop-item h3 {
+            margin: 10px 0;
+            color: #3a2615;
+        }
+        
+        .shop-item p {
+            color: #aa1b1b;
+            font-weight: bold;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(90deg, #aa1b1b 0%, #d4af37 100%);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .buy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .buy-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #3a2615;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .stats {
+                flex-direction: column;
+            }
+            
+            .stat-item {
+                margin-bottom: 10px;
+            }
+            
+            .shop-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .coin {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="main-header">
-    <h1>فتولون</h1>
-    <p class="subtitle">مجموعه آکادمی رایان</p>
-  </header>
-
-  <section class="hero">
-    <h2>یاد بگیر مثل یه پرو کار کنی ✨</h2>
-    <p>از صفر تا حرفه‌ای شدن در فوتوشاپ، همه‌چی همین‌جاست.</p>
-    <button onclick="scrollToSection('tutorials')">شروع کن</button>
-  </section>
-
-  <section id="tutorials" class="card-grid">
-    <div class="card">
-      <h3>مقدماتی</h3>
-      <p>ابزارهای پایه، لایه‌ها و براش‌ها.</p>
+    <div class="container">
+        <header>
+            <h1>سکه‌های ایرانی 🪙</h1>
+            <p>با کلیک روی سکه، درآمد کسب کنید و کارت‌های مختلف بخرید!</p>
+        </header>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-label">سکه‌های شما:</div>
+                <div class="stat-value" id="coins">0 تومان</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">درآمد هر کلیک:</div>
+                <div class="stat-value" id="click-value">1 تومان</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">درآمد غیرفعال:</div>
+                <div class="stat-value" id="passive-income">0 تومان/ثانیه</div>
+            </div>
+        </div>
+        
+        <div class="coin-area">
+            <div class="coin" id="main-coin">
+                💰
+            </div>
+            <p style="margin-top: 15px;">روی سکه کلیک کنید!</p>
+        </div>
+        
+        <div class="shop">
+            <h2>فروشگاه کارت‌ها</h2>
+            <div class="shop-items">
+                <div class="shop-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d4af37'/><text x='50' y='50' font-size='12' text-anchor='middle' fill='%23aa1b1b' dominant-baseline='middle'>هادی چوپان</text></svg>" alt="هادی چوپان">
+                    <h3>هادی چوپان</h3>
+                    <p>قیمت: 50 تومان</p>
+                    <p>درآمد هر کلیک: +1 تومان</p>
+                    <button class="buy-btn" onclick="buyItem('hadi', 50, 1, 0)">خرید</button>
+                </div>
+                
+                <div class="shop-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d4af37'/><text x='50' y='50' font-size='12' text-anchor='middle' fill='%23aa1b1b' dominant-baseline='middle'>فرش ایرانی</text></svg>" alt="فرش ایرانی">
+                    <h3>فرش ایرانی</h3>
+                    <p>قیمت: 200 تومان</p>
+                    <p>درآمد غیرفعال: 2 تومان/ثانیه</p>
+                    <button class="buy-btn" onclick="buyItem('carpet', 200, 0, 2)">خرید</button>
+                </div>
+                
+                <div class="shop-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d4af37'/><text x='50' y='50' font-size='10' text-anchor='middle' fill='%23aa1b1b' dominant-baseline='middle'>تخت جمشید</text></svg>" alt="تخت جمشید">
+                    <h3>تخت جمشید</h3>
+                    <p>قیمت: 500 تومان</p>
+                    <p>درآمد غیرفعال: 5 تومان/ثانیه</p>
+                    <button class="buy-btn" onclick="buyItem('persepolis', 500, 0, 5)">خرید</button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>ساخته شده با ❤️ برای ایرانیان | هر ۵ ثانیه یکبار درآمد غیرفعال به شما تعلق می‌گیرد</p>
+        </footer>
     </div>
-    <div class="card">
-      <h3>میان‌رده</h3>
-      <p>ماسک‌ها، افکت‌ها و رتوش.</p>
-    </div>
-    <div class="card">
-      <h3>حرفه‌ای</h3>
-      <p>ترکیب عکس‌ها، طراحی پوستر و تکنیک‌های خاص.</p>
-    </div>
-  </section>
 
-  <section id="shortcuts" class="accordion">
-    <button class="accordion-btn" onclick="toggleAccordion()">
-      ⚡ شورتکات‌ها <span id="arrow">▼</span>
-    </button>
-    <div class="accordion-content">
-      <div class="toggle-wrapper">
-        <label class="switch">
-          <input type="checkbox" id="osToggle" onchange="toggleOS()">
-          <span class="slider round"></span>
-        </label>
-        <span id="osLabel">Windows</span>
-      </div>
-      <ul id="shortcutsList">
-        <!-- شورتکات‌ها اینجا با JS پر میشه -->
-      </ul>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 فتولون | مجموعه آکادمی رایان</p>
-  </footer>
+    <script>
+        // Game state
+        let coins = 0;
+        let clickValue = 1;
+        let passiveIncome = 0;
+        
+        // DOM elements
+        const coinsElement = document.getElementById('coins');
+        const clickValueElement = document.getElementById('click-value');
+        const passiveIncomeElement = document.getElementById('passive-income');
+        const mainCoin = document.getElementById('main-coin');
+        
+        // Update display
+        function updateDisplay() {
+            coinsElement.textContent = `${coins} تومان`;
+            clickValueElement.textContent = `${clickValue} تومان`;
+            passiveIncomeElement.textContent = `${passiveIncome} تومان/ثانیه`;
+        }
+        
+        // Click on coin
+        mainCoin.addEventListener('click', () => {
+            coins += clickValue;
+            updateDisplay();
+            
+            // Create floating text animation
+            const floatingText = document.createElement('div');
+            floatingText.textContent = `+${clickValue}`;
+            floatingText.style.position = 'absolute';
+            floatingText.style.color = '#d4af37';
+            floatingText.style.fontWeight = 'bold';
+            floatingText.style.fontSize = '1.2rem';
+            floatingText.style.pointerEvents = 'none';
+            floatingText.style.animation = 'floatUp 1s ease-out forwards';
+            
+            // Add animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes floatUp {
+                    0% { transform: translateY(0); opacity: 1; }
+                    100% { transform: translateY(-50px); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Position the floating text
+            const rect = mainCoin.getBoundingClientRect();
+            floatingText.style.left = `${rect.left + rect.width/2}px`;
+            floatingText.style.top = `${rect.top}px`;
+            
+            document.body.appendChild(floatingText);
+            
+            // Remove after animation completes
+            setTimeout(() => {
+                document.body.removeChild(floatingText);
+            }, 1000);
+        });
+        
+        // Buy item function
+        function buyItem(item, cost, clickIncrease, passiveIncrease) {
+            if (coins >= cost) {
+                coins -= cost;
+                clickValue += clickIncrease;
+                passiveIncome += passiveIncrease;
+                updateDisplay();
+                alert(`شما با موفقیت ${item} را خریدید!`);
+            } else {
+                alert('سکه کافی ندارید!');
+            }
+        }
+        
+        // Passive income every 5 seconds
+        setInterval(() => {
+            coins += passiveIncome;
+            updateDisplay();
+        }, 5000);
+        
+        // Initialize display
+        updateDisplay();
+    </script>
 </body>
 </html>
