@@ -1,637 +1,210 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مینی‌اپ ارز دیجیتال | مشابه نات‌کوین</title>
-    <style>
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        :root {
-            --primary: #2a6bf0;
-            --secondary: #7239ea;
-            --success: #0acf97;
-            --danger: #fa5c7c;
-            --warning: #ffbc00;
-            --info: #39afd1;
-            --light: #f8f9fa;
-            --dark: #343a40;
-            --background: #f5f8ff;
-            --card-bg: #ffffff;
-            --text: #2c3033;
-            --border: #e2e8f0;
-        }
-        
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-            padding: 0;
-            margin: 0;
-            min-height: 100vh;
-        }
-        
-        /* Container */
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 16px;
-            background: var(--background);
-            min-height: 100vh;
-        }
-        
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-            margin-bottom: 16px;
-            position: sticky;
-            top: 0;
-            background: var(--background);
-            z-index: 100;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-        
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        
-        /* Balance Card */
-        .balance-card {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .balance-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 8px;
-        }
-        
-        .balance-amount {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        
-        .balance-actions {
-            display: flex;
-            gap: 12px;
-        }
-        
-        /* Buttons */
-        .btn {
-            padding: 12px 20px;
-            border-radius: 12px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            color: white;
-        }
-        
-        .btn-sm {
-            padding: 8px 16px;
-            font-size: 0.9rem;
-        }
-        
-        /* Card */
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        
-        .card-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        /* Tabs */
-        .tabs {
-            display: flex;
-            background: #f1f5ff;
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 16px;
-        }
-        
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 8px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .tab.active {
-            background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Transaction List */
-        .transaction-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        .transaction-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .transaction-item:last-child {
-            border-bottom: none;
-        }
-        
-        .transaction-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f1f5ff;
-            color: var(--primary);
-        }
-        
-        .transaction-details {
-            flex: 1;
-        }
-        
-        .transaction-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .transaction-date {
-            font-size: 0.8rem;
-            color: #6c757d;
-        }
-        
-        .transaction-amount {
-            font-weight: 700;
-        }
-        
-        .amount-in {
-            color: var(--success);
-        }
-        
-        .amount-out {
-            color: var(--danger);
-        }
-        
-        /* Market List */
-        .market-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .market-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 12px;
-            border-radius: 12px;
-            background: var(--card-bg);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        }
-        
-        .market-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f1f5ff;
-            color: var(--primary);
-            font-weight: 700;
-        }
-        
-        .market-details {
-            flex: 1;
-        }
-        
-        .market-name {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .market-price {
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        
-        .market-change {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        
-        .change-up {
-            color: var(--success);
-        }
-        
-        .change-down {
-            color: var(--danger);
-        }
-        
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px;
-            border-top: 1px solid var(--border);
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: #6c757d;
-            font-size: 0.8rem;
-        }
-        
-        .nav-item.active {
-            color: var(--primary);
-        }
-        
-        .nav-icon {
-            font-size: 1.2rem;
-        }
-        
-        /* Utility Classes */
-        .text-center {
-            text-align: center;
-        }
-        
-        .mb-4 {
-            margin-bottom: 24px;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        /* Responsive */
-        @media (max-width: 480px) {
-            .container {
-                padding-bottom: 70px;
-            }
-            
-            .balance-actions {
-                flex-direction: column;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Photolon Miniapp - نات‌کوین استایل</title>
+  <style>
+    body {
+      font-family: Vazirmatn, Tahoma, Arial, sans-serif;
+      background: #f6f7fb;
+      margin: 0;
+      direction: rtl;
+    }
+    .tabs {
+      display: flex;
+      background: #fff;
+      box-shadow: 0 2px 6px #eee;
+      border-radius: 12px;
+      margin: 24px auto 0;
+      width: 95%;
+      max-width: 450px;
+      overflow: hidden;
+    }
+    .tab {
+      flex: 1;
+      padding: 14px 0;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      color: #777;
+      transition: background 0.2s, color 0.2s;
+      background: #fff;
+    }
+    .tab.active {
+      background: #ffca3a;
+      color: #222;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e3e3e3;
+      margin: 24px auto;
+      padding: 0;
+      max-width: 450px;
+      width: 95%;
+      overflow: hidden;
+    }
+    .card-header {
+      background: #f8f8f8;
+      padding: 18px 18px 8px 18px;
+    }
+    .card-title {
+      font-size: 1.10rem;
+      font-weight: bold;
+      color: #222;
+    }
+    .btn {
+      padding: 7px 18px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      margin: 2px 0;
+      transition: background 0.2s;
+    }
+    .btn-success {
+      background: #2ec4b6;
+      color: #fff;
+    }
+    .btn-primary {
+      background: #1982c4;
+      color: #fff;
+    }
+    .btn-outline {
+      background: #fff;
+      color: #222;
+      border: 1px solid #ccc;
+    }
+    .btn-sm {
+      font-size: 0.95rem;
+      padding: 5px 13px;
+    }
+    ul {
+      padding-right: 18px;
+      margin: 0 0 12px 0;
+    }
+    li {
+      margin: 8px 0;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">
-                <div class="logo-icon">$</div>
-                <span>کریپتوپِی</span>
-            </div>
-            <button class="btn btn-sm btn-outline">پروفایل</button>
-        </div>
-        
-        <!-- Balance Card -->
-        <div class="balance-card">
-            <div class="balance-label">موجودی کل</div>
-            <div class="balance-amount">۱۲,۴۵۰,۰۰۰ <span style="font-size: 1.2rem;">تومان</span></div>
-            <div class="balance-actions">
-                <button class="btn btn-primary">
-                    <i class="nav-icon">+</i>
-                    واریز
-                </button>
-                <button class="btn btn-outline">
-                    <i class="nav-icon">⇄</i>
-                    انتقال
-                </button>
-            </div>
-        </div>
-        
-        <!-- Tabs -->
-        <div class="tabs">
-            <div class="tab active">ارزهای من</div>
-            <div class="tab">بازار</div>
-            <div class="tab">معامله</div>
-        </div>
-        
-        <!-- My Coins Section -->
-        <div id="my-coins">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">دارایی‌های دیجیتال</div>
-                    <button class="btn btn-sm" style="background: #f1f5ff; color: var(--primary);">مشاهده همه</button>
-                </div>
-                
-                <div class="market-list">
-                    <div class="market-item">
-                        <div class="market-icon">B</div>
-                        <div class="market-details">
-                            <div class="market-name">بیت‌کوین (BTC)</div>
-                            <div class="market-price">۱,۲۳۴,۰۰۰,۰۰۰ تومان</div>
-                        </div>
-                        <div class="market-change change-up">+۲.۵٪</div>
-                    </div>
-                    
-                    <div class="market-item">
-                        <div class="market-icon">E</div>
-                        <div class="market-details">
-                            <div class="market-name">اتریوم (ETH)</div>
-                            <div class="market-price">۱۲۳,۴۵۶,۰۰۰ تومان</div>
-                        </div>
-                        <div class="market-change change-up">+۱.۸٪</div>
-                    </div>
-                    
-                    <div class="market-item">
-                        <div class="market-icon">T</div>
-                        <div class="market-details">
-                            <div class="market-name">تتر (USDT)</div>
-                            <div class="market-price">۵۶,۷۸۹ تومان</div>
-                        </div>
-                        <div class="market-change change-down">-۰.۱٪</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">آخرین تراکنش‌ها</div>
-                    <button class="btn btn-sm" style="background: #f1f5ff; color: var(--primary);">مشاهده همه</button>
-                </div>
-                
-                <div class="transaction-list">
-                    <div class="transaction-item">
-                        <div class="transaction-icon">⇩</div>
-                        <div class="transaction-details">
-                            <div class="transaction-title">واریز وجه</div>
-                            <div class="transaction-date">۱۴۰۲/۰۵/۱۵ - ۱۲:۳۰</div>
-                        </div>
-                        <div class="transaction-amount amount-in">+۵۰۰,۰۰۰ تومان</div>
-                    </div>
-                    
-                    <div class="transaction-item">
-                        <div class="transaction-icon">⇨</div>
-                        <div class="transaction-details">
-                            <div class="transaction-title">ارسال به محمد</div>
-                            <div class="transaction-date">۱۴۰۲/۰۵/۱۴ - ۰۹:۴۵</div>
-                        </div>
-                        <div class="transaction-amount amount-out">-۲۰۰,۰۰۰ تومان</div>
-                    </div>
-                    
-                    <div class="transaction-item">
-                        <div class="transaction-icon">B</div>
-                        <div class="transaction-details">
-                            <div class="transaction-title">خرید بیت‌کوین</div>
-                            <div class="transaction-date">۱۴۰۲/۰۵/۱۲ - ۱۶:۲۰</div>
-                        </div>
-                        <div class="transaction-amount amount-out">-۱,۵۰۰,۰۰۰ تومان</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Market Section (Hidden by default) -->
-        <div id="market" class="hidden">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">ارزهای پرطرفدار</div>
-                    <button class="btn btn-sm" style="background: #f1f5ff; color: var(--primary);">جستجو</button>
-                </div>
-                
-                <div class="market-list">
-                    <div class="market-item">
-                        <div class="market-icon">B</div>
-                        <div class="market-details">
-                            <div class="market-name">بیت‌کوین (BTC)</div>
-                            <div class="market-price">۱,۲۳۴,۰۰۰,۰۰۰ تومان</div>
-                        </div>
-                        <div class="market-change change-up">+۲.۵٪</div>
-                    </div>
-                    
-                    <div class="market-item">
-                        <div class="market-icon">E</div>
-                        <div class="market-details">
-                            <div class="market-name">اتریوم (ETH)</div>
-                            <div class="market-price">۱۲۳,۴۵۶,۰۰۰ تومان</div>
-                        </div>
-                        <div class="market-change change-up">+۱.۸٪</div>
-                    </div>
-                    
-                    <div class="market-item">
-                        <div class="market-icon">S</div>
-                        <div class="market-details">
-                            <div class="market-name">سولانا (SOL)</div>
-                            <div class="market-price">۱,۲۳۴,۰۰۰ تومان</div>
-                        </div>
-                        <div class="market-change change-up">+۵.۲٪</div>
-                    </div>
-                    
-                    <div class="market-item">
-                        <div class="market-icon">D</div>
-                        <div class="market-details">
-                            <div class="market-name">دوج کوین (DOGE)</div>
-                            <div class="market-price">۵۶۷ تومان</div>
-                        </div>
-                        <div class="market-change change-down">-۱.۲٪</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Trade Section (Hidden by default) -->
-        <div id="trade" class="hidden">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">خرید و فروش</div>
-                </div>
-                
-                <div style="padding: 16px 0;">
-                    <div style="display: flex; margin-bottom: 20px; background: #f1f5ff; border-radius: 12px; padding: 4px;">
-                        <div style="flex: 1; text-align: center; padding: 12px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); font-weight: 600;">خرید</div>
-                        <div style="flex: 1; text-align: center; padding: 12px; color: #6c757d; font-weight: 500;">فروش</div>
-                    </div>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">ارز مورد نظر</label>
-                        <select style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: white;">
-                            <option>بیت‌کوین (BTC)</option>
-                            <option>اتریوم (ETH)</option>
-                            <option>تتر (USDT)</option>
-                            <option>سولانا (SOL)</option>
-                        </select>
-                    </div>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">مبلغ (تومان)</label>
-                        <input type="number" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border);" placeholder="مبلغ را وارد کنید">
-                    </div>
-                    
-                    <div style="margin-bottom: 20px; padding: 16px; background: #f8f9fa; border-radius: 12px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span>قیمت هر واحد:</span>
-                            <span>۱,۲۳۴,۰۰۰,۰۰۰ تومان</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>مقدار دریافت:</span>
-                            <span>۰.۰۰۰۴۱۵ BTC</span>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-primary" style="width: 100%;">خرید بیت‌کوین</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <div class="nav-item active">
-            <div class="nav-icon">🏠</div>
-            <span>خانه</span>
-        </div>
-        <div class="nav-item">
-            <div class="nav-icon">📊</div>
-            <span>بازار</span>
-        </div>
-        <div class="nav-item">
-            <div class="nav-icon">⇄</div>
-            <span>معامله</span>
-        </div>
-        <div class="nav-item">
-            <div class="nav-icon">💼</div>
-            <span>کیف پول</span>
-        </div>
-        <div class="nav-item">
-            <div class="nav-icon">☰</div>
-            <span>بیشتر</span>
-        </div>
-    </div>
+  <!-- تب‌ها -->
+  <div class="tabs">
+    <div class="tab active">ارزهای من</div>
+    <div class="tab">بازار</div>
+    <div class="tab">معامله</div>
+    <div class="tab">کسب درآمد</div>
+  </div>
 
-    <script>
-        // Tab switching functionality
-        const tabs = document.querySelectorAll('.tab');
-        const sections = {
-            'my-coins': document.getElementById('my-coins'),
-            'market': document.getElementById('market'),
-            'trade': document.getElementById('trade')
-        };
-        
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs
-                tabs.forEach(t => t.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                tab.classList.add('active');
-                
-                // Hide all sections
-                Object.values(sections).forEach(section => {
-                    section.classList.add('hidden');
-                });
-                
-                // Show the corresponding section
-                if (tab.textContent === 'ارزهای من') {
-                    sections['my-coins'].classList.remove('hidden');
-                } else if (tab.textContent === 'بازار') {
-                    sections['market'].classList.remove('hidden');
-                } else if (tab.textContent === 'معامله') {
-                    sections['trade'].classList.remove('hidden');
-                }
-            });
+  <!-- بخش ارزهای من -->
+  <div id="my-coins">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">ارزهای من</div>
+      </div>
+      <ul>
+        <li>نات‌کوین: ۱۲۵۰</li>
+        <li>فتولون: ۳۵۰</li>
+        <li>تومان: ۵۸٬۰۰۰</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- بخش بازار -->
+  <div id="market" class="hidden">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">بازار رمزارزها</div>
+      </div>
+      <ul>
+        <li>نات‌کوین: ۴٬۵۵۰ تومان</li>
+        <li>فتولون: ۲٬۴۰۰ تومان</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- بخش معامله -->
+  <div id="trade" class="hidden">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">معامله</div>
+      </div>
+      <ul>
+        <li>خرید نات‌کوین</li>
+        <li>فروش نات‌کوین</li>
+        <li>خرید فتولون</li>
+        <li>فروش فتولون</li>
+      </ul>
+      <button class="btn btn-primary" style="margin: 12px 18px;">انجام معامله</button>
+    </div>
+  </div>
+
+  <!-- بخش کسب درآمد -->
+  <div id="earn" class="hidden">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">ماموریت‌های کسب درآمد</div>
+      </div>
+      <div style="padding: 10px;">
+        <div style="margin-bottom: 16px;">
+          <strong>دعوت دوستان</strong>
+          <div style="font-size: 0.95rem; color: #555;">
+            هر دوست را دعوت کنید و ۵۰٬۰۰۰ تومان جایزه بگیرید.
+          </div>
+          <button class="btn btn-success btn-sm" style="margin-top: 8px;">دریافت لینک دعوت</button>
+        </div>
+        <div style="margin-bottom: 16px;">
+          <strong>انجام اولین معامله</strong>
+          <div style="font-size: 0.95rem; color: #555;">
+            با اولین خرید یا فروش ۳۰٬۰۰۰ تومان دریافت کنید.
+          </div>
+          <button class="btn btn-primary btn-sm" style="margin-top: 8px;">انجام معامله</button>
+        </div>
+        <div style="margin-bottom: 16px;">
+          <strong>تکمیل پروفایل</strong>
+          <div style="font-size: 0.95rem; color: #555;">
+            اطلاعات پروفایل را کامل کنید و ۲۰٬۰۰۰ تومان جایزه بگیرید.
+          </div>
+          <button class="btn btn-outline btn-sm" style="margin-top: 8px;">تکمیل پروفایل</button>
+        </div>
+      </div>
+      <div class="card-header">
+        <div class="card-title">درآمد فعلی شما</div>
+      </div>
+      <div style="font-size: 1.3rem; color: #ffca3a; font-weight: bold; text-align: center; margin-bottom: 12px;">
+        ۱۰۰٬۰۰۰ تومان
+      </div>
+      <div style="font-size: 0.9rem; color: #888; text-align: center;">
+        مجموع جوایز دریافتی شما از ماموریت‌ها
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const sections = {
+      'ارزهای من': document.getElementById('my-coins'),
+      'بازار': document.getElementById('market'),
+      'معامله': document.getElementById('trade'),
+      'کسب درآمد': document.getElementById('earn')
+    };
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        Object.values(sections).forEach(section => {
+          section.classList.add('hidden');
         });
-        
-        // Bottom navigation functionality
-        const navItems = document.querySelectorAll('.nav-item');
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Remove active class from all nav items
-                navItems.forEach(i => i.classList.remove('active'));
-                
-                // Add active class to clicked nav item
-                item.classList.add('active');
-                
-                // In a real app, this would navigate to different pages
-                // For this demo, we'll just show an alert
-                if (item.querySelector('span').textContent === 'بیشتر') {
-                    alert('منوی بیشتر باز شد');
-                }
-            });
-        });
-        
-        // Simulate loading data
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Mini App loaded successfully!');
-        });
-    </script>
+        sections[tab.textContent].classList.remove('hidden');
+      });
+    });
+  </script>
 </body>
 </html>
