@@ -1,210 +1,345 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Photolon Miniapp - نات‌کوین استایل</title>
-  <style>
-    body {
-      font-family: Vazirmatn, Tahoma, Arial, sans-serif;
-      background: #f6f7fb;
-      margin: 0;
-      direction: rtl;
-    }
-    .tabs {
-      display: flex;
-      background: #fff;
-      box-shadow: 0 2px 6px #eee;
-      border-radius: 12px;
-      margin: 24px auto 0;
-      width: 95%;
-      max-width: 450px;
-      overflow: hidden;
-    }
-    .tab {
-      flex: 1;
-      padding: 14px 0;
-      text-align: center;
-      cursor: pointer;
-      font-weight: bold;
-      color: #777;
-      transition: background 0.2s, color 0.2s;
-      background: #fff;
-    }
-    .tab.active {
-      background: #ffca3a;
-      color: #222;
-    }
-    .hidden {
-      display: none !important;
-    }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #e3e3e3;
-      margin: 24px auto;
-      padding: 0;
-      max-width: 450px;
-      width: 95%;
-      overflow: hidden;
-    }
-    .card-header {
-      background: #f8f8f8;
-      padding: 18px 18px 8px 18px;
-    }
-    .card-title {
-      font-size: 1.10rem;
-      font-weight: bold;
-      color: #222;
-    }
-    .btn {
-      padding: 7px 18px;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-family: inherit;
-      cursor: pointer;
-      margin: 2px 0;
-      transition: background 0.2s;
-    }
-    .btn-success {
-      background: #2ec4b6;
-      color: #fff;
-    }
-    .btn-primary {
-      background: #1982c4;
-      color: #fff;
-    }
-    .btn-outline {
-      background: #fff;
-      color: #222;
-      border: 1px solid #ccc;
-    }
-    .btn-sm {
-      font-size: 0.95rem;
-      padding: 5px 13px;
-    }
-    ul {
-      padding-right: 18px;
-      margin: 0 0 12px 0;
-    }
-    li {
-      margin: 8px 0;
-      font-size: 1rem;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>فتولون — پنل عمومی آپولون | آکادمی رایان</title>
+  <meta name="description" content="معرفی دوره‌های آپولون فتوشاپ و آپولون پریمیر آکادمی رایان با محتوای پروژه‌محور، نمونه‌درس رایگان، FAQ و فرم مشاوره." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- تب‌ها -->
-  <div class="tabs">
-    <div class="tab active">ارزهای من</div>
-    <div class="tab">بازار</div>
-    <div class="tab">معامله</div>
-    <div class="tab">کسب درآمد</div>
-  </div>
 
-  <!-- بخش ارزهای من -->
-  <div id="my-coins">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">ارزهای من</div>
-      </div>
-      <ul>
-        <li>نات‌کوین: ۱۲۵۰</li>
-        <li>فتولون: ۳۵۰</li>
-        <li>تومان: ۵۸٬۰۰۰</li>
-      </ul>
+  <!-- Header / Navbar -->
+  <header class="app-header" id="header" aria-label="ناوبری اصلی">
+    <div class="container nav">
+      <a href="#" class="brand" aria-label="خانه فتولون">
+        <span class="brand-mark" aria-hidden="true">
+          <!-- Simple SVG logo -->
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6F3FF5"/><stop offset="1" stop-color="#1F8CFF"/>
+              </linearGradient>
+            </defs>
+            <rect x="4" y="4" width="40" height="40" rx="10" fill="url(#g)"/>
+            <path d="M16 30L22 18H26L32 30H28.8L27.2 27H20.8L19.2 30H16ZM21.8 24.4H26.2L24 20.2L21.8 24.4Z" fill="white"/>
+          </svg>
+        </span>
+        <span class="brand-text">فتولون</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="باز و بسته کردن منو" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#about">درباره آپولون</a>
+        <a href="#tools">فتوشاپ و پریمیر</a>
+        <a href="#features">چرا آپولون؟</a>
+        <a href="#courses">دوره‌ها</a>
+        <a href="#faq">سوالات</a>
+        <a href="#contact" class="btn btn--ghost">مشاوره رایگان</a>
+        <a href="#courses" class="btn btn--primary">مشاهده دوره‌ها</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <!-- بخش بازار -->
-  <div id="market" class="hidden">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">بازار رمزارزها</div>
-      </div>
-      <ul>
-        <li>نات‌کوین: ۴٬۵۵۰ تومان</li>
-        <li>فتولون: ۲٬۴۰۰ تومان</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- بخش معامله -->
-  <div id="trade" class="hidden">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">معامله</div>
-      </div>
-      <ul>
-        <li>خرید نات‌کوین</li>
-        <li>فروش نات‌کوین</li>
-        <li>خرید فتولون</li>
-        <li>فروش فتولون</li>
-      </ul>
-      <button class="btn btn-primary" style="margin: 12px 18px;">انجام معامله</button>
-    </div>
-  </div>
-
-  <!-- بخش کسب درآمد -->
-  <div id="earn" class="hidden">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">ماموریت‌های کسب درآمد</div>
-      </div>
-      <div style="padding: 10px;">
-        <div style="margin-bottom: 16px;">
-          <strong>دعوت دوستان</strong>
-          <div style="font-size: 0.95rem; color: #555;">
-            هر دوست را دعوت کنید و ۵۰٬۰۰۰ تومان جایزه بگیرید.
-          </div>
-          <button class="btn btn-success btn-sm" style="margin-top: 8px;">دریافت لینک دعوت</button>
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container hero__grid">
+      <div class="hero__content">
+        <h1>ویترین آپولون — آکادمی رایان</h1>
+        <p class="hero__subtitle">
+          یادگیری پروژه‌محور فتوشاپ و پریمیر؛ کوتاه، کاربردی و دقیق. همین امروز یک قدم واقعی بردار.
+        </p>
+        <div class="hero__cta">
+          <a href="#courses" class="btn btn--primary">معرفی دوره‌ها</a>
+          <a href="#contact" class="btn btn--ghost">مشاوره رایگان</a>
         </div>
-        <div style="margin-bottom: 16px;">
-          <strong>انجام اولین معامله</strong>
-          <div style="font-size: 0.95rem; color: #555;">
-            با اولین خرید یا فروش ۳۰٬۰۰۰ تومان دریافت کنید.
-          </div>
-          <button class="btn btn-primary btn-sm" style="margin-top: 8px;">انجام معامله</button>
-        </div>
-        <div style="margin-bottom: 16px;">
-          <strong>تکمیل پروفایل</strong>
-          <div style="font-size: 0.95rem; color: #555;">
-            اطلاعات پروفایل را کامل کنید و ۲۰٬۰۰۰ تومان جایزه بگیرید.
-          </div>
-          <button class="btn btn-outline btn-sm" style="margin-top: 8px;">تکمیل پروفایل</button>
+        <div class="hero__stats" role="list">
+          <div class="chip" role="listitem"><strong>۳٬۲۰۰+</strong><span>هنرجوی راضی</span></div>
+          <div class="chip" role="listitem"><strong>۴.۸/۵</strong><span>میانگین رضایت</span></div>
+          <div class="chip" role="listitem"><strong>۱۰ دقیقه</strong><span>میانگین هر مینی‌درس</span></div>
         </div>
       </div>
-      <div class="card-header">
-        <div class="card-title">درآمد فعلی شما</div>
-      </div>
-      <div style="font-size: 1.3rem; color: #ffca3a; font-weight: bold; text-align: center; margin-bottom: 12px;">
-        ۱۰۰٬۰۰۰ تومان
-      </div>
-      <div style="font-size: 0.9rem; color: #888; text-align: center;">
-        مجموع جوایز دریافتی شما از ماموریت‌ها
+      <div class="hero__art" aria-hidden="true">
+        <div class="glass-card">
+          <div class="glass-card__title">Poster Retouch</div>
+          <div class="glass-card__bar">
+            <span style="width: 72%"></span>
+          </div>
+          <div class="glass-card__meta">
+            <span>Curves</span><span>Mask</span><span>Blend</span>
+          </div>
+        </div>
+        <div class="glow"></div>
       </div>
     </div>
-  </div>
+    <a class="scroll-indicator" href="#about" aria-label="اسکرول به بخش بعد">▼</a>
+  </section>
 
-  <script>
-    const tabs = document.querySelectorAll('.tab');
-    const sections = {
-      'ارزهای من': document.getElementById('my-coins'),
-      'بازار': document.getElementById('market'),
-      'معامله': document.getElementById('trade'),
-      'کسب درآمد': document.getElementById('earn')
-    };
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        Object.values(sections).forEach(section => {
-          section.classList.add('hidden');
-        });
-        sections[tab.textContent].classList.remove('hidden');
-      });
-    });
-  </script>
+  <!-- About Apollon -->
+  <section class="section" id="about">
+    <div class="container two-col">
+      <div>
+        <h2>آپولون چیست؟</h2>
+        <p>
+          «آپولون» مجموعه دوره‌های تخصصی آکادمی رایان است که با تمرکز بر پروژه‌های واقعی، مسیر یادگیری را کوتاه و نتیجه‌محور می‌کند. هر درس یک هدف روشن دارد و با تمرین قابل‌ارزیابی تمام می‌شود.
+        </p>
+        <ul class="list">
+          <li><strong>پروژه‌محور:</strong> تمرین واقعی با فایل‌های تمرین</li>
+          <li><strong>بازخورد سریع:</strong> استاندارد تصحیح و چک‌لیست واضح</li>
+          <li><strong>منابع آماده:</strong> براش، اکشن، LUT، پریست</li>
+          <li><strong>مسیر شغلی:</strong> ساخت نمونه‌کار قابل ارائه</li>
+        </ul>
+      </div>
+      <div class="card timeline">
+        <h3>مسیر یادگیری در ۳ گام</h3>
+        <ol>
+          <li><strong>پایه‌های کاربردی:</strong> ابزارها با مثال‌های واقعی</li>
+          <li><strong>پروژه‌های میانی:</strong> پوستر، ریتاچ، تدوین ۳۰ ثانیه‌ای</li>
+          <li><strong>خروجی نهایی:</strong> یک نمونه‌کار استاندارد قابل اشتراک</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools: Photoshop & Premiere -->
+  <section class="section section--soft" id="tools">
+    <div class="container">
+      <h2>فتوشاپ و پریمیر به زبان ساده</h2>
+      <div class="cards">
+        <article class="card tool-card">
+          <div class="icon">
+            <!-- brush icon -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17c.3-1.3 1.3-2.3 2.6-2.6L20 4.1a2.1 2.1 0 1 1 2.9 3L12.6 17.4c-.3 1.3-1.3 2.3-2.6 2.6-1.6.4-3.4-.2-4.6-1.4C4.2 17.4 4 16 4 16s1.4.2 2.4.9c1.2 1.2 2.9 1.8 4.6 1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <h3>فتوشاپ چیست؟</h3>
+          <p>نرم‌افزار استاندارد صنعت برای طراحی گرافیک، روتوش عکس، پوستر، کاور و محتوای تبلیغاتی.</p>
+          <ul class="list list--compact">
+            <li><strong>کاربردها:</strong> پوستر، بنر، سوشال، موکاپ محصول</li>
+            <li><strong>مهارت‌های کلیدی:</strong> ماسک، Curves، Blend Modes</li>
+            <li><strong>خروجی ملموس:</strong> یک پوستر کمپین واقعی</li>
+          </ul>
+        </article>
+
+        <article class="card tool-card">
+          <div class="icon">
+            <!-- video icon -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 10l6-3v10l-6-3v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>پریمیر چیست؟</h3>
+          <p>نرم‌افزار تدوین ویدیو برای ساخت تیزر، اینترو، ویدیوهای سوشال و محتوای آموزشی.</p>
+          <ul class="list list--compact">
+            <li><strong>کاربردها:</strong> تدوین تیزر، ریتم موسیقی، سوشال</li>
+            <li><strong>مهارت‌های کلیدی:</strong> Cut ریتمیک، Color Match، LUT</li>
+            <li><strong>خروجی ملموس:</strong> ویدیوی معرفی شخصی ۴۵–۶۰ ثانیه</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Apollon (Features) -->
+  <section class="section" id="features">
+    <div class="container">
+      <h2>چرا آپولون؟</h2>
+      <div class="cards features">
+        <div class="feature">
+          <div class="feature__icon">🎯</div>
+          <h3>نتیجه‌محور</h3>
+          <p>هر درس با هدف روشن و خروجی مشخص طراحی شده تا در زمان کوتاه به نتیجه برسی.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon">⚡</div>
+          <h3>یادگیری سریع</h3>
+          <p>ویدیوهای کوتاه ۳–۷ دقیقه‌ای با تمرین‌های دقیق و فایل‌های آماده.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon">🧩</div>
+          <h3>منابع آماده</h3>
+          <p>براش‌ها، پریست‌ها و فایل‌های تمرین قابل دانلود برای هر ماژول.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon">🤝</div>
+          <h3>همراهی</h3>
+          <p>پاسخ به پرسش‌های پرتکرار و راهنمایی قدم‌به‌قدم در دسترس.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section class="section section--soft" id="courses">
+    <div class="container">
+      <h2>دوره‌های آپولون</h2>
+
+      <div class="cards course-cards">
+        <!-- Photoshop -->
+        <article class="card course">
+          <div class="course__badge" style="--c:#6F3FF5;">فتوشاپ</div>
+          <h3>آپولون فتوشاپ</h3>
+          <p>طراحی پوستر، ریتاچ سریع، میکس‌مدیا و خروجی استاندارد برای شبکه‌های اجتماعی.</p>
+          <ul class="meta">
+            <li><strong>سطح:</strong> مبتدی تا میانی</li>
+            <li><strong>مدت:</strong> ۱۸–۲۴ ساعت محتوای طبقه‌بندی‌شده</li>
+            <li><strong>خروجی:</strong> یک نمونه‌کار کامل قابل ارائه</li>
+          </ul>
+          <div class="course__cta">
+            <a href="#" class="btn btn--ghost">نمونه‌درس رایگان</a>
+            <a href="#" class="btn btn--primary">مشاهده سرفصل</a>
+          </div>
+        </article>
+        <!-- Premiere -->
+        <article class="card course">
+          <div class="course__badge" style="--c:#1F8CFF;">پریمیر</div>
+          <h3>آپولون پریمیر</h3>
+          <p>تدوین ریتمیک، ترنزیشن‌های تمیز، رنگ و صداسازی برای ویدیوهای حرفه‌ای.</p>
+          <ul class="meta">
+            <li><strong>سطح:</strong> مبتدی تا میانی</li>
+            <li><strong>مدت:</strong> ۱۵–۲۰ ساعت محتوای هدفمند</li>
+            <li><strong>خروجی:</strong> ویدیوی معرفی ۶۰ ثانیه‌ای</li>
+          </ul>
+          <div class="course__cta">
+            <a href="#" class="btn btn--ghost">نمونه‌درس رایگان</a>
+            <a href="#" class="btn btn--primary">مشاهده سرفصل</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2>سوالات متداول</h2>
+
+      <div class="accordion" role="tablist">
+        <div class="accordion__item">
+          <button class="accordion__btn" aria-expanded="false">
+            <span>پیش‌نیاز دوره‌ها چیست؟</span>
+            <i></i>
+          </button>
+          <div class="accordion__panel" role="region">
+            <p>هیچ پیش‌نیاز تخصصی لازم نیست. آشنایی اولیه با کامپیوتر کافی است. ابزارها را قدم‌به‌قدم یاد می‌گیری.</p>
+          </div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__btn" aria-expanded="false">
+            <span>به چه سیستمی نیاز دارم؟</span>
+            <i></i>
+          </button>
+          <div class="accordion__panel" role="region">
+            <p>سیستم میان‌رده با ۸ گیگ رم برای شروع مناسب است. برای پروژه‌های سنگین‌تر، ۱۶ گیگ پیشنهاد می‌شود.</p>
+          </div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__btn" aria-expanded="false">
+            <span>مدت دوره‌ها چقدر است؟</span>
+            <i></i>
+          </button>
+          <div class="accordion__panel" role="region">
+            <p>سرفصل‌ها ماژولارند؛ میانگین ۱۵ تا ۲۴ ساعت ویدیوی کوتاه به‌همراه تمرین و فایل‌های دانلودی.</p>
+          </div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__btn" aria-expanded="false">
+            <span>آیا مدرک پایان دوره می‌گیرم؟</span>
+            <i></i>
+          </button>
+          <div class="accordion__panel" role="region">
+            <p>بله؛ پس از گذراندن آزمون پایانی هر ماژول، مدرک دیجیتال قابل اشتراک دریافت می‌کنی.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section section--soft" id="contact">
+    <div class="container two-col">
+      <div>
+        <h2>مشاوره رایگان</h2>
+        <p>اگر بین فتوشاپ و پریمیر مرددی، فرم زیر را پر کن. کمتر از ۲۴ ساعت با تو تماس می‌گیریم.</p>
+
+        <form id="leadForm" class="form" novalidate>
+          <div class="form__row">
+            <label for="name">نام و نام‌خانوادگی</label>
+            <input id="name" name="name" type="text" placeholder="مثلاً: بهاره رضایی" required />
+            <small class="err" data-for="name"></small>
+          </div>
+
+          <div class="form__row">
+            <label for="phone">شماره تماس</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="09xxxxxxxxx" required />
+            <small class="err" data-for="phone"></small>
+          </div>
+
+          <div class="form__row">
+            <label for="goal">هدفت از یادگیری چیه؟</label>
+            <select id="goal" name="goal" required>
+              <option value="" selected disabled>انتخاب کن…</option>
+              <option value="career">ورود به بازار کار</option>
+              <option value="content">تولید محتوای شخصی/سوشال</option>
+              <option value="upskill">ارتقای مهارت شغلی</option>
+              <option value="hobby">علاقه شخصی</option>
+            </select>
+            <small class="err" data-for="goal"></small>
+          </div>
+
+          <button class="btn btn--primary btn--full" type="submit">ثبت درخواست</button>
+          <p class="form__note">با ارسال این فرم، فقط برای مشاوره تماس می‌گیریم. پیامک تبلیغی نمی‌فرستیم.</p>
+        </form>
+      </div>
+
+      <div class="card contact">
+        <h3>راه‌های ارتباطی</h3>
+        <ul class="list">
+          <li><strong>تلگرام:</strong> t.me/your_academy</li>
+          <li><strong>اینستاگرام:</strong> instagram.com/your_academy</li>
+          <li><strong>ایمیل:</strong> hello@youracademy.com</li>
+        </ul>
+        <a href="#courses" class="btn btn--ghost">دیدن دوره‌ها</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">فتولون</span>
+        </div>
+        <p>ویترین رسمی دوره‌های آپولون آکادمی رایان.</p>
+      </div>
+      <div class="footer__links">
+        <a href="#about">درباره</a>
+        <a href="#features">چرا آپولون</a>
+        <a href="#courses">دوره‌ها</a>
+        <a href="#faq">سوالات</a>
+        <a href="#contact">مشاوره</a>
+      </div>
+      <div class="footer__copy">
+        <small>© تمامی حقوق متعلق به آکادمی رایان است.</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating actions -->
+  <a class="fab" href="#contact" aria-label="درخواست مشاوره">💬</a>
+  <button class="to-top" id="toTop" aria-label="بازگشت به بالا">▲</button>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">درخواستت ثبت شد! به‌زودی با تو تماس می‌گیریم.</div>
+
+  <script src="app.js"></script>
 </body>
 </html>
