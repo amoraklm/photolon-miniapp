@@ -3,20 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>فتوشاپ هاب</title>
+  <title>فتولون</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
-  <!-- فونت جوان‌پسند (Vazirmatn از گوگل) -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>🎨 فتوشاپ هاب</h1>
-    <nav>
-      <a href="#tutorials">آموزش‌ها</a>
-      <a href="#tips">نکات سریع</a>
-      <a href="#resources">منابع</a>
-    </nav>
+  <header class="main-header">
+    <h1>🎨 فتولون</h1>
+    <p class="subtitle">مجموعه آکادمی رایان</p>
   </header>
 
   <section class="hero">
@@ -40,23 +35,26 @@
     </div>
   </section>
 
-  <section id="tips" class="tips">
-    <h2>⚡ نکات سریع</h2>
-    <ul>
-      <li>کلید <b>Ctrl+J</b> = کپی سریع لایه</li>
-      <li>با <b>Alt+Scroll</b> زوم راحت‌تره</li>
-      <li>Shift رو نگه دار → تناسب رو حفظ کن</li>
-    </ul>
-  </section>
-
-  <section id="resources">
-    <h2>📂 منابع رایگان</h2>
-    <p>براش، تکسچر و موکاپ رو همینجا دانلود کن.</p>
-    <button>رفتن به منابع</button>
+  <section id="shortcuts" class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion()">
+      ⚡ شورتکات‌ها <span id="arrow">▼</span>
+    </button>
+    <div class="accordion-content">
+      <div class="toggle-wrapper">
+        <label class="switch">
+          <input type="checkbox" id="osToggle" onchange="toggleOS()">
+          <span class="slider round"></span>
+        </label>
+        <span id="osLabel">Windows</span>
+      </div>
+      <ul id="shortcutsList">
+        <!-- شورتکات‌ها اینجا با JS پر میشه -->
+      </ul>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 فتوشاپ هاب | طراحی شده برای جوان‌ها</p>
+    <p>© 2025 فتولون | مجموعه آکادمی رایان</p>
   </footer>
 </body>
 </html>
