@@ -3,47 +3,60 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Telegram Mini App</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body{margin:0;font-family:sans-serif;background:#fff;color:#111}
-    .wrap{padding:16px}
-    button{padding:10px 16px;border:0;border-radius:12px;cursor:pointer}
-  </style>
+  <title>فتوشاپ هاب</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <!-- فونت جوان‌پسند (Vazirmatn از گوگل) -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="wrap">
-    <h1>���� �� Mini App ??</h1>
-    <p id="user"></p>
-    <button id="btn">��� ����� ���</button>
-  </div>
+  <header>
+    <h1>🎨 فتوشاپ هاب</h1>
+    <nav>
+      <a href="#tutorials">آموزش‌ها</a>
+      <a href="#tips">نکات سریع</a>
+      <a href="#resources">منابع</a>
+    </nav>
+  </header>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();               // ����� ���ϐ� �� �����
-    tg.expand();              // ������ ����
-    tg.BackButton.show();     // Ϙ�� �ѐ��
-    tg.onEvent('backButtonClicked', () => tg.close());
+  <section class="hero">
+    <h2>یاد بگیر مثل یه پرو کار کنی ✨</h2>
+    <p>از صفر تا حرفه‌ای شدن در فوتوشاپ، همه‌چی همین‌جاست.</p>
+    <button onclick="scrollToSection('tutorials')">شروع کن</button>
+  </section>
 
-    // �� ��ј/���� �����
-    document.body.style.background = tg.colorScheme === 'dark' ? '#111' : '#fff';
-    document.body.style.color = tg.colorScheme === 'dark' ? '#eee' : '#111';
+  <section id="tutorials" class="card-grid">
+    <div class="card">
+      <h3>مقدماتی</h3>
+      <p>ابزارهای پایه، لایه‌ها و براش‌ها.</p>
+    </div>
+    <div class="card">
+      <h3>میان‌رده</h3>
+      <p>ماسک‌ها، افکت‌ها و رتوش.</p>
+    </div>
+    <div class="card">
+      <h3>حرفه‌ای</h3>
+      <p>ترکیب عکس‌ها، طراحی پوستر و تکنیک‌های خاص.</p>
+    </div>
+  </section>
 
-    // ����� ��� �����
-    const u = tg.initDataUnsafe?.user;
-    if (u) document.getElementById('user').textContent = `�����: ${u.first_name} ${u.last_name||''}`;
+  <section id="tips" class="tips">
+    <h2>⚡ نکات سریع</h2>
+    <ul>
+      <li>کلید <b>Ctrl+J</b> = کپی سریع لایه</li>
+      <li>با <b>Alt+Scroll</b> زوم راحت‌تره</li>
+      <li>Shift رو نگه دار → تناسب رو حفظ کن</li>
+    </ul>
+  </section>
 
-    // Ϙ�� ���� �����
-    tg.MainButton.setText('����� ����');
-    tg.MainButton.show();
-    tg.MainButton.onClick(() => {
-      tg.sendData(JSON.stringify({ action: 'submit', time: Date.now() }));
-    });
+  <section id="resources">
+    <h2>📂 منابع رایگان</h2>
+    <p>براش، تکسچر و موکاپ رو همینجا دانلود کن.</p>
+    <button>رفتن به منابع</button>
+  </section>
 
-    // Ϙ�� ���� ����
-    document.getElementById('btn').onclick = () => {
-      tg.showPopup({ title:'����� ��', message:'�� ǘ�� ���� ���� �� ?', buttons:[{type:'ok'}] });
-    };
-  </script>
+  <footer>
+    <p>© 2025 فتوشاپ هاب | طراحی شده برای جوان‌ها</p>
+  </footer>
 </body>
 </html>
