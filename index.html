@@ -1,99 +1,316 @@
-<!DOCTYPE html>
-<html lang="fa">
+<!doctype html>
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آپولون رایان - دستیار و مرجع تلگرامی</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>آپولون — آکادمی رایان</title>
+  <meta name="theme-color" content="#6f32ff" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script defer src="app.js"></script>
 </head>
 <body>
-    <header>
-        <div class="logo">آپولون رایان</div>
-        <nav>
-            <button id="menu-toggle">☰</button>
-            <ul id="nav-menu">
-                <li><a href="#home">خانه</a></li>
-                <li><a href="#resources">منابع</a></li>
-                <li><a href="#support">پشتیبانی</a></li>
-                <li><a href="#assistant">دستیار</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#A06AFF"/>
+              <stop offset="100%" stop-color="#6F32FF"/>
+            </linearGradient>
+          </defs>
+          <rect x="4" y="4" width="40" height="40" rx="12" fill="url(#g)"/>
+          <path d="M15 24c0-6 3-9 9-9s9 3 9 9-3 9-9 9" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+          <path d="M15 30h9" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="titles">
+        <h1>آپولون مینی‌اپ</h1>
+        <p id="courseMeta">آپولون فتوشاپ — ترم 36</p>
+      </div>
+    </div>
+    <button id="panelBtn" class="panel-btn" aria-label="ورود به پنل">
+      پنل رایان
+    </button>
+  </header>
 
-    <main>
-        <section id="home" class="section">
-            <h1>خوش آمدید به دستیار آپولون رایان!</h1>
-            <p>این مینی اپ مرجع کامل دوره‌های آپولون فتوشاپ و پریمر است. با تم بنفش جذاب، طراحی مدرن و کاربری آسان، همه چیز را در دسترس دارید.</p>
-            <div class="cards">
-                <div class="card" onclick="navigateTo('#resources')">
-                    <img src="https://via.placeholder.com/100?text=منابع" alt="منابع">
-                    <h2>منابع آموزشی</h2>
-                    <p>دسترسی به ویدیوها، قوانین و بیشتر.</p>
-                </div>
-                <div class="card" onclick="navigateTo('#support')">
-                    <img src="https://via.placeholder.com/100?text=پشتیبانی" alt="پشتیبانی">
-                    <h2>پشتیبانی</h2>
-                    <p>ارتباط با آپولون‌یار و کانال‌ها.</p>
-                </div>
-                <div class="card" onclick="navigateTo('#assistant')">
-                    <img src="https://via.placeholder.com/100?text=دستیار" alt="دستیار">
-                    <h2>دستیار هوشمند</h2>
-                    <p>سؤالات خود را بپرسید و پاسخ بگیرید.</p>
-                </div>
+  <main id="views">
+    <!-- خانه -->
+    <section id="home" class="view active" aria-labelledby="homeTab">
+      <div class="hero">
+        <div class="hero-text">
+          <h2>خوش اومدی، <span id="userFirstName">هنرجو</span> 👋</h2>
+          <p>همه‌چیزِ آپولون اینجاست؛ سریع، مرتب، و همیشه در دسترس.</p>
+          <div class="chips">
+            <span class="chip">گواهینامه فنی‌وحرفه‌ای</span>
+            <span class="chip">پشتیبانی و شبکه‌سازی</span>
+            <span class="chip">تکلیف هفتگی</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <a class="card link" data-link="channel">
+          <div class="card-icon">📣</div>
+          <div class="card-body">
+            <h3>ندای آپولون</h3>
+            <p>عضویت در کانال اطلاع‌رسانی دوره</p>
+          </div>
+          <div class="card-cta">ورود</div>
+        </a>
+
+        <a class="card link" data-link="rules">
+          <div class="card-icon">📜</div>
+          <div class="card-body">
+            <h3>قوانین و تعهدات</h3>
+            <p>مطالعه قبل از شروع دوره</p>
+          </div>
+          <div class="card-cta">مشاهده</div>
+        </a>
+
+        <a class="card link" data-link="zeroVideo">
+          <div class="card-icon">🎬</div>
+          <div class="card-body">
+            <h3>ویدئو صفر ۱۴۰۴</h3>
+            <p>پیش از لایو شروع دوره، الزامی</p>
+          </div>
+          <div class="card-cta">پخش</div>
+        </a>
+
+        <a class="card link" data-link="widemGuide">
+          <div class="card-icon">💾</div>
+          <div class="card-body">
+            <h3>نصب ویدِم و فتوشاپ</h3>
+            <p>راهنمای کامل مشاهده آموزش‌ها</p>
+          </div>
+          <div class="card-cta">راهنما</div>
+        </a>
+
+        <a class="card link" data-link="liveHowTo">
+          <div class="card-icon">🎥</div>
+          <div class="card-body">
+            <h3>لایوها و ورکشاپ‌ها</h3>
+            <p>ورود به جلسات آنلاین</p>
+          </div>
+          <div class="card-cta">ورود</div>
+        </a>
+
+        <a class="card link" data-link="assignmentsForm">
+          <div class="card-icon">📝</div>
+          <div class="card-body">
+            <h3>ارسال تکلیف</h3>
+            <p>سامانه تکالیف (Google Forms)</p>
+          </div>
+          <div class="card-cta">ارسال</div>
+        </a>
+
+        <a class="card link" data-link="gradesSheet">
+          <div class="card-icon">📊</div>
+          <div class="card-body">
+            <h3>نمرات و نتایج</h3>
+            <p>مشاهده Google Sheets</p>
+          </div>
+          <div class="card-cta">مشاهده</div>
+        </a>
+
+        <a class="card link" data-link="panel">
+          <div class="card-icon">🛡️</div>
+          <div class="card-body">
+            <h3>پنل عمومی</h3>
+            <p>panel.rayan.academy</p>
+          </div>
+          <div class="card-cta">ورود</div>
+        </a>
+      </div>
+
+      <div class="notice">
+        <strong>یادآوری تکلیف:</strong>
+        اگر ۳ بار ارسال نکنی، از دوره حذف می‌شی. حواست به ددلاین هفتگی باشه!
+      </div>
+    </section>
+
+    <!-- آموزش‌ها -->
+    <section id="learn" class="view" aria-labelledby="learnTab">
+      <div class="section-title">
+        <h2>آموزش‌ها</h2>
+        <p>مشاهده در اپلیکیشن ویدِم — مدت هر دوره ۲ تا ۳ ماه</p>
+      </div>
+      <div class="list">
+        <div class="item">
+          <div class="item-info">
+            <h3>راهنمای نصب ویدِم</h3>
+            <p>نصب، ورود، و مشاهده کلاس‌ها</p>
+          </div>
+          <button class="btn ghost" data-link="widemGuide">باز کردن</button>
+        </div>
+        <div class="item">
+          <div class="item-info">
+            <h3>نصب فتوشاپ</h3>
+            <p>پیش‌نیاز دوره آپولون فتوشاپ</p>
+          </div>
+          <button class="btn ghost" data-link="widemGuide">راهنما</button>
+        </div>
+        <div class="item">
+          <div class="item-info">
+            <h3>آپولون پریمیر</h3>
+            <p>به‌زودی در همین مینی‌اپ</p>
+          </div>
+          <button class="btn disabled" disabled>به‌زودی</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- لایو و ورکشاپ -->
+    <section id="live" class="view" aria-labelledby="liveTab">
+      <div class="section-title">
+        <h2>لایوها و ورکشاپ‌های تخصصی</h2>
+        <p>ورود و شرکت در جلسات Google Meet</p>
+      </div>
+      <div class="card wide">
+        <div class="card-body">
+          <h3>جلسه بعدی</h3>
+          <p id="nextLiveInfo">سه‌شنبه، ۲۰:۰۰ — لینک Meet در دسترس</p>
+          <div class="actions">
+            <button class="btn primary" id="joinMeet">ورود به جلسه</button>
+            <button class="btn ghost" data-link="liveHowTo">راهنمای ورود</button>
+          </div>
+        </div>
+      </div>
+      <div class="notice subtle">
+        <strong>نکته:</strong>
+        لطفاً ۵ دقیقه زودتر وارد بشید و میکروفون رو روی بی‌صدا قرار بدید.
+      </div>
+    </section>
+
+    <!-- تکالیف -->
+    <section id="assignments" class="view" aria-labelledby="assignmentsTab">
+      <div class="section-title">
+        <h2>سامانه تکالیف</h2>
+        <p>ارسال در Google Forms و مشاهده نتایج در Google Sheets</p>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <div class="card-body">
+            <h3>ارسال تکلیف این هفته</h3>
+            <p>فایل/لینک را با توضیحات کامل بفرست</p>
+            <button class="btn primary" data-link="assignmentsForm">ارسال تکلیف</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3>نمرات و بازخورد</h3>
+            <p>نتایج در شیت هفتگی</p>
+            <button class="btn ghost" data-link="gradesSheet">مشاهده نمرات</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="rules">
+        <h4>قوانین تکلیف</h4>
+        <ul>
+          <li><strong>ددلاین:</strong> هر هفته یک بار — تأخیر حساب نمی‌شود.</li>
+          <li><strong>حذف از دوره:</strong> ۳ بار عدم ارسال = حذف.</li>
+          <li><strong>نام فایل:</strong> نام و ترم را در نام فایل قید کن.</li>
+        </ul>
+      </div>
+
+      <div class="history">
+        <h4>تاریخچه ارسال‌های من</h4>
+        <ul id="historyList" class="history-list">
+          <li class="muted">هنوز سابقه‌ای ثبت نشده.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- پشتیبانی -->
+    <section id="support" class="view" aria-labelledby="supportTab">
+      <div class="section-title">
+        <h2>پشتیبانی آپولون</h2>
+        <p>ارتباط با آپولون‌یار و عضویت در کانال اطلاع‌رسانی</p>
+      </div>
+
+      <div class="list">
+        <div class="item">
+          <div class="item-info">
+            <h3>آپولون‌یار</h3>
+            <p>سریع‌ترین مسیر پاسخ‌گویی</p>
+          </div>
+          <button class="btn primary" data-link="support">پیام به پشتیبانی</button>
+        </div>
+        <div class="item">
+          <div class="item-info">
+            <h3>کانال اطلاع‌رسانی</h3>
+            <p>آخرین اخبار و تغییرات</p>
+          </div>
+          <button class="btn ghost" data-link="channel">عضویت</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- پروفایل -->
+    <section id="profile" class="view" aria-labelledby="profileTab">
+      <div class="section-title">
+        <h2>پروفایل من</h2>
+        <p>تنظیمات دوره، ترم، و ترجیحات</p>
+      </div>
+
+      <div class="profile-card">
+        <div class="row">
+          <div class="col">
+            <label>نام</label>
+            <div id="profileName" class="value">—</div>
+          </div>
+          <div class="col">
+            <label>یوزرنیم</label>
+            <div id="profileUsername" class="value">—</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="courseSelect">دوره</label>
+            <select id="courseSelect">
+              <option value="photoshop">آپولون فتوشاپ</option>
+              <option value="premiere">آپولون پریمیر</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="termInput">ترم من</label>
+            <input id="termInput" type="number" min="1" max="200" inputmode="numeric" value="36" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>تم</label>
+            <div class="btn-group">
+              <button class="btn ghost" data-theme="system">هماهنگ با تلگرام</button>
+              <button class="btn ghost" data-theme="light">روشن</button>
+              <button class="btn ghost" data-theme="dark">تاریک</button>
             </div>
-        </section>
+          </div>
+          <div class="col">
+            <label>بازخورد لمسی</label>
+            <button class="btn ghost" id="hapticTest">تست هپتیک</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <section id="resources" class="section">
-            <h1>منابع آپولون</h1>
-            <ul class="resource-list">
-                <li>
-                    <a href="[LINK_TO_NEDAYE_APOLLON_CHANNEL]" target="_blank">عضویت در کانال اطلاع‌رسانی دوره (ندای آپولون)</a>
-                    <p>پیوستن به کانال برای اخبار و به‌روزرسانی‌ها.</p>
-                </li>
-                <li>
-                    <a href="[LINK_TO_RULES_AND_COMMITMENTS]" target="_blank">قوانین و تعهدات دوره آپولون</a>
-                    <p>خواندن قوانین قبل از شروع.</p>
-                </li>
-                <li>
-                    <a href="[LINK_TO_VIDEO_ZERO_1404]" target="_blank">ویدئو صفر آپولون فتوشاپ ۱۴۰۴</a>
-                    <p>الزامی قبل از لایو شروع دوره.</p>
-                </li>
-                <li>
-                    <a href="[LINK_TO_EDUCATION_GUIDE]" target="_blank">مشاهده آموزش‌ها</a>
-                    <p>راهنمای نصب اپلیکیشن ویدم و فتوشاپ.</p>
-                </li>
-                <li>
-                    <a href="[LINK_TO_LIVES_AND_WORKSHOPS]" target="_blank">لایوها و ورکشاپ‌های تخصصی</a>
-                    <p>راهنمای ورود و شرکت در جلسات آنلاین.</p>
-                </li>
-                <li>
-                    <a href="[LINK_TO_TASK_SYSTEM]" target="_blank">سامانه تکالیف</a>
-                    <p>ارسال تکالیف و مشاهده نمرات.</p>
-                </li>
-            </ul>
-        </section>
-
-        <section id="support" class="section">
-            <h1>پشتیبانی آپولون</h1>
-            <p>راهنمای ارتباط با آپولون‌یار و عضویت در کانال اطلاع‌رسانی.</p>
-            <button onclick="openSupportChat()">ارتباط با پشتیبانی</button>
-            <a href="[LINK_TO_SUPPORT_CHANNEL]" target="_blank">عضویت در کانال پشتیبانی</a>
-        </section>
-
-        <section id="assistant" class="section">
-            <h1>دستیار هوشمند</h1>
-            <p>سؤال خود را وارد کنید و پاسخ بگیرید. (این بخش ساده است و می‌تواند با API خارجی گسترش یابد.)</p>
-            <input type="text" id="assistant-input" placeholder="سؤال خود را بپرسید...">
-            <button onclick="askAssistant()">ارسال</button>
-            <div id="assistant-response"></div>
-        </section>
-    </main>
-
-    <footer>
-        <p>© ۱۴۰۴ آکادمی رایان - تم بنفش، طراحی متمایز</p>
-    </footer>
-
-    <script src="script.js"></script>
+  <nav class="tabbar" role="tablist">
+    <button id="homeTab" class="tab active" data-target="home" role="tab" aria-controls="home">خانه</button>
+    <button id="learnTab" class="tab" data-target="learn" role="tab" aria-controls="learn">آموزش‌ها</button>
+    <button id="liveTab" class="tab" data-target="live" role="tab" aria-controls="live">لایو</button>
+    <button id="assignmentsTab" class="tab" data-target="assignments" role="tab" aria-controls="assignments">تکالیف</button>
+    <button id="supportTab" class="tab" data-target="support" role="tab" aria-controls="support">پشتیبانی</button>
+    <button id="profileTab" class="tab" data-target="profile" role="tab" aria-controls="profile">پروفایل</button>
+  </nav>
 </body>
 </html>
