@@ -1,51 +1,99 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <title>پنل دستیار آموزشی</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آپولون رایان - دستیار و مرجع تلگرامی</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <header>
-    <h1>🎓 پنل دستیار آموزشی</h1>
-  </header>
+    <header>
+        <div class="logo">آپولون رایان</div>
+        <nav>
+            <button id="menu-toggle">☰</button>
+            <ul id="nav-menu">
+                <li><a href="#home">خانه</a></li>
+                <li><a href="#resources">منابع</a></li>
+                <li><a href="#support">پشتیبانی</a></li>
+                <li><a href="#assistant">دستیار</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <!-- خلاصه وضعیت -->
-    <section class="card">
-      <h2>📊 خلاصه وضعیت</h2>
-      <ul id="status">
-        <li>پیشرفت ترم: <strong>۴۵٪</strong></li>
-        <li>تکالیف باز: <strong>۲</strong></li>
-        <li>رویداد بعدی: <strong>کارگاه نورپردازی - ۵ شهریور</strong></li>
-      </ul>
-    </section>
+    <main>
+        <section id="home" class="section">
+            <h1>خوش آمدید به دستیار آپولون رایان!</h1>
+            <p>این مینی اپ مرجع کامل دوره‌های آپولون فتوشاپ و پریمر است. با تم بنفش جذاب، طراحی مدرن و کاربری آسان، همه چیز را در دسترس دارید.</p>
+            <div class="cards">
+                <div class="card" onclick="navigateTo('#resources')">
+                    <img src="https://via.placeholder.com/100?text=منابع" alt="منابع">
+                    <h2>منابع آموزشی</h2>
+                    <p>دسترسی به ویدیوها، قوانین و بیشتر.</p>
+                </div>
+                <div class="card" onclick="navigateTo('#support')">
+                    <img src="https://via.placeholder.com/100?text=پشتیبانی" alt="پشتیبانی">
+                    <h2>پشتیبانی</h2>
+                    <p>ارتباط با آپولون‌یار و کانال‌ها.</p>
+                </div>
+                <div class="card" onclick="navigateTo('#assistant')">
+                    <img src="https://via.placeholder.com/100?text=دستیار" alt="دستیار">
+                    <h2>دستیار هوشمند</h2>
+                    <p>سؤالات خود را بپرسید و پاسخ بگیرید.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- لینک‌های سریع -->
-    <section class="card">
-      <h2>🔗 لینک‌های سریع</h2>
-      <a href="https://example.com/homework-form" class="btn" target="_blank">ثبت تکالیف</a>
-      <a href="https://vedm.example.com" class="btn" target="_blank">مشاهده آموزش‌ها در ویدم</a>
-    </section>
+        <section id="resources" class="section">
+            <h1>منابع آپولون</h1>
+            <ul class="resource-list">
+                <li>
+                    <a href="[LINK_TO_NEDAYE_APOLLON_CHANNEL]" target="_blank">عضویت در کانال اطلاع‌رسانی دوره (ندای آپولون)</a>
+                    <p>پیوستن به کانال برای اخبار و به‌روزرسانی‌ها.</p>
+                </li>
+                <li>
+                    <a href="[LINK_TO_RULES_AND_COMMITMENTS]" target="_blank">قوانین و تعهدات دوره آپولون</a>
+                    <p>خواندن قوانین قبل از شروع.</p>
+                </li>
+                <li>
+                    <a href="[LINK_TO_VIDEO_ZERO_1404]" target="_blank">ویدئو صفر آپولون فتوشاپ ۱۴۰۴</a>
+                    <p>الزامی قبل از لایو شروع دوره.</p>
+                </li>
+                <li>
+                    <a href="[LINK_TO_EDUCATION_GUIDE]" target="_blank">مشاهده آموزش‌ها</a>
+                    <p>راهنمای نصب اپلیکیشن ویدم و فتوشاپ.</p>
+                </li>
+                <li>
+                    <a href="[LINK_TO_LIVES_AND_WORKSHOPS]" target="_blank">لایوها و ورکشاپ‌های تخصصی</a>
+                    <p>راهنمای ورود و شرکت در جلسات آنلاین.</p>
+                </li>
+                <li>
+                    <a href="[LINK_TO_TASK_SYSTEM]" target="_blank">سامانه تکالیف</a>
+                    <p>ارسال تکالیف و مشاهده نمرات.</p>
+                </li>
+            </ul>
+        </section>
 
-    <!-- رویدادها -->
-    <section class="card">
-      <h2>📅 رویدادها</h2>
-      <ul id="events">
-        <li>۵ شهریور - کارگاه نورپردازی</li>
-        <li>۲۰ شهریور - جلسه نقد آثار</li>
-      </ul>
-    </section>
-  </main>
+        <section id="support" class="section">
+            <h1>پشتیبانی آپولون</h1>
+            <p>راهنمای ارتباط با آپولون‌یار و عضویت در کانال اطلاع‌رسانی.</p>
+            <button onclick="openSupportChat()">ارتباط با پشتیبانی</button>
+            <a href="[LINK_TO_SUPPORT_CHANNEL]" target="_blank">عضویت در کانال پشتیبانی</a>
+        </section>
 
-  <!-- پشتیبانی -->
-  <footer>
-    <p>💬 پشتیبانی: 
-      <a href="mailto:support@example.com">ایمیل</a> | 
-      <a href="https://t.me/your_support" target="_blank">تلگرام</a>
-    </p>
-  </footer>
+        <section id="assistant" class="section">
+            <h1>دستیار هوشمند</h1>
+            <p>سؤال خود را وارد کنید و پاسخ بگیرید. (این بخش ساده است و می‌تواند با API خارجی گسترش یابد.)</p>
+            <input type="text" id="assistant-input" placeholder="سؤال خود را بپرسید...">
+            <button onclick="askAssistant()">ارسال</button>
+            <div id="assistant-response"></div>
+        </section>
+    </main>
 
-  <script src="script.js"></script>
+    <footer>
+        <p>© ۱۴۰۴ آکادمی رایان - تم بنفش، طراحی متمایز</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
