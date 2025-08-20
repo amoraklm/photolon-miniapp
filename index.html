@@ -1,13 +1,51 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>دستیار و پنل آموزشی</title>
-    <meta name="color-scheme" content="light only" />
-  </head>
-  <body class="bg-gray-50 text-gray-900">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>پنل دستیار آموزشی</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎓 پنل دستیار آموزشی</h1>
+  </header>
+
+  <main>
+    <!-- خلاصه وضعیت -->
+    <section class="card">
+      <h2>📊 خلاصه وضعیت</h2>
+      <ul id="status">
+        <li>پیشرفت ترم: <strong>۴۵٪</strong></li>
+        <li>تکالیف باز: <strong>۲</strong></li>
+        <li>رویداد بعدی: <strong>کارگاه نورپردازی - ۵ شهریور</strong></li>
+      </ul>
+    </section>
+
+    <!-- لینک‌های سریع -->
+    <section class="card">
+      <h2>🔗 لینک‌های سریع</h2>
+      <a href="https://example.com/homework-form" class="btn" target="_blank">ثبت تکالیف</a>
+      <a href="https://vedm.example.com" class="btn" target="_blank">مشاهده آموزش‌ها در ویدم</a>
+    </section>
+
+    <!-- رویدادها -->
+    <section class="card">
+      <h2>📅 رویدادها</h2>
+      <ul id="events">
+        <li>۵ شهریور - کارگاه نورپردازی</li>
+        <li>۲۰ شهریور - جلسه نقد آثار</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- پشتیبانی -->
+  <footer>
+    <p>💬 پشتیبانی: 
+      <a href="mailto:support@example.com">ایمیل</a> | 
+      <a href="https://t.me/your_support" target="_blank">تلگرام</a>
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>
