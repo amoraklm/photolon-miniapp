@@ -1,179 +1,317 @@
-// داده نمونه شورتکات‌ها
-const SHORTCUTS = [
-  { id: 1, title: "Free Transform", cat: "tools", win: "Ctrl + T", mac: "Cmd + T", desc: "تغییر اندازه و چرخش آبجکت یا لایه." },
-  { id: 2, title: "Duplicate Layer", cat: "layers", win: "Ctrl + J", mac: "Cmd + J", desc: "کپی گرفتن از لایه انتخاب‌شده." },
-  { id: 3, title: "New Layer", cat: "layers", win: "Ctrl + Shift + N", mac: "Cmd + Shift + N", desc: "ساخت لایه جدید با تنظیمات." },
-  { id: 4, title: "Merge Layers", cat: "layers", win: "Ctrl + E", mac: "Cmd + E", desc: "ادغام لایه‌های انتخابی." },
-  { id: 5, title: "Select All", cat: "selection", win: "Ctrl + A", mac: "Cmd + A", desc: "انتخاب کل بوم." },
-  { id: 6, title: "Deselect", cat: "selection", win: "Ctrl + D", mac: "Cmd + D", desc: "لغو انتخاب." },
-  { id: 7, title: "Inverse Selection", cat: "selection", win: "Ctrl + Shift + I", mac: "Cmd + Shift + I", desc: "وارونه کردن محدوده انتخاب." },
-  { id: 8, title: "Brush Tool", cat: "tools", win: "B", mac: "B", desc: "انتخاب ابزار براش." },
-  { id: 9, title: "Move Tool", cat: "tools", win: "V", mac: "V", desc: "جابجایی آبجکت‌ها و لایه‌ها." },
-  { id:10, title: "Zoom In", cat: "navigation", win: "Ctrl + +", mac: "Cmd + +", desc: "بزرگنمایی نمای بوم." },
-  { id:11, title: "Zoom Out", cat: "navigation", win: "Ctrl + -", mac: "Cmd + -", desc: "کوچکنمایی نمای بوم." },
-  { id:12, title: "Fit on Screen", cat: "navigation", win: "Ctrl + 0", mac: "Cmd + 0", desc: "نمایش کل تصویر در صفحه." },
-  { id:13, title: "Hand Tool (Hold)", cat: "navigation", win: "Space", mac: "Space", desc: "پیمایش سریع با نگه‌داشتن Space." },
-  { id:14, title: "Toggle Rulers", cat: "navigation", win: "Ctrl + R", mac: "Cmd + R", desc: "نمایش/عدم نمایش خط‌کش‌ها." },
-  { id:15, title: "Quick Selection Tool", cat: "tools", win: "W", mac: "W", desc: "ابزار انتخاب سریع نواحی." },
-  { id:16, title: "Crop Tool", cat: "tools", win: "C", mac: "C", desc: "ابزار برش تصویر." },
-  { id:17, title: "New Document", cat: "general", win: "Ctrl + N", mac: "Cmd + N", desc: "ساخت سند جدید." },
-  { id:18, title: "Save", cat: "general", win: "Ctrl + S", mac: "Cmd + S", desc: "ذخیره سند." },
-  { id:19, title: "Save As", cat: "general", win: "Ctrl + Shift + S", mac: "Cmd + Shift + S", desc: "ذخیره با نام جدید." },
-  { id:20, title: "Quick Export (Export As)", cat: "export", win: "Ctrl + Alt + Shift + W", mac: "Cmd + Opt + Shift + W", desc: "بازکردن پنجره Export As." },
-  { id:21, title: "Type Tool", cat: "type", win: "T", mac: "T", desc: "ابزار تایپ متن." },
-];
-
-// حالت برنامه
+// حالت و ذخیره‌سازی
 const state = {
-  q: "",
-  cat: "all",
-  os: "win",
-  theme: "light",
+  os: localStorage.getItem('ps_os') || 'win', // 'win' | 'mac'
+  open: JSON.parse(localStorage.getItem('ps_open') || '[]') // آرایه id دسته‌های باز
 };
 
-// DOM
-const resultsEl = document.getElementById("results");
-const searchInput = document.getElementById("searchInput");
-const clearSearch = document.getElementById("clearSearch");
-const chips = document.querySelectorAll(".chip");
-const osButtons = document.querySelectorAll(".os-toggle .seg");
-const themeToggle = document.getElementById("themeToggle");
-const template = document.getElementById("shortcut-card");
-const metaTheme = document.getElementById("metaThemeColor");
+// داده‌ها: دسته‌ها + آیتم‌ها
+// پوشش پرکاربردترین شورتکات‌ها؛ می‌تونی موارد بیشتری اضافه کنی.
+const CATS = [
+  {
+    id: 'general',
+    title: 'عمومی',
+    items: [
+      i('New Document','ساخت سند جدید','Ctrl + N','Cmd + N'),
+      i('Open','باز کردن فایل','Ctrl + O','Cmd + O'),
+      i('Save','ذخیره','Ctrl + S','Cmd + S'),
+      i('Save As','ذخیره با نام جدید','Ctrl + Shift + S','Cmd + Shift + S'),
+      i('Close Document','بستن سند','Ctrl + W','Cmd + W'),
+      i('Print','چاپ','Ctrl + P','Cmd + P'),
+      i('Preferences','تنظیمات','Ctrl + K','Cmd + K'),
+      i('Quit Photoshop','خروج','Alt + F4','Cmd + Q')
+    ]
+  },
+  {
+    id: 'edit',
+    title: 'ویرایش',
+    items: [
+      i('Undo/Step Backward','یک مرحله عقب','Ctrl + Z / Alt + Ctrl + Z','Cmd + Z / Cmd + Opt + Z'),
+      i('Redo/Step Forward','یک مرحله جلو','Shift + Ctrl + Z','Shift + Cmd + Z'),
+      i('Cut','برش','Ctrl + X','Cmd + X'),
+      i('Copy','کپی','Ctrl + C','Cmd + C'),
+      i('Paste','چسباندن','Ctrl + V','Cmd + V'),
+      i('Free Transform','تغییر اندازه/چرخش','Ctrl + T','Cmd + T'),
+      i('Content-Aware Fill','پرکردن هوشمند','Shift + F5','Shift + F5'),
+      i('Fill Foreground','پر کردن با رنگ پیش‌زمینه','Alt + Backspace','Opt + Delete')
+    ]
+  },
+  {
+    id: 'layers',
+    title: 'لایه‌ها',
+    items: [
+      i('New Layer','لایه جدید','Ctrl + Shift + N','Cmd + Shift + N'),
+      i('Duplicate Layer','کپی لایه','Ctrl + J','Cmd + J'),
+      i('Merge Layers','ادغام لایه‌ها','Ctrl + E','Cmd + E'),
+      i('Merge Visible','ادغام قابل‌مشاهده','Shift + Ctrl + E','Shift + Cmd + E'),
+      i('Bring to Front','آوردن به جلو','Shift + Ctrl + ]','Shift + Cmd + ]'),
+      i('Send to Back','فرستادن به عقب','Shift + Ctrl + [','Shift + Cmd + ['),
+      i('New Group','گروه جدید','Ctrl + G','Cmd + G'),
+      i('Clipping Mask','کلیپینگ ماسک','Alt + Ctrl + G','Opt + Cmd + G')
+    ]
+  },
+  {
+    id: 'selection',
+    title: 'انتخاب',
+    items: [
+      i('Select All','انتخاب همه','Ctrl + A','Cmd + A'),
+      i('Deselect','لغو انتخاب','Ctrl + D','Cmd + D'),
+      i('Reselect','انتخاب مجدد','Shift + Ctrl + D','Shift + Cmd + D'),
+      i('Inverse Selection','معکوس‌کردن انتخاب','Shift + Ctrl + I','Shift + Cmd + I'),
+      i('Feather','نرم‌کردن لبه انتخاب','Shift + F6','Shift + F6'),
+      i('Select Color Range','انتخاب بازه رنگ','Shift + Ctrl + F','Shift + Cmd + F'),
+      i('Transform Selection','تبدیل ناحیه انتخاب','Shift + Ctrl + T','Shift + Cmd + T')
+    ]
+  },
+  {
+    id: 'tools',
+    title: 'ابزارها',
+    items: [
+      i('Move Tool','جابجایی','V','V'),
+      i('Marquee Tools','چهارگوش/بیضی','M','M'),
+      i('Lasso Tools','لاسو','L','L'),
+      i('Quick Selection / Magic Wand','انتخاب سریع/چوب جادویی','W','W'),
+      i('Crop Tool','برش','C','C'),
+      i('Eyedropper','نمونه‌بردار رنگ','I','I'),
+      i('Brush Tool','براش','B','B'),
+      i('Clone Stamp','کلون استمپ','S','S'),
+      i('History Brush','هیستوری براش','Y','Y'),
+      i('Eraser','پاک‌کن','E','E'),
+      i('Gradient / Paint Bucket','گرادیان/سطل رنگ','G','G'),
+      i('Dodge / Burn','روشن/تیره','O','O'),
+      i('Pen Tool','قلم','P','P'),
+      i('Type Tool','متن','T','T'),
+      i('Path/Direct Selection','انتخاب مسیر/مستقیم','A','A'),
+      i('Rectangle/Shape','اشکال','U','U'),
+      i('Hand Tool (Hold)','دست (نگه‌داشتن Space)','Space','Space'),
+      i('Zoom Tool','بزرگ‌نمایی ابزار','Z','Z')
+    ]
+  },
+  {
+    id: 'nav',
+    title: 'نمایش و نویگیشن',
+    items: [
+      i('Zoom In','بزرگنمایی','Ctrl + = / Ctrl + +','Cmd + = / Cmd + +'),
+      i('Zoom Out','کوچکنمایی','Ctrl -','Cmd -'),
+      i('Fit on Screen','جای‌گیری در صفحه','Ctrl + 0','Cmd + 0'),
+      i('Actual Pixels (100%)','نمایش ۱۰۰٪','Ctrl + 1','Cmd + 1'),
+      i('Toggle Full Screen','تمام‌صفحه','F','F'),
+      i('Toggle Screen Mode','حالت‌های نمایش','Shift + F','Shift + F'),
+      i('Show/Hide Extras','نمایش اضافات (گرید/گاید...)','Ctrl + H','Cmd + H')
+    ]
+  },
+  {
+    id: 'type',
+    title: 'متن',
+    items: [
+      i('Toggle Character/Paragraph','پنل متن','Ctrl + T','Cmd + T'),
+      i('Increase Font Size','افزایش اندازه فونت','Ctrl + Shift + >','Cmd + Shift + >'),
+      i('Decrease Font Size','کاهش اندازه فونت','Ctrl + Shift + <','Cmd + Shift + <'),
+      i('Bold','بولد','Ctrl + Shift + B','Cmd + Shift + B'),
+      i('Italic','ایتالیک','Ctrl + Shift + I','Cmd + Shift + I'),
+      i('All Caps','حروف بزرگ','Ctrl + Shift + K','Cmd + Shift + K'),
+      i('Baseline Shift Up','بالابردن بیس‌لاین','Alt + Shift + Up','Opt + Shift + Up'),
+      i('Baseline Shift Down','پایین‌آوردن بیس‌لاین','Alt + Shift + Down','Opt + Shift + Down')
+    ]
+  },
+  {
+    id: 'color',
+    title: 'رنگ و تنظیمات',
+    items: [
+      i('Foreground Color Picker','انتخاب رنگ پیش‌زمینه','Alt + Shift + Backspace','Opt + Shift + Delete'),
+      i('Swap Foreground/Background','جابجایی رنگ‌ها','X','X'),
+      i('Default Colors','بازگشت به سیاه/سفید','D','D'),
+      i('Adjustments Panel','پنل ادجاستمنت','Ctrl + F9','Cmd + F9'),
+      i('Levels','لولز','Ctrl + L','Cmd + L'),
+      i('Curves','کرووز','Ctrl + M','Cmd + M'),
+      i('Hue/Saturation','هیو/ستیوریشن','Ctrl + U','Cmd + U'),
+      i('Color Balance','بالانس رنگ','Ctrl + B','Cmd + B')
+    ]
+  },
+  {
+    id: 'guides',
+    title: 'راهنماها و خط‌کش',
+    items: [
+      i('Toggle Rulers','نمایش خط‌کش','Ctrl + R','Cmd + R'),
+      i('Show/Hide Guides','نمایش راهنماها','Ctrl + ;','Cmd + ;'),
+      i('Lock Guides','قفل راهنماها','Alt + Ctrl + ;','Opt + Cmd + ;'),
+      i('Clear Guides','حذف همه راهنماها','Ctrl + Alt + ;','Cmd + Opt + ;'),
+      i('Snap','چسبندگی','Shift + Ctrl + ;','Shift + Cmd + ;'),
+      i('New Guide','راهنمای جدید','Ctrl + R then drag','Cmd + R سپس درگ')
+    ]
+  },
+  {
+    id: 'history',
+    title: 'هیستوری و سایر',
+    items: [
+      i('History Panel','پنل هیستوری','F10','F10'),
+      i('Layers Panel','پنل لایه‌ها','F7','F7'),
+      i('Brush Panel','پنل براش','F5','F5'),
+      i('Toggle Menus','نمایش/مخفی منو','Tab','Tab'),
+      i('Quick Export (Export As)','پنجره Export As','Ctrl + Alt + Shift + W','Cmd + Opt + Shift + W'),
+      i('Show Info','اطلاعات تصویر','F8','F8')
+    ]
+  },
+  {
+    id: 'file-export',
+    title: 'فایل و خروجی',
+    items: [
+      i('Export Quick PNG','اِکسپورت سریع','Alt + Shift + Ctrl + W','Opt + Shift + Cmd + W'),
+      i('Save for Web (Legacy)','ذخیره برای وب (قدیمی)','Ctrl + Alt + Shift + S','Cmd + Opt + Shift + S'),
+      i('Place Embedded','جایگذاری داخلی','Shift + Ctrl + P','Shift + Cmd + P'),
+      i('Place Linked','جایگذاری لینک‌شده','Alt + Shift + Ctrl + P','Opt + Shift + Cmd + P')
+    ]
+  }
+];
 
-// ابزارها
-const persianNormalize = s =>
-  s.toLowerCase()
-   .replace(/[آأإ]/g, "ا")
-   .replace(/ي/g, "ی")
-   .replace(/ك/g, "ک")
-   .replace(/[^\p{L}\p{N}\+\-\s]/gu, ""); // حذف علائم غیرضروری اما + و - را نگه می‌دارد
+// کمکی برای ساخت آیتم
+function i(title, desc, win, mac){ return { title, desc, win, mac }; }
 
-const escapeHTML = s => s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+// عناصر DOM
+const nav = document.getElementById('catNav');
+const acc = document.getElementById('accordion');
+const tplSection = document.getElementById('tpl-section');
+const tplItem = document.getElementById('tpl-item');
+const osToggle = document.getElementById('osToggle');
+const btnExpandAll = document.getElementById('expandAll');
+const btnCollapseAll = document.getElementById('collapseAll');
 
-function highlight(text, terms) {
-  if (!terms.length) return escapeHTML(text);
-  let safe = escapeHTML(text);
-  terms.forEach(t => {
-    if (!t) return;
-    const rx = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
-    safe = safe.replace(rx, m => `<mark>${m}</mark>`);
+// راه‌اندازی
+document.addEventListener('DOMContentLoaded', () => {
+  // وضعیت اولیه سوییچ OS
+  osToggle.checked = state.os === 'mac';
+
+  // ساخت ناوبری دسته‌ها
+  buildNav();
+
+  // رندر آکاردئون
+  renderAccordion();
+
+  // رویدادها
+  osToggle.addEventListener('change', () => {
+    state.os = osToggle.checked ? 'mac' : 'win';
+    localStorage.setItem('ps_os', state.os);
+    updateAllKeys();
   });
-  return safe;
-}
 
-function applyTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("rayan_theme", theme);
-  themeToggle.querySelector(".icon").textContent = theme === "dark" ? "☀️" : "🌙";
-  metaTheme.setAttribute("content", theme === "dark" ? "#0f172a" : "#ffffff");
-}
+  btnExpandAll.addEventListener('click', () => openCloseAll(true));
+  btnCollapseAll.addEventListener('click', () => openCloseAll(false));
+});
 
-function initTheme() {
-  const saved = localStorage.getItem("rayan_theme");
-  if (saved) return applyTheme(saved);
-  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  applyTheme(prefersDark ? "dark" : "light");
-}
-
-// رندر
-function render() {
-  const q = persianNormalize(state.q);
-  const terms = q.split(/\s+/).filter(Boolean);
-
-  const filtered = SHORTCUTS.filter(it => {
-    const catOk = state.cat === "all" || it.cat === state.cat;
-    if (!catOk) return false;
-    if (!terms.length) return true;
-
-    const hay = persianNormalize(
-      `${it.title} ${it.desc} ${it.win} ${it.mac} ${it.cat}`
-    );
-    return terms.every(t => hay.includes(t));
+// ساخت چیپ‌های ناوبری
+function buildNav(){
+  CATS.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = c.title;
+    b.addEventListener('click', () => {
+      document.getElementById(`sec-${c.id}`)?.scrollIntoView({ behavior:'smooth', block:'start' });
+      // اگر بسته است، بازش کن
+      const header = document.querySelector(`#sec-${c.id} .acc-header`);
+      if (header?.getAttribute('aria-expanded') === 'false') toggleSection(header);
+    });
+    nav.appendChild(b);
   });
+}
 
-  resultsEl.innerHTML = "";
+// رندر آکاردئون
+function renderAccordion(){
+  acc.innerHTML = '';
+  CATS.forEach(cat => {
+    const node = tplSection.content.firstElementChild.cloneNode(true);
+    node.id = `sec-${cat.id}`;
+    node.querySelector('h3').textContent = cat.title;
+    node.querySelector('.count').textContent = `${cat.items.length} کلید`;
+    const header = node.querySelector('.acc-header');
+    const panel = node.querySelector('.acc-panel');
+    const list = node.querySelector('.shortcut-list');
 
-  if (!filtered.length) {
-    resultsEl.innerHTML = `<div class="card"><p>نتیجه‌ای پیدا نشد. عبارت دیگری امتحان کن.</p></div>`;
+    // آیتم‌ها
+    cat.items.forEach(item => {
+      const li = tplItem.content.firstElementChild.cloneNode(true);
+      li.querySelector('.s-title').textContent = item.title;
+      li.querySelector('.desc').textContent = item.desc;
+      li.querySelector('.kbd').textContent = state.os === 'mac' ? item.mac : item.win;
+      list.appendChild(li);
+    });
+
+    // وضعیت باز/بسته از حافظه
+    const shouldOpen = state.open.includes(cat.id);
+    setPanelState(header, panel, shouldOpen, false);
+
+    // تعامل با هدر
+    header.addEventListener('click', () => toggleSection(header));
+
+    acc.appendChild(node);
+  });
+}
+
+// توگل یک سکشن
+function toggleSection(header){
+  const section = header.closest('.acc-section');
+  const panel = section.querySelector('.acc-panel');
+  const isOpen = header.getAttribute('aria-expanded') === 'true';
+  setPanelState(header, panel, !isOpen, true);
+
+  // ذخیره وضعیت
+  const id = section.id.replace('sec-','');
+  if (!isOpen) {
+    if (!state.open.includes(id)) state.open.push(id);
+  } else {
+    state.open = state.open.filter(x => x !== id);
+  }
+  localStorage.setItem('ps_open', JSON.stringify(state.open));
+}
+
+// باز/بستن همه
+function openCloseAll(open){
+  document.querySelectorAll('.acc-section').forEach(sec => {
+    const header = sec.querySelector('.acc-header');
+    const panel = sec.querySelector('.acc-panel');
+    setPanelState(header, panel, open, true);
+    const id = sec.id.replace('sec-','');
+    if (open && !state.open.includes(id)) state.open.push(id);
+    if (!open) state.open = [];
+  });
+  localStorage.setItem('ps_open', JSON.stringify(state.open));
+}
+
+// اعمال حالت پنل با انیمیشن ارتفاع
+function setPanelState(header, panel, open, animate){
+  header.setAttribute('aria-expanded', open ? 'true' : 'false');
+  panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+
+  if (!animate){
+    panel.style.height = open ? 'auto' : '0px';
     return;
   }
 
-  const frag = document.createDocumentFragment();
-
-  filtered.forEach(it => {
-    const node = template.content.firstElementChild.cloneNode(true);
-    node.querySelector(".title").innerHTML = highlight(it.title, terms);
-    node.querySelector(".badge").textContent = labelForCategory(it.cat);
-    node.querySelector(".desc").innerHTML = highlight(it.desc, terms);
-
-    const keyWin = node.querySelector(".keyline.win .kbd");
-    const keyMac = node.querySelector(".keyline.mac .kbd");
-    keyWin.innerHTML = highlight(it.win, terms);
-    keyMac.innerHTML = highlight(it.mac, terms);
-
-    // نمایش براساس OS
-    node.querySelector(".keyline.win").style.display = state.os === "win" ? "flex" : "none";
-    node.querySelector(".keyline.mac").style.display = state.os === "mac" ? "flex" : "none";
-
-    frag.appendChild(node);
-  });
-
-  resultsEl.appendChild(frag);
-}
-
-function labelForCategory(cat) {
-  switch (cat) {
-    case "general": return "عمومی";
-    case "layers": return "لایه‌ها";
-    case "selection": return "انتخاب";
-    case "tools": return "ابزارها";
-    case "navigation": return "نویگیشن";
-    case "type": return "متن";
-    case "export": return "خروجی";
-    default: return "دیگر";
+  if (open){
+    panel.style.height = 'auto';
+    const target = panel.scrollHeight;
+    panel.style.height = '0px';
+    requestAnimationFrame(() => {
+      panel.style.height = target + 'px';
+      panel.addEventListener('transitionend', function done(){
+        panel.style.height = 'auto';
+        panel.removeEventListener('transitionend', done);
+      });
+    });
+  } else {
+    const from = panel.scrollHeight;
+    panel.style.height = from + 'px';
+    requestAnimationFrame(() => {
+      panel.style.height = '0px';
+    });
   }
 }
 
-// رویدادها
-document.addEventListener("DOMContentLoaded", () => {
-  initTheme();
-  render();
-
-  searchInput.addEventListener("input", e => {
-    state.q = e.target.value;
-    clearSearch.classList.toggle("show", !!state.q);
-    render();
-  });
-
-  clearSearch.addEventListener("click", () => {
-    state.q = "";
-    searchInput.value = "";
-    clearSearch.classList.remove("show");
-    searchInput.focus();
-    render();
-  });
-
-  chips.forEach(btn => {
-    btn.addEventListener("click", () => {
-      chips.forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
-      btn.classList.add("active"); btn.setAttribute("aria-selected", "true");
-      state.cat = btn.dataset.cat;
-      render();
+// به‌روزرسانی کلیدها بر اساس OS
+function updateAllKeys(){
+  document.querySelectorAll('.acc-section').forEach((sec, idx) => {
+    const cat = CATS[idx];
+    const codes = sec.querySelectorAll('.kbd');
+    codes.forEach((codeEl, i) => {
+      codeEl.textContent = state.os === 'mac' ? cat.items[i].mac : cat.items[i].win;
     });
   });
-
-  osButtons.forEach(b => {
-    b.addEventListener("click", () => {
-      osButtons.forEach(x => { x.classList.remove("active"); x.setAttribute("aria-pressed", "false"); });
-      b.classList.add("active"); b.setAttribute("aria-pressed", "true");
-      state.os = b.dataset.os;
-      render();
-    });
-  });
-
-  themeToggle.addEventListener("click", () => {
-    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    applyTheme(next);
-  });
-});
+}
