@@ -1,192 +1,52 @@
-:root{
-  --brand:#6F32FF;
-  --brand-2:#A06AFF;
-  --bg:#0F0F13;
-  --surface:#17171D;
-  --on-bg:#EDEDF1;
-  --muted:#9AA0A6;
-  --stroke:#26262C;
-  --success:#2ECC71;
-  --danger:#FF4D6D;
-  --radius:16px;
-  --shadow:0 8px 24px rgba(111,50,255,0.20);
+body {
+  font-family: "Vazir", sans-serif;
+  direction: rtl;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:'Vazirmatn', system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans Arabic", sans-serif;
-  background:linear-gradient(180deg, #0C0C12 0%, #0F0F13 100%);
-  color:var(--on-bg);
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
+header {
+  background-color: #2d2d2d;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-.topbar{
-  position:sticky; top:0; z-index:10;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:16px;
-  background:rgba(15,15,19,0.7);
-  backdrop-filter:saturate(140%) blur(10px);
-  border-bottom:1px solid var(--stroke);
+section {
+  padding: 20px;
+  margin: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-.brand{display:flex; gap:12px; align-items:center}
-.logo{
-  width:40px; height:40px; display:grid; place-items:center;
-  background:linear-gradient(135deg, var(--brand-2), var(--brand));
-  border-radius:12px; box-shadow:var(--shadow);
-}
-.titles h1{margin:0; font-size:16px; font-weight:700}
-.titles p{margin:2px 0 0; font-size:12px; color:var(--muted)}
-
-.panel-btn{
-  padding:10px 14px; border-radius:10px;
-  background:rgba(160,106,255,0.15); color:#E9DDFF;
-  border:1px solid rgba(160,106,255,0.35);
-  cursor:pointer; font-weight:600;
-}
-.panel-btn:hover{filter:brightness(1.1)}
-
-main#views{padding:16px 16px 88px}
-
-.hero{
-  border:1px solid var(--stroke);
-  border-radius:var(--radius);
-  padding:16px;
-  background:linear-gradient(180deg, rgba(160,106,255,0.10) 0%, rgba(111,50,255,0.10) 100%);
-}
-.hero h2{margin:0 0 6px}
-.hero p{margin:0 0 12px; color:var(--muted)}
-.chips{display:flex; gap:8px; flex-wrap:wrap}
-.chip{
-  padding:6px 10px; font-size:12px; color:#E9DDFF;
-  background:rgba(160,106,255,0.15); border:1px solid rgba(160,106,255,0.35);
-  border-radius:999px;
+h2 {
+  color: #0077cc;
 }
 
-.grid{
-  margin-top:16px;
-  display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
-}
-.grid.two{grid-template-columns:repeat(2,1fr)}
-@media (min-width:900px){ .grid{grid-template-columns:repeat(3,1fr)} }
-
-.card{
-  position:relative; overflow:hidden;
-  border:1px solid var(--stroke); border-radius:var(--radius);
-  background:var(--surface);
-  box-shadow:0 2px 12px rgba(0,0,0,0.25);
-}
-.card.wide{grid-column:1/-1}
-.card:hover{border-color:#3A3A42}
-.card .card-icon{font-size:22px; padding:12px 12px 0 12px}
-.card .card-body{padding:0 12px 12px 12px}
-.card h3{margin:4px 0 6px; font-size:15px}
-.card p{margin:0; font-size:12px; color:var(--muted)}
-.card .card-cta{
-  position:absolute; inset-inline-end:10px; inset-block-end:8px;
-  font-size:12px; color:#E9DDFF; background:rgba(160,106,255,0.18);
-  border:1px solid rgba(160,106,255,0.4);
-  padding:4px 8px; border-radius:8px;
-}
-.card.link{cursor:pointer}
-
-.notice{
-  margin-top:16px;
-  padding:12px; border-radius:12px;
-  background:rgba(255,77,109,0.10);
-  border:1px dashed rgba(255,77,109,0.35);
-  color:#FFD5DD; font-size:13px;
-}
-.notice.subtle{
-  background:rgba(160,106,255,0.10);
-  border-color:rgba(160,106,255,0.35);
-  color:#E9DDFF;
+ul {
+  list-style: none;
+  padding: 0;
 }
 
-.section-title h2{margin:0 0 4px}
-.section-title p{margin:0; color:var(--muted)}
-
-.list{display:flex; flex-direction:column; gap:10px; margin-top:10px}
-.item{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:12px; padding:12px; border:1px solid var(--stroke);
-  border-radius:12px; background:var(--surface);
+li {
+  margin: 8px 0;
 }
-.item-info h3{margin:0 0 4px; font-size:14px}
-.item-info p{margin:0; font-size:12px; color:var(--muted)}
 
-.btn{
-  border:none; cursor:pointer; border-radius:10px;
-  padding:10px 14px; font-weight:700;
+a {
+  color: #0077cc;
+  text-decoration: none;
 }
-.btn.primary{
-  color:white;
-  background:linear-gradient(135deg, var(--brand-2), var(--brand));
-  box-shadow:var(--shadow);
+
+a:hover {
+  text-decoration: underline;
 }
-.btn.ghost{
-  color:#E9DDFF; background:rgba(160,106,255,0.12);
-  border:1px solid rgba(160,106,255,0.35);
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #eee;
+  font-size: 0.9em;
 }
-.btn.disabled{opacity:.5; cursor:not-allowed}
-
-.rules, .history{margin-top:16px}
-.rules h4, .history h4{margin:0 0 8px}
-.rules ul{margin:0; padding:0 16px}
-.rules li{margin:6px 0; color:var(--on-bg)}
-
-.history-list{margin:0; padding:0 16px}
-.history-list li{margin:6px 0}
-.muted{color:var(--muted)}
-
-.profile-card{
-  border:1px solid var(--stroke); border-radius:12px; padding:12px; background:var(--surface);
-  display:flex; flex-direction:column; gap:12px;
-}
-.row{display:flex; gap:12px; flex-wrap:wrap}
-.col{flex:1; min-width:220px}
-label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
-.value{font-weight:700}
-select, input{
-  width:100%; padding:10px 12px; border-radius:10px;
-  background:#121218; color:var(--on-bg); border:1px solid var(--stroke);
-  outline:none;
-}
-.btn-group{display:flex; gap:8px; flex-wrap:wrap}
-
-.view{display:none}
-.view.active{display:block}
-
-.tabbar{
-  position:fixed; inset-inline:0; inset-block-end:0; z-index:10;
-  display:grid; grid-template-columns:repeat(6,1fr);
-  background:rgba(15,15,19,0.75); backdrop-filter:blur(10px);
-  border-top:1px solid var(--stroke);
-}
-.tab{
-  appearance:none; background:none; border:none; color:var(--muted);
-  padding:12px 6px; font-weight:700; cursor:pointer;
-}
-.tab.active{color:#E9DDFF}
-
-/* حالت روشن (اگر کاربر انتخاب کرد) */
-.light{
-  --bg:#F7F7FB;
-  --surface:#FFFFFF;
-  --on-bg:#1A1A20;
-  --muted:#596172;
-  --stroke:#E6E6EF;
-  background:linear-gradient(180deg, #F5F2FF 0%, #F7F7FB 100%);
-}
-.light .notice{color:#8B0E2A}
-.light .notice.subtle{color:#3C2469}
-
-/* تطبیق با تم تلگرام */
-.tg-dark{} /* پیش‌فرض تاریکه */
-.tg-light{}
-
-/* اسکرول نرم */
-html{scroll-behavior:smooth}
