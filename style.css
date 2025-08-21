@@ -1,52 +1,178 @@
+/* پایه */
+:root {
+  --bg: #0b1220;
+  --surface: #0f172a;
+  --muted: #8aa0c5;
+  --text: #e6edf7;
+  --accent: #60a5fa;
+  --accent-2: #34d399;
+  --card: #111827;
+  --border: #1f2937;
+  --chip: #0b1220;
+  --shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+html[data-theme="light"] {
+  --bg: #f7f8fb;
+  --surface: #ffffff;
+  --muted: #6b7280;
+  --text: #0f172a;
+  --accent: #2563eb;
+  --accent-2: #059669;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --chip: #f1f5f9;
+  --shadow: 0 8px 20px rgba(15, 23, 42, .08);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
-  font-family: "Vazir", sans-serif;
-  direction: rtl;
-  background-color: #f9f9f9;
-  color: #333;
   margin: 0;
-  padding: 0;
+  font-family: Vazirmatn FD, Vazirmatn, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(1200px 800px at 100% -200px, rgba(96,165,250,.15), transparent 60%),
+              radial-gradient(900px 700px at -10% -100px, rgba(52,211,153,.12), transparent 55%),
+              var(--bg);
+  color: var(--text);
+  line-height: 1.7;
 }
 
-header {
-  background-color: #2d2d2d;
-  color: white;
-  padding: 20px;
-  text-align: center;
+/* ظرف‌بندی و هدر */
+.container { width: min(1100px, 92vw); margin-inline: auto; }
+
+.app-header {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(120%) blur(10px);
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; gap: 16px; }
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo {
+  width: 44px; height: 44px; border-radius: 14px;
+  display: grid; place-items: center; font-size: 22px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: var(--shadow);
+}
+.titles h1 { margin: 0; font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
+.subtitle { font-size: .86rem; color: var(--muted); }
+
+.actions { display: flex; align-items: center; gap: 10px; }
+
+/* سوئیچ OS */
+.os-toggle {
+  display: inline-flex; border: 1px solid var(--border); border-radius: 12px;
+  background: var(--chip); overflow: hidden;
+}
+.os-toggle .seg {
+  padding: 8px 12px; font-size: .9rem; color: var(--muted); background: transparent; border: 0; cursor: pointer;
+}
+.os-toggle .seg.active {
+  color: var(--text); background: color-mix(in oklab, var(--surface), var(--accent) 15%);
 }
 
-section {
-  padding: 20px;
-  margin: 10px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+/* دکمه آیکنی */
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border);
+  background: var(--chip); color: var(--text); cursor: pointer;
+}
+.icon-btn .icon { display: grid; place-items: center; font-size: 18px; }
+
+/* پنل جستجو */
+.main { padding: 28px 0 50px; }
+
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 18px; box-shadow: var(--shadow);
+}
+.search-panel { display: grid; gap: 14px; }
+
+.search-group {
+  position: relative; display: flex; align-items: center;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+}
+.search-icon { padding-inline: 12px; color: var(--muted); font-size: 18px; }
+#searchInput {
+  appearance: none; flex: 1; padding: 12px; border: 0; outline: none; background: transparent; color: var(--text);
+  font-size: 1rem;
+}
+.clear-btn {
+  margin: 6px; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--chip); color: var(--muted); cursor: pointer; display: none;
+}
+.clear-btn.show { display: inline-block; }
+
+/* چیپ‌های فیلتر */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  border: 1px solid var(--border); background: var(--chip); color: var(--text);
+  padding: 8px 12px; border-radius: 999px; font-size: .9rem; cursor: pointer;
+}
+.chip.active { background: color-mix(in oklab, var(--accent) 22%, var(--chip)); border-color: transparent; }
+
+/* گرید نتایج */
+.grid {
+  margin-top: 18px;
+  display: grid; gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 560px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-h2 {
-  color: #0077cc;
+/* کارت شورتکات */
+.shortcut-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.shortcut .title { margin: 0; font-size: 1.05rem; letter-spacing: -0.01em; }
+.badge {
+  font-size: .75rem; color: var(--text);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  padding: 4px 10px; border-radius: 999px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+.shortcut .desc { color: var(--muted); margin-top: 6px; margin-bottom: 12px; min-height: 3.2em; }
+
+.keys { display: grid; gap: 8px; }
+.keyline {
+  display: flex; align-items: center; gap: 10px;
+  background: color-mix(in oklab, var(--surface), var(--chip) 35%);
+  border: 1px dashed var(--border); border-radius: 12px; padding: 8px 10px;
+}
+.keyline .label {
+  font-size: .78rem; color: var(--muted); border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px;
+}
+.kbd {
+  direction: ltr; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92rem;
+  background: color-mix(in oklab, var(--surface), var(--chip) 20%);
+  border-radius: 8px; padding: 6px 10px; display: inline-block;
 }
 
-li {
-  margin: 8px 0;
+/* هایلایت جستجو */
+mark {
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+  color: inherit; padding: 0 2px; border-radius: 4px;
 }
 
-a {
-  color: #0077cc;
-  text-decoration: none;
+/* بخش درباره و کانال */
+.about-grid {
+  margin-top: 28px;
+  display: grid; gap: 14px; grid-template-columns: 1fr;
 }
-
-a:hover {
-  text-decoration: underline;
+@media (min-width: 760px) {
+  .about-grid { grid-template-columns: 2fr 1fr; }
 }
+.about h2, .channel h2 { margin-top: 0; }
 
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #eee;
-  font-size: 0.9em;
+/* فوتر */
+.app-footer { border-top: 1px solid var(--border); padding: 18px 0; color: var(--muted); }
+.app-footer .container { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center; }
+.dot { opacity: .6; }
+
+/* دسترس‌پذیری و ترجیحات */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
