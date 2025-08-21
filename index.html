@@ -1,99 +1,94 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl" data-theme="light">
+<!doctype html>
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#0f172a" id="metaThemeColor" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#6F32FF" />
   <title>آکادمی رایان — شورتکات‌های فتوشاپ</title>
-  <!-- فونت (اختیاری) -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link href="https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/variable/FD/VazirmatnFDmin.css" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="app-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <div class="logo">🎨</div>
-        <div class="titles">
-          <h1>آکادمی رایان</h1>
-          <span class="subtitle">راهنمای مینیمال شورتکات‌های فتوشاپ</span>
-        </div>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#A06AFF"/>
+              <stop offset="100%" stop-color="#6F32FF"/>
+            </linearGradient>
+          </defs>
+          <rect x="4" y="4" width="40" height="40" rx="12" fill="url(#g)"/>
+          <path d="M15 24c0-6 3-9 9-9s9 3 9 9-3 9-9 9" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M15 30h9" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        </svg>
       </div>
+      <div class="titles">
+        <h1>شورتکات‌های فتوشاپ</h1>
+        <p>آکادمی رایان — سریع، منظم، قابل‌اعتماد</p>
+      </div>
+    </div>
 
-      <div class="actions">
-        <div class="os-toggle" role="group" aria-label="انتخاب سیستم عامل">
-          <button class="seg active" data-os="win" aria-pressed="true">Windows</button>
-          <button class="seg" data-os="mac" aria-pressed="false">macOS</button>
-        </div>
-        <button id="themeToggle" class="icon-btn" aria-label="تغییر حالت شب">
-          <span class="icon">🌙</span>
-        </button>
+    <div class="actions">
+      <div class="os-switch" role="group" aria-label="سوییچ سیستم‌عامل">
+        <input type="checkbox" id="osToggle" aria-label="Switch OS" />
+        <label for="osToggle" class="switch">
+          <span class="knob"></span>
+          <span class="label win">Windows</span>
+          <span class="label mac">macOS</span>
+        </label>
       </div>
+      <button id="expandAll" class="btn ghost" aria-label="باز کردن همه">باز کردن همه</button>
+      <button id="collapseAll" class="btn ghost" aria-label="بستن همه">بستن همه</button>
     </div>
   </header>
 
-  <main class="container main">
-    <section class="search-panel card">
-      <div class="search-group">
-        <span class="search-icon">🔎</span>
-        <input id="searchInput" type="search" placeholder="جستجو: Ctrl + J، «لایه»، «Transform» ..." aria-label="جستجوی شورتکات" />
-        <button id="clearSearch" class="clear-btn" aria-label="پاک کردن جستجو">✕</button>
-      </div>
-      <div class="chips" role="tablist" aria-label="فیلتر دسته‌ها">
-        <button class="chip active" data-cat="all" role="tab" aria-selected="true">همه</button>
-        <button class="chip" data-cat="general" role="tab">عمومی</button>
-        <button class="chip" data-cat="layers" role="tab">لایه‌ها</button>
-        <button class="chip" data-cat="selection" role="tab">انتخاب</button>
-        <button class="chip" data-cat="tools" role="tab">ابزارها</button>
-        <button class="chip" data-cat="navigation" role="tab">نویگیشن</button>
-        <button class="chip" data-cat="type" role="tab">متن</button>
-        <button class="chip" data-cat="export" role="tab">خروجی</button>
-      </div>
-    </section>
+  <main class="container">
+    <nav id="catNav" class="chips" aria-label="پرش سریع به دسته‌ها"></nav>
 
-    <section id="results" class="grid"></section>
+    <section id="accordion" class="accordion" aria-label="لیست شورتکات‌ها با آکاردئون"></section>
 
-    <section class="about-grid">
-      <article class="card about">
+    <section class="meta">
+      <div class="card about">
         <h2>درباره آکادمی رایان</h2>
-        <p>آکادمی رایان با تمرکز بر آموزش پروژه‌محور فتوشاپ، پریمیر و ایلاستریتور، یادگیری عمیق و کاربردی را با پشتیبانی مستمر ارائه می‌دهد.</p>
-      </article>
-      <article class="card channel">
-        <h2>کانال مجموعه</h2>
-        <p>برای دریافت آموزش‌ها، نمونه‌کارها و اخبار دوره‌ها عضو کانال شوید.</p>
-        <a class="btn" href="https://t.me/academy_rayan" target="_blank" rel="noopener">ورود به کانال تلگرام</a>
-      </article>
+        <p>
+          آکادمی رایان با تمرکز بر آموزش پروژه‌محور و پشتیبانی قوی، مسیر یادگیری ابزارهای خلاق مثل فتوشاپ و پریمیر را
+          برای علاقه‌مندان هموار می‌کند.
+        </p>
+        <a class="btn primary" href="https://t.me/academy_rayan" target="_blank" rel="noopener">کانال تلگرام مجموعه</a>
+      </div>
     </section>
   </main>
 
-  <footer class="app-footer">
-    <div class="container">
-      <span>© ۲۰۲۵ آکادمی رایان</span>
-      <span class="dot">•</span>
-      <span>ساخته‌شده با عشق به طراحی مینیمال</span>
-    </div>
-  </footer>
+  <template id="tpl-section">
+    <section class="acc-section">
+      <button class="acc-header" aria-expanded="false">
+        <div class="title">
+          <span class="chev" aria-hidden="true">⌄</span>
+          <h3></h3>
+        </div>
+        <span class="count"></span>
+      </button>
+      <div class="acc-panel" role="region" aria-hidden="true">
+        <ul class="shortcut-list"></ul>
+      </div>
+    </section>
+  </template>
 
-  <template id="shortcut-card">
-    <article class="card shortcut">
-      <div class="shortcut-head">
-        <h3 class="title"></h3>
-        <span class="badge"></span>
-      </div>
-      <p class="desc"></p>
-      <div class="keys">
-        <div class="keyline win">
-          <span class="label">Windows</span>
-          <code class="kbd"></code>
+  <template id="tpl-item">
+    <li class="shortcut">
+      <div class="row">
+        <div class="info">
+          <h4 class="s-title"></h4>
+          <p class="desc"></p>
         </div>
-        <div class="keyline mac">
-          <span class="label">macOS</span>
+        <div class="keys">
           <code class="kbd"></code>
         </div>
       </div>
-    </article>
+    </li>
   </template>
 
   <script src="script.js"></script>
