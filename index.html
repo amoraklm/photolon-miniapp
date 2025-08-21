@@ -253,55 +253,25 @@
       </div>
     </section>
 
-    <!-- پروفایل -->
-    <section id="profile" class="view" aria-labelledby="profileTab">
-      <div class="section-title">
-        <h2>پروفایل من</h2>
-        <p>تنظیمات دوره، ترم، و ترجیحات</p>
-      </div>
+   <section id="profile">
+  <h2>پروفایل من</h2>
+  <label for="nameInput">نام هنرجو:</label>
+  <input type="text" id="nameInput" placeholder="مثلاً علی" />
 
-      <div class="profile-card">
-        <div class="row">
-          <div class="col">
-            <label>نام</label>
-            <div id="profileName" class="value">—</div>
-          </div>
-          <div class="col">
-            <label>یوزرنیم</label>
-            <div id="profileUsername" class="value">—</div>
-          </div>
-        </div>
+  <label for="termInput">ترم:</label>
+  <input type="number" id="termInput" min="1" max="200" value="36" />
 
-        <div class="row">
-          <div class="col">
-            <label for="courseSelect">دوره</label>
-            <select id="courseSelect">
-              <option value="photoshop">آپولون فتوشاپ</option>
-              <option value="premiere">آپولون پریمیر</option>
-            </select>
-          </div>
-          <div class="col">
-            <label for="termInput">ترم من</label>
-            <input id="termInput" type="number" min="1" max="200" inputmode="numeric" value="36" />
-          </div>
-        </div>
+  <label for="courseSelect">دوره:</label>
+  <select id="courseSelect">
+    <option value="photoshop">آپولون فتوشاپ</option>
+    <option value="premiere">آپولون پریمیر</option>
+  </select>
 
-        <div class="row">
-          <div class="col">
-            <label>تم</label>
-            <div class="btn-group">
-              <button class="btn ghost" data-theme="system">هماهنگ با تلگرام</button>
-              <button class="btn ghost" data-theme="light">روشن</button>
-              <button class="btn ghost" data-theme="dark">تاریک</button>
-            </div>
-          </div>
-          <div class="col">
-            <label>بازخورد لمسی</label>
-            <button class="btn ghost" id="hapticTest">تست هپتیک</button>
-          </div>
-        </div>
-      </div>
-    </section>
+  <button id="saveBtn">ذخیره پروفایل</button>
+</section>
+
+<div id="welcomeMessage"></div>
+
   </main>
 
   <nav class="tabbar" role="tablist">
