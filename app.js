@@ -1,104 +1,248 @@
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', e=>{
-    const id = a.getAttribute('href');
-    if(id.length>1){
-      e.preventDefault();
-      document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'});
-      // close mobile menu on navigation
-      navMenu.classList.remove('open');
-      navToggle.setAttribute('aria-expanded','false');
-    }
-  });
-});
-
-// Header shadow on scroll + toTop
-const header = document.getElementById('header');
-const toTop = document.getElementById('toTop');
-const onScroll = ()=>{
-  const y = window.scrollY || document.documentElement.scrollTop;
-  header.classList.toggle('scrolled', y>8);
-  toTop.classList.toggle('show', y>280);
+// --- تنظیمات قابل ویرایش ---
+const CONFIG = {
+  defaults: {
+    course: 'photoshop',
+    term: 36
+  },
+  links: {
+    panel: 'https://panel.rayan.academy',
+    apollonHub: 'https://zil.ink/apollon',
+    channel: 'https://t.me/Apollon_Neda',         // جایگزین کن
+    rules: 'https://zil.ink/apollon#rules',        // جایگزین کن
+    zeroVideo: 'https://zil.ink/apollon#zero',     // جایگزین کن
+    widemGuide: 'https://zil.ink/apollon#widem',   // جایگزین کن
+    liveHowTo: 'https://zil.ink/apollon#live',     // جایگزین کن
+    support: 'https://t.me/Apollon_Yar',           // جایگزین کن
+    assignmentsForm: 'https://docs.google.com/forms/d/EXAMPLE',   // جایگزین کن
+    gradesSheet: 'https://docs.google.com/spreadsheets/d/EXAMPLE',// جایگزین کن
+    meetLink: 'https://meet.google.com/EXAMPLE'    // جایگزین کن
+  }
 };
-document.addEventListener('scroll', onScroll);
-onScroll();
 
-// Mobile menu toggle
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-navToggle.addEventListener('click', ()=>{
-  const open = navMenu.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', String(open));
-});
+// --- کمک‌تابع‌ها ---
+const tg = window.Telegram?.WebApp;
+const isInTelegram = !!tg;
 
-// Back to top
-toTop.addEventListener('click', ()=>{
-  window.scrollTo({top:0, behavior:'smooth'});
-});
+function openLink(url, tryInstant = true) {
+  if (isInTelegram && tryInstant) return tg.openLink(url, { try_instant_view: true });
+  window.open(url, '_blank', 'noopener');
+}
 
-// Accordion
-document.querySelectorAll('.accordion__item').forEach(item=>{
-  const btn = item.querySelector('.accordion__btn');
-  const panel = item.querySelector('.accordion__panel');
-  const setHeight = (open)=>{
-    if(open){
-      panel.style.height = panel.scrollHeight + 'px';
-    }else{
-      panel.style.height = '0px';
-    }
-  };
-  setHeight(false);
-  btn.addEventListener('click', ()=>{
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    // close others
-    document.querySelectorAll('.accordion__btn[aria-expanded="true"]').forEach(b=>{
-      if(b!==btn){ b.setAttribute('aria-expanded','false'); b.parentElement.querySelector('.accordion__panel').style.height='0px'; }
+function haptic(type = 'light') {
+  try { tg?.HapticFeedback?.impactOccurred(type); } catch {}
+}
+
+function save(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+function load(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
+  catch { return fallback; }
+}
+
+function applyThemeFromTelegram() {
+  if (!isInTelegram) return;
+  const p = tg.themeParams || {};
+  // نگاشت چند متغیر مهم تلگرام به CSS Variables
+  const root = document.documentElement;
+  if (p.bg_color) root.style.setProperty('--bg', p.bg_color);
+  if (p.secondary_bg_color) root.style.setProperty('--surface', p.secondary_bg_color);
+  if (p.text_color) root.style.setProperty('--on-bg', p.text_color);
+  if (p.hint_color) root.style.setProperty('--muted', p.hint_color);
+  if (p.section_separator_color) root.style.setProperty('--stroke', p.section_separator_color);
+  document.body.classList.remove('light');
+  document.body.classList.add(tg.colorScheme === 'light' ? 'tg-light' : 'tg-dark');
+}
+
+function setMainButton(sectionId) {
+  if (!isInTelegram) return;
+  if (sectionId === 'assignments') {
+    tg.MainButton.setText('ارسال تکلیف');
+    tg.MainButton.show();
+    tg.MainButton.onClick(() => openLink(CONFIG.links.assignmentsForm));
+  } else {
+    tg.MainButton.hide();
+    tg.MainButton.offClick(() => {});
+  }
+}
+
+function setBackButton(sectionId) {
+  if (!isInTelegram) return;
+  if (sectionId !== 'home') tg.BackButton.show();
+  else tg.BackButton.hide();
+}
+
+// --- راه‌اندازی ---
+document.addEventListener('DOMContentLoaded', () => {
+  // مقداردهی اولیه تلگرام
+  if (isInTelegram) {
+    tg.expand();
+    applyThemeFromTelegram();
+  }
+
+  // عناصر
+  const tabs = [...document.querySelectorAll('.tab')];
+  const views = [...document.querySelectorAll('.view')];
+  const panelBtn = document.getElementById('panelBtn');
+  const courseMeta = document.getElementById('courseMeta');
+  const userFirstName = document.getElementById('userFirstName');
+  const profileName = document.getElementById('profileName');
+  const profileUsername = document.getElementById('profileUsername');
+  const courseSelect = document.getElementById('courseSelect');
+  const termInput = document.getElementById('termInput');
+  const themeButtons = document.querySelectorAll('[data-theme]');
+  const hapticTest = document.getElementById('hapticTest');
+  const joinMeet = document.getElementById('joinMeet');
+  const historyList = document.getElementById('historyList');
+
+  // لینک کارت‌ها
+  document.querySelectorAll('[data-link]').forEach(el => {
+    el.addEventListener('click', () => {
+      const key = el.getAttribute('data-link');
+      const url = CONFIG.links[key];
+      if (!url) return;
+      haptic('light');
+      openLink(url);
+      // ثبت تاریخچه ارسال تکلیف
+      if (key === 'assignmentsForm') {
+        const now = new Date();
+        const history = load('apollon_history', []);
+        history.unshift({ type: 'assignment', at: now.toISOString() });
+        save('apollon_history', history.slice(0, 20));
+        renderHistory(historyList, history);
+      }
     });
-    btn.setAttribute('aria-expanded', String(!expanded));
-    setHeight(!expanded);
   });
-  // transition end fix for dynamic height
-  panel.addEventListener('transitionend', ()=>{
-    if(btn.getAttribute('aria-expanded')==='true'){
-      panel.style.height = 'auto';
+
+  // دکمه پنل
+  panelBtn.addEventListener('click', () => {
+    haptic('light');
+    openLink(CONFIG.links.panel);
+  });
+
+  // ناوبری تب‌ها
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-target');
+      switchView(target);
+    });
+  });
+
+  // دکمه برگشت تلگرام
+  tg?.BackButton?.onClick(() => switchView('home'));
+
+  // ورود به میت
+  joinMeet.addEventListener('click', () => openLink(CONFIG.links.meetLink, false));
+
+  // پروفایل از تلگرام
+  const tgUser = tg?.initDataUnsafe?.user || null;
+  const saved = load('apollon_profile', {
+    course: CONFIG.defaults.course,
+    term: CONFIG.defaults.term
+  });
+
+  // نام/یوزرنیم
+  const firstName = tgUser?.first_name || 'هنرجو';
+  userFirstName.textContent = firstName;
+  profileName.textContent = `${tgUser?.first_name ?? '—'} ${tgUser?.last_name ?? ''}`.trim() || '—';
+  profileUsername.textContent = tgUser?.username ? `@${tgUser.username}` : '—';
+
+  // دوره/ترم
+  courseSelect.value = saved.course;
+  termInput.value = saved.term;
+  updateCourseMeta();
+
+  courseSelect.addEventListener('change', () => {
+    saveProfile();
+    updateCourseMeta();
+  });
+  termInput.addEventListener('input', () => {
+    saveProfile();
+    updateCourseMeta();
+  });
+
+  function saveProfile() {
+    const data = {
+      course: courseSelect.value,
+      term: Number(termInput.value || CONFIG.defaults.term)
+    };
+    save('apollon_profile', data);
+  }
+
+  function updateCourseMeta() {
+    const courseTitle = courseSelect.value === 'premiere' ? 'آپولون پریمیر' : 'آپولون فتوشاپ';
+    const term = Number(termInput.value || CONFIG.defaults.term);
+    courseMeta.textContent = `${courseTitle} — ترم ${term}`;
+    document.title = `آپولون — ${courseTitle} ترم ${term}`;
+  }
+
+  // تاریخچه
+  renderHistory(historyList, load('apollon_history', []));
+
+  // تم دستی
+  themeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mode = btn.getAttribute('data-theme');
+      haptic('light');
+      if (mode === 'system') {
+        document.body.classList.remove('light');
+        applyThemeFromTelegram();
+        save('apollon_theme', 'system');
+      } else if (mode === 'light') {
+        document.body.classList.add('light');
+        save('apollon_theme', 'light');
+      } else {
+        document.body.classList.remove('light');
+        document.body.classList.add('tg-dark');
+        save('apollon_theme', 'dark');
+      }
+    });
+  });
+
+  // بازیابی تم ذخیره‌شده
+  const themePref = load('apollon_theme', 'system');
+  if (themePref === 'light') document.body.classList.add('light');
+  else if (themePref === 'dark') document.body.classList.add('tg-dark');
+
+  // هپتیک تست
+  hapticTest.addEventListener('click', () => haptic('medium'));
+
+  // بازیابی تب از هَش
+  const initial = location.hash?.replace('#', '') || 'home';
+  switchView(initial);
+
+  // همگام با تغییر هَش
+  window.addEventListener('hashchange', () => {
+    const target = location.hash?.replace('#', '') || 'home';
+    switchView(target);
+  });
+
+  // کمک: رندر تاریخچه
+  function renderHistory(container, items) {
+    container.innerHTML = '';
+    if (!items.length) {
+      const li = document.createElement('li');
+      li.textContent = 'هنوز سابقه‌ای ثبت نشده.';
+      li.className = 'muted';
+      container.appendChild(li);
+      return;
     }
-  });
-});
+    items.slice(0, 10).forEach(it => {
+      const li = document.createElement('li');
+      const d = new Date(it.at);
+      li.textContent = `ارسال تکلیف — ${d.toLocaleString('fa-IR', { dateStyle:'medium', timeStyle:'short' })}`;
+      container.appendChild(li);
+    });
+  }
 
-// Lead form validation + toast
-const form = document.getElementById('leadForm');
-const toast = document.getElementById('toast');
-
-function showError(id, msg){
-  const el = document.querySelector(`.err[data-for="${id}"]`);
-  if(el) el.textContent = msg || '';
-}
-function validatePhone(v){
-  return /^(\+?98|0)?9\d{9}$/.test(v.replace(/\s|-/g,''));
-}
-form?.addEventListener('submit', (e)=>{
-  e.preventDefault();
-  const name = form.name.value.trim();
-  const phone = form.phone.value.trim();
-  const goal = form.goal.value;
-
-  let ok = true;
-  if(name.length < 3){ showError('name', 'نام را کامل‌تر بنویس'); ok=false; } else showError('name');
-  if(!validatePhone(phone)){ showError('phone', 'شماره معتبر وارد کن'); ok=false; } else showError('phone');
-  if(!goal){ showError('goal', 'یکی از گزینه‌ها را انتخاب کن'); ok=false; } else showError('goal');
-
-  if(!ok) return;
-
-  // Simulate submit
-  try{
-    const lead = {name, phone, goal, ts: Date.now()};
-    const leads = JSON.parse(localStorage.getItem('ftn_leads')||'[]');
-    leads.push(lead);
-    localStorage.setItem('ftn_leads', JSON.stringify(leads));
-  }catch(_){}
-
-  // reset and toast
-  form.reset();
-  toast.classList.add('toast--show');
-  setTimeout(()=>toast.classList.remove('toast--show'), 2600);
+  // سوییچ ویو
+  function switchView(id) {
+    const target = views.find(v => v.id === id) ? id : 'home';
+    views.forEach(v => v.classList.toggle('active', v.id === target));
+    tabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-target') === target));
+    setMainButton(target);
+    setBackButton(target);
+    if (location.hash.replace('#', '') !== target) {
+      history.replaceState(null, '', `#${target}`);
+    }
+    haptic('light');
+  }
 });
