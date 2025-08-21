@@ -1,41 +1,100 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>آکادمی رایان - فتوشاپ</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#0f172a" id="metaThemeColor" />
+  <title>آکادمی رایان — شورتکات‌های فتوشاپ</title>
+  <!-- فونت (اختیاری) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link href="https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/variable/FD/VazirmatnFDmin.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>🎨 آکادمی رایان</h1>
-    <p>به دنیای فتوشاپ خوش آمدید!</p>
+  <header class="app-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">🎨</div>
+        <div class="titles">
+          <h1>آکادمی رایان</h1>
+          <span class="subtitle">راهنمای مینیمال شورتکات‌های فتوشاپ</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="os-toggle" role="group" aria-label="انتخاب سیستم عامل">
+          <button class="seg active" data-os="win" aria-pressed="true">Windows</button>
+          <button class="seg" data-os="mac" aria-pressed="false">macOS</button>
+        </div>
+        <button id="themeToggle" class="icon-btn" aria-label="تغییر حالت شب">
+          <span class="icon">🌙</span>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <section id="shortcuts">
-    <h2>⏱ شورتکات‌های کاربردی فتوشاپ</h2>
-    <ul>
-      <li><strong>Ctrl + T:</strong> تغییر اندازه و چرخش</li>
-      <li><strong>Ctrl + J:</strong> کپی لایه</li>
-      <li><strong>Ctrl + Shift + N:</strong> ساخت لایه جدید</li>
-      <!-- می‌تونی موارد بیشتری اضافه کنی -->
-    </ul>
-  </section>
+  <main class="container main">
+    <section class="search-panel card">
+      <div class="search-group">
+        <span class="search-icon">🔎</span>
+        <input id="searchInput" type="search" placeholder="جستجو: Ctrl + J، «لایه»، «Transform» ..." aria-label="جستجوی شورتکات" />
+        <button id="clearSearch" class="clear-btn" aria-label="پاک کردن جستجو">✕</button>
+      </div>
+      <div class="chips" role="tablist" aria-label="فیلتر دسته‌ها">
+        <button class="chip active" data-cat="all" role="tab" aria-selected="true">همه</button>
+        <button class="chip" data-cat="general" role="tab">عمومی</button>
+        <button class="chip" data-cat="layers" role="tab">لایه‌ها</button>
+        <button class="chip" data-cat="selection" role="tab">انتخاب</button>
+        <button class="chip" data-cat="tools" role="tab">ابزارها</button>
+        <button class="chip" data-cat="navigation" role="tab">نویگیشن</button>
+        <button class="chip" data-cat="type" role="tab">متن</button>
+        <button class="chip" data-cat="export" role="tab">خروجی</button>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>🏫 درباره آکادمی رایان</h2>
-    <p>آکادمی رایان با هدف آموزش تخصصی نرم‌افزارهای گرافیکی مثل فتوشاپ، پریمیر و ایلاستریتور فعالیت می‌کنه. دوره‌ها به‌صورت پروژه‌محور و با پشتیبانی کامل برگزار می‌شن.</p>
-  </section>
+    <section id="results" class="grid"></section>
 
-  <section id="channel">
-    <h2>📢 کانال مجموعه</h2>
-    <p>برای دریافت آموزش‌ها و اطلاع از دوره‌ها، عضو کانال تلگرام ما شوید:</p>
-    <a href="https://t.me/academy_rayan" target="_blank">ورود به کانال تلگرام</a>
-  </section>
+    <section class="about-grid">
+      <article class="card about">
+        <h2>درباره آکادمی رایان</h2>
+        <p>آکادمی رایان با تمرکز بر آموزش پروژه‌محور فتوشاپ، پریمیر و ایلاستریتور، یادگیری عمیق و کاربردی را با پشتیبانی مستمر ارائه می‌دهد.</p>
+      </article>
+      <article class="card channel">
+        <h2>کانال مجموعه</h2>
+        <p>برای دریافت آموزش‌ها، نمونه‌کارها و اخبار دوره‌ها عضو کانال شوید.</p>
+        <a class="btn" href="https://t.me/academy_rayan" target="_blank" rel="noopener">ورود به کانال تلگرام</a>
+      </article>
+    </section>
+  </main>
 
-  <footer>
-    <p>© 2025 آکادمی رایان</p>
+  <footer class="app-footer">
+    <div class="container">
+      <span>© ۲۰۲۵ آکادمی رایان</span>
+      <span class="dot">•</span>
+      <span>ساخته‌شده با عشق به طراحی مینیمال</span>
+    </div>
   </footer>
+
+  <template id="shortcut-card">
+    <article class="card shortcut">
+      <div class="shortcut-head">
+        <h3 class="title"></h3>
+        <span class="badge"></span>
+      </div>
+      <p class="desc"></p>
+      <div class="keys">
+        <div class="keyline win">
+          <span class="label">Windows</span>
+          <code class="kbd"></code>
+        </div>
+        <div class="keyline mac">
+          <span class="label">macOS</span>
+          <code class="kbd"></code>
+        </div>
+      </div>
+    </article>
+  </template>
 
   <script src="script.js"></script>
 </body>
