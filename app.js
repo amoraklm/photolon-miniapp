@@ -132,18 +132,38 @@ document.addEventListener('DOMContentLoaded', () => {
   // ورود به میت
   joinMeet.addEventListener('click', () => openLink(CONFIG.links.meetLink, false));
 
-  // پروفایل از تلگرام
-  const tgUser = tg?.initDataUnsafe?.user || null;
-  const saved = load('apollon_profile', {
-    course: CONFIG.defaults.course,
-    term: CONFIG.defaults.term
+  document.addEventListener('DOMContentLoaded', () => {
+  const nameInput = document.getElementById('nameInput');
+  const termInput = document.getElementById('termInput');
+  const courseSelect = document.getElementById('courseSelect');
+  const saveBtn = document.getElementById('saveBtn');
+  const welcomeMessage = document.getElementById('welcomeMessage');
+
+  // بارگذاری اطلاعات ذخیره‌شده
+  const savedProfile = JSON.parse(localStorage.getItem('apollonProfile')) || {};
+  if (savedProfile.name) nameInput.value = savedProfile.name;
+  if (savedProfile.term) termInput.value = savedProfile.term;
+  if (savedProfile.course) courseSelect.value = savedProfile.course;
+
+  updateWelcome(savedProfile);
+
+  // ذخیره اطلاعات
+  saveBtn.addEventListener('click', () => {
+    const profile = {
+      name: nameInput.value.trim(),
+      term: parseInt(termInput.value),
+      course: courseSelect.value
+    };
+    localStorage.setItem('apollonProfile', JSON.stringify(profile));
+    updateWelcome(profile);
   });
 
-  // نام/یوزرنیم
-  const firstName = tgUser?.first_name || 'هنرجو';
-  userFirstName.textContent = firstName;
-  profileName.textContent = `${tgUser?.first_name ?? '—'} ${tgUser?.last_name ?? ''}`.trim() || '—';
-  profileUsername.textContent = tgUser?.username ? `@${tgUser.username}` : '—';
+  function updateWelcome(profile) {
+    if (!profile.name) return;
+    const courseName = profile.course === 'premiere' ? 'آپولون پریمیر' : 'آپولون فتوشاپ';
+    welcomeMessage.innerHTML = `👋 سلام ${profile.name}! خوش اومدی به ترم ${profile.term} از دوره ${courseName}`;
+  }
+});
 
   // دوره/ترم
   courseSelect.value = saved.course;
