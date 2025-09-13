@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>پروفایل کاربر | دستیار فتولون</title>
-    <link rel="stylesheet" href="style.css?v=1.0.0.1">
+    <link rel="stylesheet" href="style.css?v=1.0.0.2">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Vazirmatn+Hand:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,6 +12,7 @@
         <div class="profile-avatar" id="profileAvatar">
             <span class="profile-icon" style="font-size:2.7rem;">👤</span>
         </div>
+        <input type="file" name="avatar" id="profilePic" accept="image/png, image/jpeg, image/jpg, image/webp">
         <form class="profile-form" id="profileForm" autocomplete="off">
             <div class="profile-form-row">
                 <div>
@@ -27,11 +28,9 @@
             <input type="email" name="email" id="profileEmail" placeholder="اختیاری">
             <label>شماره همراه</label>
             <input type="tel" name="phone" id="profilePhone" placeholder="اختیاری">
-            <label>عکس پروفایل</label>
-            <input type="file" name="avatar" id="profilePic" accept="image/*">
             <button type="submit" class="profile-save-btn">ثبت اطلاعات</button>
         </form>
     </div>
-    <script src="profile.js?v=1.0.0.1"></script>
+    <script src="profile.js?v=1.0.0.2"></script>
 </body>
 </html>
