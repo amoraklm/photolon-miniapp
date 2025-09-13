@@ -304,3 +304,99 @@ body[data-theme="dark"] footer {
   .main-card { min-width: 95vw; max-width: 98vw; }
   .section-box { padding: 21px 5vw 17px 5vw;}
 }
+/* ادامه استایل اصلی، فقط بخش پروفایل اضافه شده */
+.profile-section {
+  background: rgba(255,255,255,0.88);
+  max-width: 400px;
+  margin: 100px auto 40px auto;
+  border-radius: 20px;
+  padding: 32px 19px 28px 19px;
+  box-shadow: 0 2px 18px #a259ec18;
+  transition: background .25s;
+  display: flex; flex-direction: column; align-items: center;
+}
+body[data-theme="dark"] .profile-section {
+  background: rgba(30,30,45,0.88);
+}
+.profile-form {
+  width: 100%; max-width: 320px;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+}
+.profile-avatar {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 7px #a259ec26;
+}
+.profile-avatar img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.profile-icon {
+  font-size: 2.7rem;
+  color: #fff;
+}
+.profile-form input[type="file"] {
+  margin-bottom: 10px;
+  font-size: .95em;
+  color: var(--purple);
+}
+.form-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 3px;
+}
+.form-row label {
+  font-size: .98em;
+  color: var(--purple);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+body[data-theme="dark"] .form-row label { color: #fff; }
+.profile-form input[type="text"], .profile-form input[type="email"], .profile-form input[type="tel"] {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1.4px solid var(--purple);
+  font-size: 1.02em;
+  font-family: var(--main-font);
+  background: #fff;
+  margin-bottom: 2px;
+  transition: border .19s, background .19s;
+}
+body[data-theme="dark"] .profile-form input[type="text"], 
+body[data-theme="dark"] .profile-form input[type="email"], 
+body[data-theme="dark"] .profile-form input[type="tel"] {
+  background: rgba(35,41,70,0.92);
+  color: #fff;
+  border-color: var(--blue);
+}
+.profile-form .required { color: #e040fb; }
+.profile-save-btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg,var(--blue),var(--purple));
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.09em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 12px #a259ec33;
+  transition: background .17s, color .18s, box-shadow .18s;
+}
+.profile-save-btn:hover {
+  background: linear-gradient(135deg,var(--purple),var(--blue));
+  color: #fff;
+}
+
+/* پروفایل ریسپانسیو */
+@media (max-width: 600px) {
+  .profile-section { max-width: 97vw; padding: 21px 6vw 17px 6vw;}
+  .profile-form {max-width: 99vw;}
+}
