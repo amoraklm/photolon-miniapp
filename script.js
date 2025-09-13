@@ -13,10 +13,6 @@ if (themeToggleBtn) {
     // Init theme from localStorage
     const saved = localStorage.getItem('photolon_theme');
     setTheme(saved || 'light');
-    // Animate icon on load
-    setTimeout(() => {
-        themeToggleBtn.classList.remove('anim');
-    }, 800);
 }
 
 // Accordion sections
@@ -26,10 +22,9 @@ document.querySelectorAll('.accordion-section').forEach((section, i) => {
         if (e.target.closest('.shortcut-switcher')) return;
         section.classList.toggle('open');
     });
-    // بخش کانال‌ها پیش‌فرض بسته، بقیه: فقط اولی باز نیست
-    if (i !== 0) section.classList.remove('open');
+    // همه بسته باشند ابتدا
+    section.classList.remove('open');
 });
-document.querySelectorAll('.accordion-section')[0].classList.remove('open');
 
 // Shortcuts toggle & groups
 const shortcutToggle = document.getElementById('shortcutToggle');
@@ -64,7 +59,7 @@ const shortcutsData = {
             { action: "Levels", keys: "Ctrl + L" },
             { action: "Curves", keys: "Ctrl + M" },
             { action: "Hue/Saturation", keys: "Ctrl + U" },
-            { action: "Brightness/Contrast", keys: "Ctrl + Shift + U" },
+            { action: "Desaturate", keys: "Ctrl + Shift + U" },
             { action: "Black & White", keys: "Ctrl + Alt + Shift + B" }
         ]
     },
@@ -97,7 +92,7 @@ const shortcutsData = {
             { action: "Levels", keys: "Cmd + L" },
             { action: "Curves", keys: "Cmd + M" },
             { action: "Hue/Saturation", keys: "Cmd + U" },
-            { action: "Brightness/Contrast", keys: "Cmd + Shift + U" },
+            { action: "Desaturate", keys: "Cmd + Shift + U" },
             { action: "Black & White", keys: "Cmd + Option + Shift + B" }
         ]
     }
@@ -106,7 +101,6 @@ function renderShortcuts(type) {
     if (!shortcutsAccordion) return;
     shortcutsAccordion.innerHTML = "";
     let data = shortcutsData[type];
-    let idx = 0;
     for (let group in data) {
         const category = document.createElement('div');
         category.className = 'shortcut-category';
@@ -117,6 +111,7 @@ function renderShortcuts(type) {
         const content = document.createElement('div');
         content.className = 'shortcut-category-content';
         content.innerHTML = `
+            <div style="overflow-x:auto;">
             <table class="shortcuts-table">
                 <thead>
                     <tr><th>عملیات</th><th>کلیدها</th></tr>
@@ -125,6 +120,7 @@ function renderShortcuts(type) {
                     ${data[group].map(x => `<tr><td>${x.action}</td><td>${x.keys}</td></tr>`).join('')}
                 </tbody>
             </table>
+            </div>
         `;
         btn.addEventListener('click', () => {
             category.classList.toggle('open');
@@ -138,7 +134,7 @@ function renderShortcuts(type) {
 }
 shortcutToggle && shortcutToggle.addEventListener('change', e => {
     renderShortcuts(shortcutToggle.checked ? 'mac' : 'win');
-    // انیمیت سوئیچ
+    // انیمیت سوییچ
     const thumb = e.target.closest('.switch-track').querySelector('.switch-thumb');
     thumb.classList.add('switched');
     setTimeout(() => thumb.classList.remove('switched'), 320);
