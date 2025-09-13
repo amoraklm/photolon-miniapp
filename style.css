@@ -1,136 +1,155 @@
-:root{
-  --brand:#6F32FF;
-  --brand-2:#A06AFF;
-  --bg:#0C0C12;
-  --surface:#12121A;
-  --card:#171722;
-  --text:#EDEDF4;
-  --muted:#9AA0A6;
-  --stroke:#232334;
-  --chip:#141420;
-  --success:#34D399;
-  --radius:16px;
-  --shadow:0 12px 30px rgba(111,50,255,.18);
+/* نسخه 1.0.0.1 */
+/* Base ثابت است اما UI مدرن‌تر، فونت جدید (Vazirmatn)، رنگ‌بندی جوان‌پسند و رسمی */
+:root {
+    --primary: #1e293b;
+    --secondary: #38bdf8;
+    --accent: #e11d48;
+    --bg: #f1f5f9;
+    --white: #fff;
+    --shadow: 0 4px 24px 0 rgba(30,41,59,0.09);
+    --radius: 18px;
+    --font-main: "Vazirmatn", "Tahoma", "Arial", sans-serif;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:'Vazirmatn FD', 'Vazirmatn', system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans Arabic", sans-serif;
-  background:
-    radial-gradient(900px 600px at 100% -200px, rgba(160,106,255,.12), transparent 60%),
-    radial-gradient(1200px 800px at -10% -300px, rgba(111,50,255,.10), transparent 55%),
-    var(--bg);
-  color:var(--text);
-  line-height:1.7;
+html, body {
+    background: var(--bg);
+    color: var(--primary);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    direction: rtl;
 }
 
-/* Header */
-.topbar{
-  position:sticky; top:0; z-index:50;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:12px 16px;
-  background:rgba(12,12,18,.7); backdrop-filter:blur(12px) saturate(130%);
-  border-bottom:1px solid var(--stroke);
-}
-.brand{display:flex; align-items:center; gap:12px}
-.logo{
-  width:44px; height:44px; display:grid; place-items:center; border-radius:14px;
-  background:linear-gradient(135deg, var(--brand-2), var(--brand)); box-shadow:var(--shadow);
-}
-.titles h1{margin:0; font-size:1.05rem; letter-spacing:-.02em}
-.titles p{margin:0; color:var(--muted); font-size:.85rem}
-
-.actions{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-.btn{
-  border:none; cursor:pointer; border-radius:12px; padding:10px 14px; font-weight:800; font-size:.92rem;
-}
-.btn.primary{
-  background:linear-gradient(135deg, var(--brand-2), var(--brand)); color:white; box-shadow:var(--shadow);
-}
-.btn.ghost{
-  background:rgba(160,106,255,.12); color:#E9DDFF; border:1px solid rgba(160,106,255,.35);
+.container {
+    max-width: 800px;
+    margin: 36px auto 24px auto;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 32px 24px 24px 24px;
 }
 
-/* OS switch */
-.os-switch{position:relative}
-.os-switch input{position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer}
-.switch{
-  position:relative; display:inline-grid; grid-template-columns:1fr 1fr; align-items:center;
-  width:190px; height:44px; border-radius:14px; border:1px solid var(--stroke); background:var(--chip);
-  overflow:hidden;
-}
-.switch .label{text-align:center; font-weight:800; font-size:.9rem; color:var(--muted); z-index:2}
-.switch .knob{
-  position:absolute; inset-block:4px; inset-inline-start:4px; width:calc(50% - 6px); border-radius:10px;
-  background:color-mix(in oklab, var(--brand) 55%, #2b2447);
-  transition:transform .28s cubic-bezier(.2,.8,.2,1), background .3s;
-  box-shadow:0 6px 16px rgba(111,50,255,.35);
-}
-.os-switch input:checked + .switch .knob{ transform:translateX(100%); }
-.os-switch input:not(:checked) + .switch .label.win{ color:#fff }
-.os-switch input:checked + .switch .label.mac{ color:#fff }
-
-/* Container */
-.container{width:min(1100px, 92vw); margin-inline:auto; padding:20px 0}
-
-/* Chips nav */
-.chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px}
-.chips .chip{
-  padding:8px 12px; border-radius:999px; background:var(--chip);
-  border:1px solid var(--stroke); color:var(--text); font-weight:700; font-size:.9rem; cursor:pointer;
-}
-.chips .chip:hover{border-color:#3a3a47}
-
-/* Accordion */
-.accordion{display:grid; gap:10px}
-.acc-section{border:1px solid var(--stroke); border-radius:16px; background:var(--card); overflow:hidden}
-.acc-header{
-  width:100%; text-align:start; background:transparent; border:0; cursor:pointer;
-  display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px;
-}
-.acc-header .title{display:flex; align-items:center; gap:10px}
-.acc-header h3{margin:0; font-size:1rem}
-.acc-header .count{font-size:.85rem; color:var(--muted)}
-.chev{
-  display:inline-grid; place-items:center; width:26px; height:26px; border-radius:8px;
-  background:rgba(160,106,255,.14); color:#E9DDFF; transform:rotate(-90deg);
-  transition:transform .28s cubic-bezier(.2,.8,.2,1);
-}
-.acc-header[aria-expanded="true"] .chev{ transform:rotate(0deg) }
-
-.acc-panel{
-  height:0; overflow:hidden; transition:height .3s cubic-bezier(.2,.8,.2,1);
-  border-top:1px solid var(--stroke); background:linear-gradient(180deg, rgba(160,106,255,.06), transparent);
-}
-.acc-panel[aria-hidden="false"]{ /* height set by JS for animation */ }
-
-/* Shortcut item */
-.shortcut-list{list-style:none; margin:0; padding:10px}
-.shortcut{
-  padding:10px 8px; border-radius:12px;
-  transition:background .2s; border:1px dashed transparent;
-}
-.shortcut:hover{ background:rgba(160,106,255,.08); border-color:rgba(160,106,255,.25) }
-.shortcut .row{display:flex; align-items:flex-start; gap:12px; justify-content:space-between}
-.shortcut .s-title{margin:0 0 4px 0; font-size:.98rem}
-.shortcut .desc{margin:0; color:var(--muted); font-size:.86rem}
-.kbd{
-  direction:ltr; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  background:rgba(160,106,255,.10); color:#EDEDF4; border:1px solid rgba(160,106,255,.35);
-  padding:6px 10px; border-radius:10px; white-space:nowrap; font-size:.92rem; display:inline-block;
+header {
+    border-bottom: 2px solid var(--secondary);
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    text-align: center;
 }
 
-/* About card */
-.meta{margin-top:18px}
-.card.about{padding:16px; border:1px solid var(--stroke); border-radius:16px; background:var(--card)}
-.card.about h2{margin:0 0 6px 0}
+header h1 {
+    font-size: 2.2rem;
+    color: var(--secondary);
+    margin: 0 0 8px 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
 
-/* Responsive */
-@media (max-width:620px){
-  .actions{justify-content:flex-end}
-  .switch{width:170px}
-  .shortcut .row{flex-direction:column; gap:6px}
-  .kbd{align-self:flex-start}
+.version {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 0;
+}
+
+.service-section {
+    margin-bottom: 30px;
+    padding: 18px;
+    background: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(56,189,248,0.08);
+    transition: box-shadow 0.2s;
+}
+.service-section:hover {
+    box-shadow: 0 6px 24px rgba(56,189,248,0.13);
+}
+
+.service-section h2 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin: 0 0 14px 0;
+    border-right: 3px solid var(--secondary);
+    padding-right: 9px;
+    font-weight: 700;
+}
+
+.shortcuts {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.shortcuts > div {
+    flex: 1 1 180px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(30,41,59,0.05);
+    padding: 14px 16px;
+}
+.shortcuts h3 {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+.shortcuts ul {
+    list-style: disc inside;
+    padding: 0;
+    margin: 0;
+}
+.shortcuts li {
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+.links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.links-list li {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.links-list a {
+    color: var(--secondary);
+    background: rgba(56,189,248,0.08);
+    padding: 2px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+}
+.links-list a:hover {
+    background: var(--secondary);
+    color: #fff;
+}
+
+.assignments ul.links-list li {
+    border-right: 3px solid var(--accent);
+    padding-right: 8px;
+}
+
+footer {
+    text-align: center;
+    margin: 18px 0 0 0;
+    color: #64748b;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+    padding-bottom: 10px;
+}
+
+/* مدرن و جوان پسند، رنگ‌ها و سایه‌ها و فونت */
+@media (max-width: 600px) {
+    .container {
+        padding: 13px 3vw 12px 3vw;
+    }
+    .shortcuts {
+        flex-direction: column;
+        gap: 14px;
+    }
+    .service-section {
+        padding: 10px;
+    }
 }
