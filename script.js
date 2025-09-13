@@ -19,19 +19,17 @@ if (themeToggleBtn) {
 document.querySelectorAll('.accordion-section').forEach((section, i) => {
     const btn = section.querySelector('.accordion-btn');
     btn.addEventListener('click', function (e) {
-        if (e.target.closest('.shortcut-switcher')) return;
         section.classList.toggle('open');
     });
-    // همه بسته باشند ابتدا
     section.classList.remove('open');
 });
 
-// Shortcuts toggle & groups
-const shortcutToggle = document.getElementById('shortcutToggle');
+// Shortcuts (هم مک و هم ویندوز زیر هم و گروه‌بندی)
 const shortcutsAccordion = document.querySelector('.shortcut-accordion-group');
-const shortcutsData = {
-    win: {
-        "عمومی": [
+const shortcutsData = [
+    {
+        title: "عمومی (ویندوز)",
+        list: [
             { action: "کپی", keys: "Ctrl + C" },
             { action: "پیست", keys: "Ctrl + V" },
             { action: "ذخیره", keys: "Ctrl + S" },
@@ -46,25 +44,11 @@ const shortcutsData = {
             { action: "نمایش خط کش", keys: "Ctrl + R" },
             { action: "زوم این", keys: "Ctrl + +" },
             { action: "زوم اوت", keys: "Ctrl + -" }
-        ],
-        "ابزارها": [
-            { action: "انتخاب ابزار Move", keys: "V" },
-            { action: "انتخاب ابزار Brush", keys: "B" },
-            { action: "انتخاب ابزار Eraser", keys: "E" },
-            { action: "انتخاب ابزار Crop", keys: "C" },
-            { action: "انتخاب ابزار Lasso", keys: "L" },
-            { action: "انتخاب ابزار Magic Wand", keys: "W" }
-        ],
-        "ادجسمنت‌ها": [
-            { action: "Levels", keys: "Ctrl + L" },
-            { action: "Curves", keys: "Ctrl + M" },
-            { action: "Hue/Saturation", keys: "Ctrl + U" },
-            { action: "Desaturate", keys: "Ctrl + Shift + U" },
-            { action: "Black & White", keys: "Ctrl + Alt + Shift + B" }
         ]
     },
-    mac: {
-        "عمومی": [
+    {
+        title: "عمومی (مک)",
+        list: [
             { action: "کپی", keys: "Cmd + C" },
             { action: "پیست", keys: "Cmd + V" },
             { action: "ذخیره", keys: "Cmd + S" },
@@ -79,16 +63,43 @@ const shortcutsData = {
             { action: "نمایش خط کش", keys: "Cmd + R" },
             { action: "زوم این", keys: "Cmd + +" },
             { action: "زوم اوت", keys: "Cmd + -" }
-        ],
-        "ابزارها": [
+        ]
+    },
+    {
+        title: "ابزارها (ویندوز)",
+        list: [
             { action: "انتخاب ابزار Move", keys: "V" },
             { action: "انتخاب ابزار Brush", keys: "B" },
             { action: "انتخاب ابزار Eraser", keys: "E" },
             { action: "انتخاب ابزار Crop", keys: "C" },
             { action: "انتخاب ابزار Lasso", keys: "L" },
             { action: "انتخاب ابزار Magic Wand", keys: "W" }
-        ],
-        "ادجسمنت‌ها": [
+        ]
+    },
+    {
+        title: "ابزارها (مک)",
+        list: [
+            { action: "انتخاب ابزار Move", keys: "V" },
+            { action: "انتخاب ابزار Brush", keys: "B" },
+            { action: "انتخاب ابزار Eraser", keys: "E" },
+            { action: "انتخاب ابزار Crop", keys: "C" },
+            { action: "انتخاب ابزار Lasso", keys: "L" },
+            { action: "انتخاب ابزار Magic Wand", keys: "W" }
+        ]
+    },
+    {
+        title: "ادجسمنت‌ها (ویندوز)",
+        list: [
+            { action: "Levels", keys: "Ctrl + L" },
+            { action: "Curves", keys: "Ctrl + M" },
+            { action: "Hue/Saturation", keys: "Ctrl + U" },
+            { action: "Desaturate", keys: "Ctrl + Shift + U" },
+            { action: "Black & White", keys: "Ctrl + Alt + Shift + B" }
+        ]
+    },
+    {
+        title: "ادجسمنت‌ها (مک)",
+        list: [
             { action: "Levels", keys: "Cmd + L" },
             { action: "Curves", keys: "Cmd + M" },
             { action: "Hue/Saturation", keys: "Cmd + U" },
@@ -96,18 +107,17 @@ const shortcutsData = {
             { action: "Black & White", keys: "Cmd + Option + Shift + B" }
         ]
     }
-};
-function renderShortcuts(type) {
+];
+function renderShortcuts() {
     if (!shortcutsAccordion) return;
     shortcutsAccordion.innerHTML = "";
-    let data = shortcutsData[type];
-    for (let group in data) {
+    shortcutsData.forEach((cat, i) => {
         const category = document.createElement('div');
         category.className = 'shortcut-category';
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'shortcut-category-btn';
-        btn.innerHTML = `${group}`;
+        btn.innerHTML = `${cat.title}`;
         const content = document.createElement('div');
         content.className = 'shortcut-category-content';
         content.innerHTML = `
@@ -117,7 +127,7 @@ function renderShortcuts(type) {
                     <tr><th>عملیات</th><th>کلیدها</th></tr>
                 </thead>
                 <tbody>
-                    ${data[group].map(x => `<tr><td>${x.action}</td><td>${x.keys}</td></tr>`).join('')}
+                    ${cat.list.map(x => `<tr><td>${x.action}</td><td>${x.keys}</td></tr>`).join('')}
                 </tbody>
             </table>
             </div>
@@ -128,18 +138,11 @@ function renderShortcuts(type) {
         category.appendChild(btn);
         category.appendChild(content);
         shortcutsAccordion.appendChild(category);
-    }
+    });
     // دسته اول باز باشد
     if (shortcutsAccordion.firstChild) shortcutsAccordion.firstChild.classList.add('open');
 }
-shortcutToggle && shortcutToggle.addEventListener('change', e => {
-    renderShortcuts(shortcutToggle.checked ? 'mac' : 'win');
-    // انیمیت سوییچ
-    const thumb = e.target.closest('.switch-track').querySelector('.switch-thumb');
-    thumb.classList.add('switched');
-    setTimeout(() => thumb.classList.remove('switched'), 320);
-});
-if (shortcutsAccordion) renderShortcuts('win');
+renderShortcuts();
 
 // Profile mini (header)
 function showProfileMini() {
@@ -160,7 +163,7 @@ showProfileMini();
 
 // Toast for update
 if (!localStorage.getItem("photolon_update_1_0_0_1")) {
-    showToast("نسخه جدید 1.0.0.1 با خدمات و ظاهر جدید منتشر شد 🌟");
+    showToast("نسخه جدید با ظاهر و تجربه کاربری بهتر منتشر شد 🌟");
     localStorage.setItem("photolon_update_1_0_0_1", "shown");
 }
 function showToast(msg) {
@@ -172,5 +175,5 @@ function showToast(msg) {
     setTimeout(() => {
         toast.classList.remove("show");
         setTimeout(() => toast.remove(), 300);
-    }, 4200);
+    }, 3200);
 }
