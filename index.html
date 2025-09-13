@@ -3,79 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خدمات آکادمی فتو‌لان</title>
+    <title>دستیار فتولون | آکادمی رایان</title>
     <link rel="stylesheet" href="style.css?v=1.0.0.1">
-    <!-- فونت مدرن (مثلاً Vazirmatn یا Shabnam) -->
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Vazirmatn+Hand:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>خدمات آکادمی فتو‌لان</h1>
-            <p class="version">نسخه 1.0.0.1</p>
-        </header>
-        <section class="service-section">
-            <h2>شورتکات‌های فتوشاپ</h2>
-            <div class="shortcuts">
-                <div>
-                    <h3>ویندوز</h3>
-                    <ul>
-                        <li>کپی: <b>Ctrl+C</b></li>
-                        <li>پیست: <b>Ctrl+V</b></li>
-                        <li>Undo: <b>Ctrl+Z</b></li>
-                        <li>ذخیره: <b>Ctrl+S</b></li>
-                        <!-- ... موارد بیشتر ... -->
-                    </ul>
+    <header class="main-header glass-header">
+        <div class="header-content">
+            <div class="logo-title">
+                <div class="profile-mini" id="profileMini" title="ویرایش پروفایل">
+                    <!-- پر می‌شود توسط JS -->
                 </div>
                 <div>
-                    <h3>مک</h3>
-                    <ul>
-                        <li>کپی: <b>Cmd+C</b></li>
-                        <li>پیست: <b>Cmd+V</b></li>
-                        <li>Undo: <b>Cmd+Z</b></li>
-                        <li>ذخیره: <b>Cmd+S</b></li>
-                        <!-- ... موارد بیشتر ... -->
-                    </ul>
+                    <h1>دستیار فتولون</h1>
+                    <p class="sub-title">آکادمی رایان</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-toggle" aria-label="تغییر تم"></button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- بخش پروفایل فقط در index نشانگر دارد، صفحه جداست -->
+        <section class="accordion-section" data-section>
+            <button class="accordion-btn" type="button">ورود به کانال‌ها و گروه‌ها</button>
+            <div class="accordion-content">
+                <ul class="links-list">
+                    <li>کانال تلگرام آکادمی: <a href="https://t.me/photolon_academy" target="_blank">مشاهده</a></li>
+                    <li>کانال ایتا آکادمی: <a href="https://eitaa.com/photolon_academy" target="_blank">مشاهده</a></li>
+                    <li>گروه چت هنرجویان: <a href="https://t.me/photolon_students_chat" target="_blank">ورود</a></li>
+                    <li>کانال تلگرام ندای آپولون: <a href="#" target="_blank">مشاهده</a></li>
+                    <li>کانال ایتا ندای آپولون: <a href="#" target="_blank">مشاهده</a></li>
+                </ul>
+            </div>
+        </section>
+        <section class="accordion-section" data-section>
+            <button class="accordion-btn" type="button">
+                شورتکات‌های فتوشاپ
+                <span class="shortcut-switch">
+                    <label>Windows</label>
+                    <input type="checkbox" id="shortcutToggle">
+                    <label>Mac</label>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <div id="shortcutsList">
+                    <!-- پر می‌شود توسط JS بر اساس toggle -->
                 </div>
             </div>
         </section>
-        <section class="service-section">
-            <h2>ورود به کانال‌ها و گروه‌ها</h2>
-            <ul class="links-list">
-                <li>کانال تلگرام آکادمی: <a href="https://t.me/photolon_academy" target="_blank">مشاهده</a></li>
-                <li>کانال ایتا آکادمی: <a href="https://eitaa.com/photolon_academy" target="_blank">مشاهده</a></li>
-                <li>گروه چت هنرجویان: <a href="https://t.me/photolon_students_chat" target="_blank">ورود به گروه</a></li>
-            </ul>
+        <section class="accordion-section" data-section>
+            <button class="accordion-btn" type="button">تکالیف و وضعیت نمرات</button>
+            <div class="accordion-content">
+                <ul class="links-list">
+                    <li>وضعیت نمره هنرجویان (Google Sheets): <a href="#" target="_blank">مشاهده</a></li>
+                    <li>دانلود فایل‌های مورد نیاز تکالیف: <a href="#" target="_blank">دانلود</a></li>
+                    <li>آپلود تکالیف (Google Drive): <a href="#" target="_blank">آپلود</a></li>
+                    <li>جدول تاریخ مهلت ارسال تکالیف: <a href="#" target="_blank">مشاهده جدول</a></li>
+                </ul>
+            </div>
         </section>
-        <section class="service-section">
-            <h2>لینک‌های دانلود نرم‌افزار</h2>
-            <ul class="links-list">
-                <li>دانلود فتوشاپ 2024 (ویندوز): <a href="#" target="_blank">دانلود</a></li>
-                <li>دانلود فتوشاپ 2022 (مک): <a href="#" target="_blank">دانلود</a></li>
-                <li>دانلود پریمیر 2024: <a href="#" target="_blank">دانلود</a></li>
-                <li>دانلود برنامه ویدم (Videm): <a href="#" target="_blank">دانلود</a></li>
-                <!-- لینک‌ها را با آدرس صحیح تکمیل کنید -->
-            </ul>
+        <section class="accordion-section" data-section>
+            <button class="accordion-btn" type="button">لینک‌های لایو و ورکشاپ‌ها <a href="#" class="live-btn">ورود</a></button>
+            <div class="accordion-content">
+                <ul class="links-list">
+                    <li>آرشیو لایوها: <a href="#" target="_blank">مشاهده</a></li>
+                    <li>ورکشاپ‌های تخصصی: <a href="#" target="_blank">مشاهده</a></li>
+                </ul>
+            </div>
         </section>
-        <section class="service-section">
-            <h2>لینک‌های لایو و ورکشاپ‌ها</h2>
-            <ul class="links-list">
-                <li>آرشیو لایوها: <a href="#" target="_blank">مشاهده</a></li>
-                <li>ورکشاپ‌هاdی تخصصی: <a href="#" target="_blank">مشاهده</a></li>
-            </ul>
+        <section class="accordion-section" data-section>
+            <button class="accordion-btn" type="button">لینک‌های دانلود نرم‌افزار</button>
+            <div class="accordion-content">
+                <ul class="links-list">
+                    <li>دانلود فتوشاپ (2014 تا 2025): 
+                        <span class="multilink">
+                            <a href="#" target="_blank">2014</a> | 
+                            <a href="#" target="_blank">2015</a> |
+                            <a href="#" target="_blank">2017</a> |
+                            <a href="#" target="_blank">2018</a> |
+                            <a href="#" target="_blank">2019</a> |
+                            <a href="#" target="_blank">2020</a> |
+                            <a href="#" target="_blank">2021</a> |
+                            <a href="#" target="_blank">2022</a> |
+                            <a href="#" target="_blank">2023</a> |
+                            <a href="#" target="_blank">2024</a> |
+                            <a href="#" target="_blank">2025</a>
+                        </span>
+                    </li>
+                    <li>دانلود پریمیر (2014 تا 2025): 
+                        <span class="multilink">
+                            <a href="#" target="_blank">2014</a> | 
+                            <a href="#" target="_blank">2015</a> |
+                            <a href="#" target="_blank">2017</a> |
+                            <a href="#" target="_blank">2018</a> |
+                            <a href="#" target="_blank">2019</a> |
+                            <a href="#" target="_blank">2020</a> |
+                            <a href="#" target="_blank">2021</a> |
+                            <a href="#" target="_blank">2022</a> |
+                            <a href="#" target="_blank">2023</a> |
+                            <a href="#" target="_blank">2024</a> |
+                            <a href="#" target="_blank">2025</a>
+                        </span>
+                    </li>
+                    <li>دانلود برنامه ویدم (Videm): <a href="#" target="_blank">دانلود</a></li>
+                </ul>
+            </div>
         </section>
-        <section class="service-section assignments">
-            <h2>تکالیف و وضعیت نمرات</h2>
-            <ul class="links-list">
-                <li>وضعیت نمره هنرجویان (Google Sheets): <a href="#" target="_blank">مشاهده</a></li>
-                <li>دانلود فایل‌های مورد نیاز تکالیف: <a href="#" target="_blank">دانلود</a></li>
-                <li>آپلود تکالیف (Google Drive): <a href="#" target="_blank">آپلود</a></li>
-                <li>جدول تاریخ مهلت ارسال تکالیف: <a href="#" target="_blank">مشاهده جدول</a></li>
-            </ul>
-        </section>
-    </div>
+    </main>
     <footer>
-        <p>تمام حقوق محفوظ است &copy; Photolon Academy 2025</p>
+        <div>
+            تمام حقوق محفوظ است © Photolon | Rayan Academy 2025<br>
+            نسخه 1.0.0.1<br>
+            طراح: 𝗔‌𝗧
+        </div>
     </footer>
     <script src="script.js?v=1.0.0.1"></script>
 </body>
