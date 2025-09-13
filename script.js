@@ -13,90 +13,137 @@ if (themeToggleBtn) {
     // Init theme from localStorage
     const saved = localStorage.getItem('photolon_theme');
     setTheme(saved || 'light');
+    // Animate icon on load
+    setTimeout(() => {
+        themeToggleBtn.classList.remove('anim');
+    }, 800);
 }
 
 // Accordion sections
 document.querySelectorAll('.accordion-section').forEach((section, i) => {
     const btn = section.querySelector('.accordion-btn');
     btn.addEventListener('click', function (e) {
-        if (e.target.matches('#shortcutToggle')) return;
+        if (e.target.closest('.shortcut-switcher')) return;
         section.classList.toggle('open');
     });
-    // اولی باز باشه به صورت پیشفرض
-    if (i === 0) section.classList.add('open');
+    // بخش کانال‌ها پیش‌فرض بسته، بقیه: فقط اولی باز نیست
+    if (i !== 0) section.classList.remove('open');
 });
+document.querySelectorAll('.accordion-section')[0].classList.remove('open');
 
-// Shortcuts toggle
+// Shortcuts toggle & groups
 const shortcutToggle = document.getElementById('shortcutToggle');
-const shortcutsList = document.getElementById('shortcutsList');
-const shortcuts = {
-    win: [
-        { action: "کپی", keys: "Ctrl + C" },
-        { action: "پیست", keys: "Ctrl + V" },
-        { action: "ذخیره", keys: "Ctrl + S" },
-        { action: "جداسازی لایه", keys: "Ctrl + J" },
-        { action: "Undo", keys: "Ctrl + Z" },
-        { action: "Redo", keys: "Ctrl + Shift + Z" },
-        { action: "جداسازی انتخاب", keys: "Ctrl + Shift + I" },
-        { action: "تبدیل آزاد", keys: "Ctrl + T" },
-        { action: "انتخاب همه", keys: "Ctrl + A" },
-        { action: "بازکردن فایل", keys: "Ctrl + O" },
-        { action: "جدید", keys: "Ctrl + N" },
-        { action: "بستن", keys: "Ctrl + W" },
-        { action: "ذخیره به نام", keys: "Ctrl + Shift + S" },
-        { action: "نمایش شبکه", keys: "Ctrl + '" },
-        { action: "نمایش خط کش", keys: "Ctrl + R" },
-        { action: "زوم این", keys: "Ctrl + +" },
-        { action: "زوم اوت", keys: "Ctrl + -" },
-        { action: "نمایش/پنهان کردن پانل‌ها", keys: "Tab" },
-        { action: "انتخاب ابزار Brush", keys: "B" },
-        { action: "انتخاب ابزار Move", keys: "V" },
-        // ... بقیه موارد
-    ],
-    mac: [
-        { action: "کپی", keys: "Cmd + C" },
-        { action: "پیست", keys: "Cmd + V" },
-        { action: "ذخیره", keys: "Cmd + S" },
-        { action: "جداسازی لایه", keys: "Cmd + J" },
-        { action: "Undo", keys: "Cmd + Z" },
-        { action: "Redo", keys: "Cmd + Shift + Z" },
-        { action: "جداسازی انتخاب", keys: "Cmd + Shift + I" },
-        { action: "تبدیل آزاد", keys: "Cmd + T" },
-        { action: "انتخاب همه", keys: "Cmd + A" },
-        { action: "بازکردن فایل", keys: "Cmd + O" },
-        { action: "جدید", keys: "Cmd + N" },
-        { action: "بستن", keys: "Cmd + W" },
-        { action: "ذخیره به نام", keys: "Cmd + Shift + S" },
-        { action: "نمایش شبکه", keys: "Cmd + '" },
-        { action: "نمایش خط کش", keys: "Cmd + R" },
-        { action: "زوم این", keys: "Cmd + +" },
-        { action: "زوم اوت", keys: "Cmd + -" },
-        { action: "نمایش/پنهان کردن پانل‌ها", keys: "Tab" },
-        { action: "انتخاب ابزار Brush", keys: "B" },
-        { action: "انتخاب ابزار Move", keys: "V" },
-        // ... بقیه موارد
-    ]
+const shortcutsAccordion = document.querySelector('.shortcut-accordion-group');
+const shortcutsData = {
+    win: {
+        "عمومی": [
+            { action: "کپی", keys: "Ctrl + C" },
+            { action: "پیست", keys: "Ctrl + V" },
+            { action: "ذخیره", keys: "Ctrl + S" },
+            { action: "جداسازی لایه", keys: "Ctrl + J" },
+            { action: "Undo", keys: "Ctrl + Z" },
+            { action: "Redo", keys: "Ctrl + Shift + Z" },
+            { action: "انتخاب همه", keys: "Ctrl + A" },
+            { action: "بازکردن فایل", keys: "Ctrl + O" },
+            { action: "جدید", keys: "Ctrl + N" },
+            { action: "بستن", keys: "Ctrl + W" },
+            { action: "ذخیره به نام", keys: "Ctrl + Shift + S" },
+            { action: "نمایش خط کش", keys: "Ctrl + R" },
+            { action: "زوم این", keys: "Ctrl + +" },
+            { action: "زوم اوت", keys: "Ctrl + -" }
+        ],
+        "ابزارها": [
+            { action: "انتخاب ابزار Move", keys: "V" },
+            { action: "انتخاب ابزار Brush", keys: "B" },
+            { action: "انتخاب ابزار Eraser", keys: "E" },
+            { action: "انتخاب ابزار Crop", keys: "C" },
+            { action: "انتخاب ابزار Lasso", keys: "L" },
+            { action: "انتخاب ابزار Magic Wand", keys: "W" }
+        ],
+        "ادجسمنت‌ها": [
+            { action: "Levels", keys: "Ctrl + L" },
+            { action: "Curves", keys: "Ctrl + M" },
+            { action: "Hue/Saturation", keys: "Ctrl + U" },
+            { action: "Brightness/Contrast", keys: "Ctrl + Shift + U" },
+            { action: "Black & White", keys: "Ctrl + Alt + Shift + B" }
+        ]
+    },
+    mac: {
+        "عمومی": [
+            { action: "کپی", keys: "Cmd + C" },
+            { action: "پیست", keys: "Cmd + V" },
+            { action: "ذخیره", keys: "Cmd + S" },
+            { action: "جداسازی لایه", keys: "Cmd + J" },
+            { action: "Undo", keys: "Cmd + Z" },
+            { action: "Redo", keys: "Cmd + Shift + Z" },
+            { action: "انتخاب همه", keys: "Cmd + A" },
+            { action: "بازکردن فایل", keys: "Cmd + O" },
+            { action: "جدید", keys: "Cmd + N" },
+            { action: "بستن", keys: "Cmd + W" },
+            { action: "ذخیره به نام", keys: "Cmd + Shift + S" },
+            { action: "نمایش خط کش", keys: "Cmd + R" },
+            { action: "زوم این", keys: "Cmd + +" },
+            { action: "زوم اوت", keys: "Cmd + -" }
+        ],
+        "ابزارها": [
+            { action: "انتخاب ابزار Move", keys: "V" },
+            { action: "انتخاب ابزار Brush", keys: "B" },
+            { action: "انتخاب ابزار Eraser", keys: "E" },
+            { action: "انتخاب ابزار Crop", keys: "C" },
+            { action: "انتخاب ابزار Lasso", keys: "L" },
+            { action: "انتخاب ابزار Magic Wand", keys: "W" }
+        ],
+        "ادجسمنت‌ها": [
+            { action: "Levels", keys: "Cmd + L" },
+            { action: "Curves", keys: "Cmd + M" },
+            { action: "Hue/Saturation", keys: "Cmd + U" },
+            { action: "Brightness/Contrast", keys: "Cmd + Shift + U" },
+            { action: "Black & White", keys: "Cmd + Option + Shift + B" }
+        ]
+    }
 };
 function renderShortcuts(type) {
-    let data = shortcuts[type];
-    let html = `
-        <div class="shortcut-group">
+    if (!shortcutsAccordion) return;
+    shortcutsAccordion.innerHTML = "";
+    let data = shortcutsData[type];
+    let idx = 0;
+    for (let group in data) {
+        const category = document.createElement('div');
+        category.className = 'shortcut-category';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'shortcut-category-btn';
+        btn.innerHTML = `${group}`;
+        const content = document.createElement('div');
+        content.className = 'shortcut-category-content';
+        content.innerHTML = `
             <table class="shortcuts-table">
                 <thead>
                     <tr><th>عملیات</th><th>کلیدها</th></tr>
                 </thead>
                 <tbody>
-                    ${data.map(x => `<tr><td>${x.action}</td><td>${x.keys}</td></tr>`).join('')}
+                    ${data[group].map(x => `<tr><td>${x.action}</td><td>${x.keys}</td></tr>`).join('')}
                 </tbody>
             </table>
-        </div>
-    `;
-    shortcutsList.innerHTML = html;
+        `;
+        btn.addEventListener('click', () => {
+            category.classList.toggle('open');
+        });
+        category.appendChild(btn);
+        category.appendChild(content);
+        shortcutsAccordion.appendChild(category);
+    }
+    // دسته اول باز باشد
+    if (shortcutsAccordion.firstChild) shortcutsAccordion.firstChild.classList.add('open');
 }
 shortcutToggle && shortcutToggle.addEventListener('change', e => {
     renderShortcuts(shortcutToggle.checked ? 'mac' : 'win');
+    // انیمیت سوئیچ
+    const thumb = e.target.closest('.switch-track').querySelector('.switch-thumb');
+    thumb.classList.add('switched');
+    setTimeout(() => thumb.classList.remove('switched'), 320);
 });
-if (shortcutsList) renderShortcuts('win');
+if (shortcutsAccordion) renderShortcuts('win');
 
 // Profile mini (header)
 function showProfileMini() {
