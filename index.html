@@ -2,9 +2,9 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>دستیار فتولون | آکادمی رایان</title>
-    <link rel="stylesheet" href="style.css?v=1.0.0.2">
+    <link rel="stylesheet" href="style.css?v=1.0.0.3">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Vazirmatn+Hand:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -26,7 +26,6 @@
         </div>
     </header>
     <main>
-        <!-- بخش پروفایل فقط در index نشانگر دارد، صفحه جداست -->
         <section class="accordion-section" data-section>
             <button class="accordion-btn">ورود به کانال‌ها و گروه‌ها</button>
             <div class="accordion-content">
@@ -42,13 +41,13 @@
         <section class="accordion-section" data-section>
             <button class="accordion-btn">
                 شورتکات‌های فتوشاپ
-                <span class="shortcut-switcher">
-                    <span class="switch-label">Windows</span>
+                <span class="shortcut-switcher" id="shortcutSwitcher">
+                    <span class="switch-label" id="labelWin">Windows</span>
                     <span class="switch-track">
                         <input type="checkbox" id="shortcutToggle">
                         <span class="switch-thumb"></span>
                     </span>
-                    <span class="switch-label">Mac</span>
+                    <span class="switch-label" id="labelMac">Mac</span>
                 </span>
             </button>
             <div class="accordion-content" id="shortcutsAccordion">
@@ -67,7 +66,7 @@
             </div>
         </section>
         <section class="accordion-section" data-section>
-            <button class="accordion-btn">لینک‌های لایو و ورکشاپ‌ها <a href="#" class="live-btn">ورود</a></button>
+            <button class="accordion-btn">لینک‌های لایو و ورکشاپ‌ها</button>
             <div class="accordion-content">
                 <ul class="links-list">
                     <li>آرشیو لایوها: <a href="#" target="_blank">مشاهده</a></li>
@@ -79,39 +78,39 @@
             <button class="accordion-btn">لینک‌های دانلود نرم‌افزار</button>
             <div class="accordion-content">
                 <ul class="links-list">
-                    <li>دانلود فتوشاپ (2014 تا 2025): 
+                    <li>دانلود فتوشاپ (2014 تا 2025):
                         <span class="multilink">
-                            <a href="#" target="_blank">2014</a> | 
-                            <a href="#" target="_blank">2015</a> |
-                            <a href="#" target="_blank">2017</a> |
-                            <a href="#" target="_blank">2018</a> |
-                            <a href="#" target="_blank">2019</a> |
-                            <a href="#" target="_blank">2020</a> |
-                            <a href="#" target="_blank">2021</a> |
-                            <a href="#" target="_blank">2022</a> |
-                            <a href="#" target="_blank">2023</a> |
-                            <a href="#" target="_blank">2024</a> |
+                            <a href="#" target="_blank">2014</a>
+                            <a href="#" target="_blank">2015</a>
+                            <a href="#" target="_blank">2017</a>
+                            <a href="#" target="_blank">2018</a>
+                            <a href="#" target="_blank">2019</a>
+                            <a href="#" target="_blank">2020</a>
+                            <a href="#" target="_blank">2021</a>
+                            <a href="#" target="_blank">2022</a>
+                            <a href="#" target="_blank">2023</a>
+                            <a href="#" target="_blank">2024</a>
                             <a href="#" target="_blank">2025</a>
                         </span>
                     </li>
-                    <li>دانلود پریمیر (2014 تا 2025): 
+                    <li>دانلود پریمیر (2014 تا 2025):
                         <span class="multilink">
-                            <a href="#" target="_blank">2014</a> | 
-                            <a href="#" target="_blank">2015</a> |
-                            <a href="#" target="_blank">2017</a> |
-                            <a href="#" target="_blank">2018</a> |
-                            <a href="#" target="_blank">2019</a> |
-                            <a href="#" target="_blank">2020</a> |
-                            <a href="#" target="_blank">2021</a> |
-                            <a href="#" target="_blank">2022</a> |
-                            <a href="#" target="_blank">2023</a> |
-                            <a href="#" target="_blank">2024</a> |
+                            <a href="#" target="_blank">2014</a>
+                            <a href="#" target="_blank">2015</a>
+                            <a href="#" target="_blank">2017</a>
+                            <a href="#" target="_blank">2018</a>
+                            <a href="#" target="_blank">2019</a>
+                            <a href="#" target="_blank">2020</a>
+                            <a href="#" target="_blank">2021</a>
+                            <a href="#" target="_blank">2022</a>
+                            <a href="#" target="_blank">2023</a>
+                            <a href="#" target="_blank">2024</a>
                             <a href="#" target="_blank">2025</a>
                         </span>
                     </li>
                     <li>دانلود برنامه ویدم (Videm): 
                         <span class="multilink">
-                            <a href="#" target="_blank">اندروید</a> |
+                            <a href="#" target="_blank">اندروید</a>
                             <a href="#" target="_blank">ویندوز</a>
                         </span>
                     </li>
@@ -126,6 +125,6 @@
             <span>طراح: 𝗔‌𝗧</span>
         </div>
     </footer>
-    <script src="script.js?v=1.0.0.2"></script>
+    <script src="script.js?v=1.0.0.3"></script>
 </body>
 </html>
