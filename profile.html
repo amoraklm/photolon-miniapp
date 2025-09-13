@@ -1,36 +1,60 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پروفایل کاربر | دستیار فتولون</title>
-    <link rel="stylesheet" href="style.css?v=1.0.0.2">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Vazirmatn+Hand:wght@400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>پروفایل من | دستیار فتولون</title>
+  <link rel="stylesheet" href="style.css?v=1.1">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="profile-page">
+  <div class="app-bg"></div>
+  <header class="main-header glass-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="logo"></span>
+        <h1>پروفایل من</h1>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="تغییر تم">
+          <span class="icon-sun"></span>
+          <span class="icon-moon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="profile-section glass-section">
+      <form class="profile-form" id="profileForm" autocomplete="off">
         <div class="profile-avatar" id="profileAvatar">
-            <span class="profile-icon" style="font-size:2.7rem;">👤</span>
+          <span class="profile-icon">👤</span>
         </div>
         <input type="file" name="avatar" id="profilePic" accept="image/png, image/jpeg, image/jpg, image/webp">
-        <form class="profile-form" id="profileForm" autocomplete="off">
-            <div class="profile-form-row">
-                <div>
-                    <label>نام <span class="required">*</span></label>
-                    <input type="text" name="name" id="profileName" required>
-                </div>
-                <div>
-                    <label>نام خانوادگی <span class="required">*</span></label>
-                    <input type="text" name="family" id="profileFamily" required>
-                </div>
-            </div>
-            <label>ایمیل</label>
-            <input type="email" name="email" id="profileEmail" placeholder="اختیاری">
-            <label>شماره همراه</label>
-            <input type="tel" name="phone" id="profilePhone" placeholder="اختیاری">
-            <button type="submit" class="profile-save-btn">ثبت اطلاعات</button>
-        </form>
-    </div>
-    <script src="profile.js?v=1.0.0.2"></script>
+        <div class="form-row">
+          <label for="profileName">نام <span class="required">*</span></label>
+          <input type="text" name="name" id="profileName" required maxlength="30" placeholder="مثلاً امیررضا">
+        </div>
+        <div class="form-row">
+          <label for="profileFamily">نام خانوادگی <span class="required">*</span></label>
+          <input type="text" name="family" id="profileFamily" required maxlength="30" placeholder="مثلاً کریمی">
+        </div>
+        <div class="form-row">
+          <label for="profileEmail">ایمیل</label>
+          <input type="email" name="email" id="profileEmail" maxlength="50" placeholder="اختیاری">
+        </div>
+        <div class="form-row">
+          <label for="profilePhone">شماره همراه</label>
+          <input type="tel" name="phone" id="profilePhone" maxlength="20" placeholder="اختیاری">
+        </div>
+        <button type="submit" class="profile-save-btn">ثبت و بازگشت</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <div>تمام حقوق محفوظ است © Photolon | Rayan Academy 2025</div>
+    <div>نسخه 1.1 - طراح: 𝗔‌𝗧</div>
+  </footer>
+  <script src="script.js?v=1.1"></script>
+  <script src="profile.js?v=1.1"></script>
 </body>
 </html>
