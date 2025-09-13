@@ -4,30 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دستیار فتولون | آکادمی رایان</title>
-    <link rel="stylesheet" href="style.css?v=1.0.0.1">
+    <link rel="stylesheet" href="style.css?v=1.0.0.2">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Vazirmatn+Hand:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="main-header glass-header">
         <div class="header-content">
             <div class="logo-title">
-                <div class="profile-mini" id="profileMini" title="ویرایش پروفایل">
-                    <!-- پر می‌شود توسط JS -->
-                </div>
+                <div class="profile-mini" id="profileMini" title="ویرایش پروفایل"></div>
                 <div>
                     <h1>دستیار فتولون</h1>
                     <p class="sub-title">آکادمی رایان</p>
                 </div>
             </div>
             <div class="header-actions">
-                <button id="themeToggle" class="theme-toggle" aria-label="تغییر تم"></button>
+                <button id="themeToggle" class="theme-toggle" aria-label="تغییر تم">
+                    <span class="icon-sun"></span>
+                    <span class="icon-moon"></span>
+                </button>
             </div>
         </div>
     </header>
     <main>
         <!-- بخش پروفایل فقط در index نشانگر دارد، صفحه جداست -->
         <section class="accordion-section" data-section>
-            <button class="accordion-btn" type="button">ورود به کانال‌ها و گروه‌ها</button>
+            <button class="accordion-btn">ورود به کانال‌ها و گروه‌ها</button>
             <div class="accordion-content">
                 <ul class="links-list">
                     <li>کانال تلگرام آکادمی: <a href="https://t.me/photolon_academy" target="_blank">مشاهده</a></li>
@@ -39,22 +40,23 @@
             </div>
         </section>
         <section class="accordion-section" data-section>
-            <button class="accordion-btn" type="button">
+            <button class="accordion-btn">
                 شورتکات‌های فتوشاپ
-                <span class="shortcut-switch">
-                    <label>Windows</label>
-                    <input type="checkbox" id="shortcutToggle">
-                    <label>Mac</label>
+                <span class="shortcut-switcher">
+                    <span class="switch-label">Windows</span>
+                    <span class="switch-track">
+                        <input type="checkbox" id="shortcutToggle">
+                        <span class="switch-thumb"></span>
+                    </span>
+                    <span class="switch-label">Mac</span>
                 </span>
             </button>
-            <div class="accordion-content">
-                <div id="shortcutsList">
-                    <!-- پر می‌شود توسط JS بر اساس toggle -->
-                </div>
+            <div class="accordion-content" id="shortcutsAccordion">
+                <div class="shortcut-accordion-group"></div>
             </div>
         </section>
         <section class="accordion-section" data-section>
-            <button class="accordion-btn" type="button">تکالیف و وضعیت نمرات</button>
+            <button class="accordion-btn">تکالیف و وضعیت نمرات</button>
             <div class="accordion-content">
                 <ul class="links-list">
                     <li>وضعیت نمره هنرجویان (Google Sheets): <a href="#" target="_blank">مشاهده</a></li>
@@ -65,7 +67,7 @@
             </div>
         </section>
         <section class="accordion-section" data-section>
-            <button class="accordion-btn" type="button">لینک‌های لایو و ورکشاپ‌ها <a href="#" class="live-btn">ورود</a></button>
+            <button class="accordion-btn">لینک‌های لایو و ورکشاپ‌ها <a href="#" class="live-btn">ورود</a></button>
             <div class="accordion-content">
                 <ul class="links-list">
                     <li>آرشیو لایوها: <a href="#" target="_blank">مشاهده</a></li>
@@ -74,7 +76,7 @@
             </div>
         </section>
         <section class="accordion-section" data-section>
-            <button class="accordion-btn" type="button">لینک‌های دانلود نرم‌افزار</button>
+            <button class="accordion-btn">لینک‌های دانلود نرم‌افزار</button>
             <div class="accordion-content">
                 <ul class="links-list">
                     <li>دانلود فتوشاپ (2014 تا 2025): 
@@ -107,18 +109,23 @@
                             <a href="#" target="_blank">2025</a>
                         </span>
                     </li>
-                    <li>دانلود برنامه ویدم (Videm): <a href="#" target="_blank">دانلود</a></li>
+                    <li>دانلود برنامه ویدم (Videm): 
+                        <span class="multilink">
+                            <a href="#" target="_blank">اندروید</a> |
+                            <a href="#" target="_blank">ویندوز</a>
+                        </span>
+                    </li>
                 </ul>
             </div>
         </section>
     </main>
     <footer>
-        <div>
-            تمام حقوق محفوظ است © Photolon | Rayan Academy 2025<br>
-            نسخه 1.0.0.1<br>
-            طراح: 𝗔‌𝗧
+        <div class="footer-row">
+            <span>تمام حقوق محفوظ است © Photolon | Rayan Academy 2025</span>
+            <span>نسخه 1.0.0.1</span>
+            <span>طراح: 𝗔‌𝗧</span>
         </div>
     </footer>
-    <script src="script.js?v=1.0.0.1"></script>
+    <script src="script.js?v=1.0.0.2"></script>
 </body>
 </html>
