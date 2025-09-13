@@ -6,12 +6,17 @@ function writeProfile(p) {
 }
 const profileForm = document.getElementById('profileForm');
 const profileAvatar = document.getElementById('profileAvatar');
+const profilePicInput = document.getElementById('profilePic');
 function showAvatar(avatar) {
     if (avatar) {
         profileAvatar.innerHTML = `<img src="${avatar}" alt="avatar" />`;
     } else {
         profileAvatar.innerHTML = `<span class="profile-icon" style="font-size:2.7rem;">👤</span>`;
     }
+}
+function validateImage(file) {
+    const valid = ['image/png','image/jpeg','image/jpg','image/webp'];
+    return file && valid.includes(file.type) && file.size <= 2 * 1024 * 1024;
 }
 function init() {
     let p = readProfile();
@@ -33,8 +38,12 @@ profileForm.addEventListener('submit', function(e) {
     }
     let p = { name, family, email, phone };
     // اگر عکسی انتخاب شده
-    let file = document.getElementById('profilePic').files[0];
+    const file = profilePicInput.files[0];
     if (file) {
+        if (!validateImage(file)) {
+            alert('فقط عکس با فرمت jpg/png/webp و حجم کمتر از ۲ مگابایت مجاز است!');
+            return;
+        }
         let reader = new FileReader();
         reader.onload = function(ev) {
             p.avatar = ev.target.result;
@@ -48,14 +57,20 @@ profileForm.addEventListener('submit', function(e) {
         window.location = "index.html";
     }
 });
-document.getElementById('profilePic').addEventListener('change', function(e){
+profilePicInput.addEventListener('change', function(e){
     let file = e.target.files[0];
-    if (file) {
+    if (file && validateImage(file)) {
         let reader = new FileReader();
         reader.onload = function(ev) {
             showAvatar(ev.target.result);
         };
         reader.readAsDataURL(file);
+    } else if (file) {
+        alert('فقط عکس با فرمت jpg/png/webp و حجم کمتر از ۲ مگابایت مجاز است!');
+        profilePicInput.value = '';
+        showAvatar(readProfile().avatar);
+    } else {
+        showAvatar(readProfile().avatar);
     }
 });
 init();
