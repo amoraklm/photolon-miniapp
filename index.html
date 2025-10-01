@@ -1,106 +1,57 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>دستیار فتولون</title>
-  <link rel="stylesheet" href="style.css?v=1.1">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Munch Pro Max — Apix</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app-bg"></div>
-  <header class="main-header glass-header">
-    <div class="header-inner">
-      <div class="brand">
-        <span class="logo"></span>
-        <h1>دستیار فتولون</h1>
-      </div>
-      <div class="header-actions">
-        <button id="themeToggle" class="theme-toggle" aria-label="تغییر تم">
-          <span class="icon-sun"></span>
-          <span class="icon-moon"></span>
-        </button>
-        <div class="profile-mini" id="profileMini"></div>
-      </div>
+  <header class="topbar">
+    <div class="brand">Munch Pro Max</div>
+    <div class="room">
+      <input id="roomCode" class="room-input" placeholder="کد اتاق (مثلاً 493812)" />
+      <button id="joinBtn" class="btn">ورود</button>
+      <button id="createBtn" class="btn btn-secondary">ایجاد اتاق</button>
     </div>
+    <div id="status" class="status">وضعیت: آفلاین (لوکال)</div>
   </header>
-  <main>
-    <section class="main-cards">
-      <a class="main-card" href="profile.html">
-        <div class="card-icon">👤</div>
-        <div class="card-title">پروفایل من</div>
-      </a>
-      <a class="main-card" href="#shortcuts">
-        <div class="card-icon">⌨️</div>
-        <div class="card-title">شورتکات‌های فتوشاپ</div>
-      </a>
-      <a class="main-card" href="#downloads">
-        <div class="card-icon">⬇️</div>
-        <div class="card-title">دانلود نرم‌افزار</div>
-      </a>
-      <a class="main-card" href="#channels">
-        <div class="card-icon">💬</div>
-        <div class="card-title">کانال‌ها و گروه‌ها</div>
-      </a>
+
+  <main class="layout">
+    <section class="board-wrap">
+      <svg id="board" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet"></svg>
     </section>
-    <section class="section-box" id="shortcuts">
-      <h2>شورتکات‌های کاربردی فتوشاپ</h2>
-      <div class="shortcut-list">
-        <div>
-          <h3>عمومی</h3>
-          <ul>
-            <li>کپی: <b>Ctrl/Cmd + C</b></li>
-            <li>پیست: <b>Ctrl/Cmd + V</b></li>
-            <li>ذخیره: <b>Ctrl/Cmd + S</b></li>
-            <li>جداسازی لایه: <b>Ctrl/Cmd + J</b></li>
-            <li>بازگشت: <b>Ctrl/Cmd + Z</b></li>
-          </ul>
-        </div>
-        <div>
-          <h3>ابزارها</h3>
-          <ul>
-            <li>Move: <b>V</b></li>
-            <li>Brush: <b>B</b></li>
-            <li>Eraser: <b>E</b></li>
-            <li>Crop: <b>C</b></li>
-          </ul>
-        </div>
-        <div>
-          <h3>ادجسمنت‌ها</h3>
-          <ul>
-            <li>Levels: <b>Ctrl/Cmd + L</b></li>
-            <li>Curves: <b>Ctrl/Cmd + M</b></li>
-            <li>Hue/Sat: <b>Ctrl/Cmd + U</b></li>
-          </ul>
-        </div>
+
+    <section class="panel">
+      <div class="turn">
+        <span class="label">نوبت:</span>
+        <span id="turnName" class="value">قرمز</span>
       </div>
-    </section>
-    <section class="section-box" id="downloads">
-      <h2>دانلود نرم‌افزار</h2>
-      <div class="download-list">
-        <a href="#" class="download-btn">فتوشاپ</a>
-        <a href="#" class="download-btn">پریمیر</a>
-        <a href="#" class="download-btn">ویدم اندروید</a>
-        <a href="#" class="download-btn">ویدم ویندوز</a>
+
+      <div class="dice">
+        <button id="rollBtn" class="btn btn-primary">تاس</button>
+        <div id="diceValue" class="dice-value">—</div>
       </div>
-    </section>
-    <section class="section-box" id="channels">
-      <h2>کانال‌ها و گروه‌ها</h2>
-      <div class="channels-list">
-        <a href="https://t.me/rayan_the_artist" class="channel-btn">تلگرام آکادمی</a>
-        <a href="https://eitaa.com/rayan_the_artist1" class="channel-btn">ایتــا آکادمی</a>
-        <a href="https://t.me/+qap1gje8bjQ2ZTU0" class="channel-btn">گروه هنرجویان</a>
-        <a href="" class="channel-btn">تلگرام ندای آپولون</a>
-        <a href="#" class="channel-btn">ایتــا ندای آپولون</a>
+
+      <div class="tokens">
+        <div class="label">انتخاب مهره:</div>
+        <div id="tokenChoices" class="choices"></div>
+      </div>
+
+      <div class="actions">
+        <button id="moveBtn" class="btn" disabled>حرکت</button>
+        <button id="readyBtn" class="btn btn-secondary">آماده</button>
+        <button id="inviteBtn" class="btn btn-secondary">دعوت</button>
       </div>
     </section>
   </main>
-  <footer>
-    <div>تمام حقوق محفوظ است © Photolon | Rayan Academy 2025</div>
-    <div>نسخه: 1.0.0.7</div>
-<div>طراح: amoraklm |
-<a href="https://t.me/@amoraklm" class="footer">𝗔‌𝗧</a>@</div>
+
+  <footer class="footer">
+    <small>By Apix • MVP • قوانین پایه منچ با خانه‌های امن</small>
   </footer>
-  <script src="script.js?v=1.1"></script>
+
+  <!-- Optional: Socket.io (uncomment and host from your backend) -->
+  <!-- <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-H6L3GfQ9xO3pn2S8JmB7W+0b2kO1Kx8q3pHcC3X7A1qF4H1l3Q7hJusn9yC9eP2M" crossorigin="anonymous"></script> -->
+  <script src="app.js"></script>
 </body>
 </html>
