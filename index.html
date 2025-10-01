@@ -1,57 +1,18 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Munch Pro Max — Apix</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>بازی منچ آنلاین</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">Munch Pro Max</div>
-    <div class="room">
-      <input id="roomCode" class="room-input" placeholder="کد اتاق (مثلاً 493812)" />
-      <button id="joinBtn" class="btn">ورود</button>
-      <button id="createBtn" class="btn btn-secondary">ایجاد اتاق</button>
-    </div>
-    <div id="status" class="status">وضعیت: آفلاین (لوکال)</div>
-  </header>
-
-  <main class="layout">
-    <section class="board-wrap">
-      <svg id="board" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet"></svg>
-    </section>
-
-    <section class="panel">
-      <div class="turn">
-        <span class="label">نوبت:</span>
-        <span id="turnName" class="value">قرمز</span>
-      </div>
-
-      <div class="dice">
-        <button id="rollBtn" class="btn btn-primary">تاس</button>
-        <div id="diceValue" class="dice-value">—</div>
-      </div>
-
-      <div class="tokens">
-        <div class="label">انتخاب مهره:</div>
-        <div id="tokenChoices" class="choices"></div>
-      </div>
-
-      <div class="actions">
-        <button id="moveBtn" class="btn" disabled>حرکت</button>
-        <button id="readyBtn" class="btn btn-secondary">آماده</button>
-        <button id="inviteBtn" class="btn btn-secondary">دعوت</button>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <small>By Apix • MVP • قوانین پایه منچ با خانه‌های امن</small>
-  </footer>
-
-  <!-- Optional: Socket.io (uncomment and host from your backend) -->
-  <!-- <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-H6L3GfQ9xO3pn2S8JmB7W+0b2kO1Kx8q3pHcC3X7A1qF4H1l3Q7hJusn9yC9eP2M" crossorigin="anonymous"></script> -->
+  <h1>بازی منچ آنلاین</h1>
+  <div id="ludo-board"></div>
+  <div id="controls">
+    <button id="roll-dice">تاس بنداز</button>
+    <span id="dice-result"></span>
+    <div id="turn-info"></div>
+  </div>
   <script src="app.js"></script>
 </body>
 </html>
